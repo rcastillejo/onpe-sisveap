@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="ComunService" targetNamespace="http://comun.service.gepsac.sacooliveros.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://comun.service.gepsac.sacooliveros.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://comun.service.gepsac.sacooliveros.com/" version="1.0" xmlns:tns="http://comun.service.gepsac.sacooliveros.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="listarEstrategia" type="tns:listarEstrategia"/>
+<xs:element name="listarEstrategiaActividad" type="tns:listarEstrategiaActividad"/>
+<xs:element name="listarEstrategiaActividadResponse" type="tns:listarEstrategiaActividadResponse"/>
+<xs:element name="listarEstrategiaResponse" type="tns:listarEstrategiaResponse"/>
+<xs:complexType name="listarEstrategia">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="listarEstrategiaResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:estrategia"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="estrategia">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="actividades" nillable="true" type="tns:estrategiaActividad"/>
+          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="model">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+      <xs:element minOccurs="0" name="fecCre" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fecMod" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuMod" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="estrategiaActividad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="actividad" type="tns:actividad"/>
+      <xs:element minOccurs="0" name="codigoEstrategia" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="indicadores" nillable="true" type="tns:indicador"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="actividad">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+          <xs:element name="duracion" type="xs:int"/>
+          <xs:element name="frecuencia" type="xs:int"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element name="sesiones" type="xs:int"/>
+          <xs:element minOccurs="0" name="tipoFrecuencia" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="estado">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="indicador">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+          <xs:element minOccurs="0" name="formula" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element minOccurs="0" name="tipoIndicador" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="listarEstrategiaActividad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="listarEstrategiaActividadResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:estrategiaActividad"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="listarEstrategia">
+    <wsdl:part element="tns:listarEstrategia" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarEstrategiaActividadResponse">
+    <wsdl:part element="tns:listarEstrategiaActividadResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarEstrategiaResponse">
+    <wsdl:part element="tns:listarEstrategiaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarEstrategiaActividad">
+    <wsdl:part element="tns:listarEstrategiaActividad" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ComunService">
+    <wsdl:operation name="listarEstrategia">
+      <wsdl:input message="tns:listarEstrategia" name="listarEstrategia">
+    </wsdl:input>
+      <wsdl:output message="tns:listarEstrategiaResponse" name="listarEstrategiaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarEstrategiaActividad">
+      <wsdl:input message="tns:listarEstrategiaActividad" name="listarEstrategiaActividad">
+    </wsdl:input>
+      <wsdl:output message="tns:listarEstrategiaActividadResponse" name="listarEstrategiaActividadResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ComunServiceSoapBinding" type="tns:ComunService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listarEstrategia">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarEstrategia">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarEstrategiaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarEstrategiaActividad">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarEstrategiaActividad">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarEstrategiaActividadResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ComunService">
+    <wsdl:port binding="tns:ComunServiceSoapBinding" name="ComunServicePort">
+      <soap:address location="http://rcastillejo:8180/gepsac-service/ComunService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,37 @@
+Asunto: Reseteo de Contraseña
+ 
+<Imagen_Logo_empresa>
+ 
+Estimado(a) <nombre_usuario>,
+ 
+El proceso de reseteo de contraseña se realizó satisfactoriamente.
+Usted podrá ingresar al sistema de Control de Accesos con la nueva contraseña generada.
+ 
+Nueva contraseña : 610B0506040605010108
+ 
+ 
+Atentamente,
+ 
+Novatronic
+ 
+-------------------------------------------------------------------------------------------------------------
+ 
+Asunto: Cambio de Contraseña
+ 
+<Imagen_Logo_empresa>
+ 
+Estimado(a) <nombre_usuario>,
+ 
+La contraseña de su cuenta del sistema de Control de Acceso, se ha cambiado recientemente.
+Si usted la modificó, no necesita realizar ninguna otra acción.
+ 
+Si no la modificó usted, es posible que su cuenta haya sido vulnerada. Para poder volver a iniciar sesión,
+deberá ingresar con la nueva contraseña. Caso contrario solicitar el reseteo de contraseña.
+ 
+Atentamente,
+ 
+Novatronic
+ 
+ 
+ 
+PD: El asunto y el contenido del correo debe ser configurable.

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="StrutsProcess">
+ <PROCESS-ITEM ID="welcome" NAME="forward0" PATH="/Welcome.do"
+  SHAPE="32,17,0,0" TARGET="action1" TITLE="welcome" TYPE="forward" model-entity="StrutsProcessItem"/>
+ <PROCESS-ITEM NAME="page0" PATH="/index.jsp" SHAPE="240,146,0,0"
+  SUBTYPE="jsp" TITLE="index.jsp" TYPE="page" model-entity="StrutsProcessItem">
+  <PROCESS-ITEM-OUTPUT NAME="link0" PATH="/UserAction.do"
+   SUBTYPE="confirmed" TARGET="action0" TITLE="/UserAction.do"
+   TYPE="link" model-entity="StrutsProcessItemOutput"/>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="page2" PATH="/welcome.jsp" SHAPE="448,145,0,0"
+  SUBTYPE="jsp" TITLE="welcome.jsp" TYPE="page" model-entity="StrutsProcessItem"/>
+ <PROCESS-ITEM ID="#Welcome" NAME="action1" PATH="/Welcome"
+  SHAPE="240,17,0,0" SUBTYPE="unknown" TYPE="action" model-entity="StrutsProcessItem"/>
+ <PROCESS-ITEM ID="#welcome" NAME="action2" PATH="/welcome"
+  SHAPE="240,257,0,0" SUBTYPE="forward" TYPE="action" model-entity="StrutsProcessItem">
+  <PROCESS-ITEM-OUTPUT NAME="action2" PATH="/welcome.jsp" TARGET="page2"
+   TITLE="forward" TYPE="forward" model-entity="StrutsProcessItemOutput"/>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM ID="#UserAction" NAME="action0" PATH="/UserAction"
+  SHAPE="448,258,0,0" SUBTYPE="unknown" TYPE="action" model-entity="StrutsProcessItem"/>
+ <PROCESS-ITEM ID="#LoginAction" NAME="action3" PATH="/LoginAction"
+  SHAPE="32,129,0,0" TITLE="loginForm" TYPE="action" model-entity="StrutsProcessItem">
+  <PROCESS-ITEM-OUTPUT ID="success" NAME="forward0" PATH="/index.jsp"
+   TARGET="page0" TITLE="success" TYPE="forward" model-entity="StrutsProcessItemOutput"/>
+ </PROCESS-ITEM>
+</PROCESS>

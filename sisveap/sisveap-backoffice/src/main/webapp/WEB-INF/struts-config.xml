@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <!--Modulo Planificacion-->
+        <form-bean name="configurarEstrategiaForm" type="com.sacooliveros.gepsac.form.planificacion.ConfigurarEstrategiaForm" />
+        <form-bean name="programarPlanForm" type="com.sacooliveros.gepsac.form.planificacion.ProgramarPlanForm" />
+        <!--
+        <form-bean name="transaccionReporteForm" type="com.novatronic.sca.form.reporte.TransaccionReporteForm" />
+        <form-bean name="usuarioForm" type="com.novatronic.sca.security.form.UsuarioForm" />
+        <form-bean name="usuarioAdminForm" type="com.novatronic.sca.security.form.UsuarioForm" />
+        <form-bean name="empresaForm" type="com.novatronic.sca.security.form.EmpresaForm" />
+        <form-bean name="aplicacionForm" type="com.novatronic.sca.security.form.AplicacionForm" />
+        <form-bean name="aplicacionAdminForm" type="com.novatronic.sca.security.form.AplicacionForm" />
+        <form-bean name="rolForm" type="com.novatronic.sca.security.form.RolForm" />
+        <form-bean name="rolAdminForm" type="com.novatronic.sca.security.form.RolForm" />
+        <form-bean name="loginForm" type="com.novatronic.sca.security.form.LoginForm" />
+        <form-bean name="permisoForm" type="com.novatronic.sca.security.form.PermisoForm" />
+         <form-bean name="permisoAdminForm" type="com.novatronic.sca.security.form.PermisoForm" />
+        <form-bean name="politicaForm" type="com.novatronic.sca.security.form.PoliticaForm" />
+        <form-bean name="auditoriaForm" type="com.novatronic.sca.security.form.AuditoriaForm" />
+        <form-bean name="templateForm" type="com.novatronic.sca.security.form.TemplateForm" />
+        <form-bean name="templateFormApplication" type="com.novatronic.sca.security.form.TemplateForm" />
+        <form-bean name="templateEditForm" type="com.novatronic.sca.security.form.TemplateForm" />
+        <form-bean name="usuarioBloqueoForm" type="com.novatronic.sca.security.form.UsuarioBloqueoForm" />
+        <form-bean name="usuarioDesbloqueoForm" type="com.novatronic.sca.security.form.UsuarioDesbloqueoForm" />
+        <form-bean name="horarioForm" type="com.novatronic.sca.security.form.HorarioForm" />
+        <form-bean name="horarioAdminForm" type="com.novatronic.sca.security.form.HorarioForm" />
+        <form-bean name="importarForm" type="com.novatronic.sca.security.form.ImportarTemplateForm" />
+        <form-bean name="importarAdminForm" type="com.novatronic.sca.security.form.ImportarTemplateForm" />
+        <form-bean name="cambioClaveForm" type="com.novatronic.sca.security.form.CambioClaveForm" />
+        <form-bean name="olvideClaveForm" type="com.novatronic.sca.security.form.OlvideClaveForm" />-->
+    </form-beans>
+    
+    <global-exceptions>
+    	
+        <exception key="error.global.mesage" type="java.lang.exception" path="/pages/exception/global-error.jsp"/>
+        <exception key="error.global.mesage" type="java.lang.NullPointerException" path="/pages/exception/global-error.jsp"/>
+        <exception key="error.global.mesage" type="java.io.IOException" handler="com.novatronic.sca.util.GlobalExceptionHandler" path="/pages/exception/global-error.jsp"  />
+    	
+    	
+    </global-exceptions>
+
+    <global-forwards>
+    	
+    </global-forwards>
+
+    <action-mappings>
+            
+        <action path="/ConfigurarEstrategia" 
+                type="com.sacooliveros.gepsac.action.planificacion.ConfigurarEstrategiaAction"
+                name="configurarEstrategiaForm"
+                scope="request"
+                parameter="method" 
+                validate="false">
+            <forward name="configurarEstrategia" path="configurarEstrategia" redirect="true"/>
+        </action>
+            
+        <action path="/ProgramarPlan" 
+                type="com.sacooliveros.gepsac.action.planificacion.ProgramarPlanAction"
+                name="programarPlanForm"
+                scope="request"
+                parameter="method" 
+                validate="false">
+            <forward name="programarPlan" path="programarPlan" redirect="true"/>
+        </action>
+        
+        <!--       
+        <action path="/TransaccionReporte" 
+                type="com.novatronic.sca.action.reporte.TransaccionReporteAction"
+                name="transaccionReporteForm"
+                scope="request"
+                parameter="method" 
+                validate="false">
+            <forward name="transaccionReporte" path="transaccionReporte" redirect="true"/>
+        </action>
+        <action path="/Usuario" type="com.novatronic.sca.action.UsuarioAction"
+                name="usuarioForm"
+                parameter="method" 
+                validate="false">
+            <forward name="usuario" path="usuario" redirect="true"/>
+        </action>
+        <action path="/UsuarioAdmin" type="com.novatronic.sca.action.UsuarioAction"
+                name="usuarioAdminForm"
+                parameter="method" 
+                validate="false">
+            <forward name="usuario" path="usuario" redirect="true"/>
+        </action>               
+        <action path="/Empresa" type="com.novatronic.sca.action.EmpresaAction"
+                name="empresaForm"
+                parameter="method"
+                validate="false">
+            <forward name="empresa" path="empresa" redirect="true"/>
+        </action>
+        <action path="/Aplicacion" type="com.novatronic.sca.action.AplicacionAction"
+                name="aplicacionForm"
+                parameter="method"
+                validate="false">
+            <forward name="aplicacion" path="aplicacion" redirect="true"/>
+        </action>
+        <action path="/AplicacionAdmin" type="com.novatronic.sca.action.AplicacionAction"
+                name="aplicacionAdminForm"
+                parameter="method"
+                validate="false">
+            <forward name="aplicacion" path="aplicacion" redirect="true"/>
+        </action>
+        <action path="/Rol" type="com.novatronic.sca.action.RolAction"
+                name="rolForm"
+                parameter="method"
+                validate="false">
+            <forward name="rol" path="rol" redirect="true"/>
+        </action>
+         <action path="/RolAdmin" type="com.novatronic.sca.action.RolAction"
+                name="rolAdminForm"
+                parameter="method"
+                validate="false">
+            <forward name="rol" path="rol" redirect="true"/>
+        </action>
+        
+        <action path="/Permiso" type="com.novatronic.sca.action.PermisoAction"
+                name="permisoForm"
+                parameter="method"
+                validate="false">
+            <forward name="permiso" path="permiso" redirect="true"/>
+        </action>
+        <action path="/PermisoAdmin" type="com.novatronic.sca.action.PermisoAction"
+                name="permisoAdminForm"
+                parameter="method"
+                validate="false">
+            <forward name="permiso" path="permiso" redirect="true"/>
+        </action>
+        
+        <action path="/Auditoria" type="com.novatronic.sca.action.AuditoriaAction"
+                name="auditoriaForm"
+                parameter="method"
+                validate="false">
+            <forward name="auditoria" path="auditoria" redirect="true"/>
+        </action>
+                  
+        <action path="/Login" type="com.novatronic.sca.security.action.LoginAction"
+                name="loginForm" 
+                parameter="method" 
+                scope="request"
+                validate="true">
+            <forward name="errorServidorCorreo" path="errorServidorCorreo" redirect="true"/>
+            <forward name="volverALogin" path="volverALogin" redirect="true"/>
+            <forward name="cambioClave" path="cambioClave" redirect="true"/>
+            <forward name="inicioSistema" path="inicioSistema" redirect="true"/>
+            <forward name="olvideClave" path="olvideClave"  redirect="true"/>
+            <forward name="cambioPrimeraClave" path="cambioPrimeraClave"  redirect="true"/>
+        </action>
+        
+        <action path="/Politica" type="com.novatronic.sca.action.PoliticaAction"
+                name="politicaForm"
+                parameter="method" 
+                validate="false">
+            <forward name="politica" path="politica" redirect="true"/>
+        </action>
+        
+        <action path="/Template" type="com.novatronic.sca.action.TemplateAction"
+                name="templateForm"
+                parameter="method"
+                validate="false">
+            <forward name="template" path="template" redirect="true"/>
+        </action>
+        
+        <action path="/TemplateApplication" type="com.novatronic.sca.action.TemplateAction"
+                name="templateFormApplication"
+                parameter="method"
+                validate="false">
+            <forward name="template" path="template" redirect="true"/>
+        </action>
+        
+        <action path="/TemplateEdit" type="com.novatronic.sca.action.TemplateAction"
+                name="templateEditForm"
+                parameter="method"
+                validate="false">
+            <forward name="template" path="template" redirect="true"/>
+        </action>
+        
+        <action path="/Bloqueo" type="com.novatronic.sca.action.UsuarioBloqueoAction"
+                name="usuarioBloqueoForm"
+                parameter="method"
+                validate="false">
+            <forward name="bloqueo" path="bloqueo" redirect="true"/>
+        </action>
+        <action path="/Desbloqueo" type="com.novatronic.sca.action.UsuarioDesbloqueoAction"
+                name="usuarioDesbloqueoForm"
+                parameter="method"
+                validate="false">
+            <forward name="desbloqueo" path="desbloqueo" redirect="true"/>
+        </action>
+        
+        <action path="/Horario" type="com.novatronic.sca.action.HorarioAction"
+			name="horarioForm" parameter="method" validate="false">
+            <forward name="horario" path="horario" redirect="true" />
+        </action>
+        <action path="/HorarioAdmin" type="com.novatronic.sca.action.HorarioAction"
+			name="horarioAdminForm" parameter="method" validate="false">
+            <forward name="horario" path="horario" redirect="true" />
+        </action>
+        
+        <action path="/TemplateImportar" type="com.novatronic.sca.action.ImportarAction"
+                name="importarForm"
+                parameter="method"
+                validate="false">
+            <forward name="importar" path="importar" redirect="true"/>
+        </action>
+        <action path="/TemplateAdminImportar" type="com.novatronic.sca.action.ImportarAction"
+                name="importarAdminForm"
+                parameter="method"
+                validate="false">
+            <forward name="importar" path="importar" redirect="true"/>
+        </action>
+        
+        <action path="/CambioClave" type="com.novatronic.sca.action.CambioClaveAction"
+                name="cambioClaveForm"
+                parameter="method"
+                validate="false">
+            <forward name="inicioSistema" path="inicioSistema" redirect="true"/>
+            <forward name="cambioClave" path="cambioClave" redirect="true"/>
+            <forward name="volverALogin" path="volverALogin" redirect="true"/>
+        </action>
+
+        <action path="/OlvideClave" type="com.novatronic.sca.action.OlvideClaveAction"
+                name="olvideClaveForm"
+                parameter="method"
+                validate="false">
+            <forward name="inicioSistema" path="inicioSistema" redirect="true"/>
+            <forward name="olvideClave" path="olvideClave"  redirect="true"/>
+            <forward name="volverALogin" path="volverALogin" redirect="true"/>
+        </action>
+        -->
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+    
+    <message-resources parameter="com/novatronic/sca/ApplicationResource"/>
+    <message-resources parameter="com/novatronic/sca/UsuarioResource" key="rsUsuario" />
+    <message-resources parameter="com/novatronic/sca/EmpresaResource" key="rsEmpresa" />
+    <message-resources parameter="com/novatronic/sca/AplicacionResource" key="rsAplicacion" />
+    <message-resources parameter="com/novatronic/sca/LoginResource" key="rsLogin" />
+    <message-resources parameter="com/novatronic/sca/RolResource" key="rsRol" />
+    <message-resources parameter="com/novatronic/sca/PermisoResource" key="rsPermiso" />
+    <message-resources parameter="com/novatronic/sca/PoliticaResource" key="rsPolitica" />
+    <message-resources parameter="com/novatronic/sca/AuditoriaResource" key="rsAuditoria"/>
+    <message-resources parameter="com/novatronic/sca/TemplateResource" key="rsTemplate" />
+    <message-resources parameter="com/novatronic/sca/UsuarioBloqueoResource" key="rsUsuarioBloqueo" />
+    <message-resources parameter="com/novatronic/sca/UsuarioDesbloqueoResource" key="rsUsuarioDesbloqueo" />
+    <message-resources parameter="com/novatronic/sca/HorarioResource" key="rsHorario" />
+    <message-resources parameter="com/novatronic/sca/ImportarResource" key="rsImportar" />
+
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+    </plug-in>
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>

@@ -1,0 +1,437 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="PlanificacionService" targetNamespace="http://planificacion.service.gepsac.sacooliveros.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://planificacion.service.gepsac.sacooliveros.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://planificacion.service.gepsac.sacooliveros.com/" xmlns:tns="http://planificacion.service.gepsac.sacooliveros.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="configurar" type="tns:configurar"/>
+  <xs:element name="configurarResponse" type="tns:configurarResponse"/>
+  <xs:element name="generarProgramacion" type="tns:generarProgramacion"/>
+  <xs:element name="generarProgramacionResponse" type="tns:generarProgramacionResponse"/>
+  <xs:element name="listar" type="tns:listar"/>
+  <xs:element name="listarResponse" type="tns:listarResponse"/>
+  <xs:element name="obtenerConfigurarPlan" type="tns:obtenerConfigurarPlan"/>
+  <xs:element name="obtenerConfigurarPlanResponse" type="tns:obtenerConfigurarPlanResponse"/>
+  <xs:element name="obtenerProgramarPlan" type="tns:obtenerProgramarPlan"/>
+  <xs:element name="obtenerProgramarPlanResponse" type="tns:obtenerProgramarPlanResponse"/>
+  <xs:element name="obtenerVigente" type="tns:obtenerVigente"/>
+  <xs:element name="obtenerVigenteResponse" type="tns:obtenerVigenteResponse"/>
+  <xs:element name="programar" type="tns:programar"/>
+  <xs:element name="programarResponse" type="tns:programarResponse"/>
+  <xs:element name="registrar" type="tns:registrar"/>
+  <xs:element name="registrarResponse" type="tns:registrarResponse"/>
+  <xs:complexType name="programar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="plan">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element name="anio" type="xs:int"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="estrategiasSeleccionadas" nillable="true" type="tns:planEstrategia"/>
+          <xs:element minOccurs="0" name="fecConfiguracion" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fecFin" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fecInicio" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fecProgramacion" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fecRegistro" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="hitos" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="restriccionFechas" nillable="true" type="tns:restriccionFecha"/>
+          <xs:element minOccurs="0" name="titulo" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="model">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+      <xs:element minOccurs="0" name="fecCre" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fecMod" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuMod" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="planEstrategia">
+    <xs:complexContent>
+      <xs:extension base="tns:estrategia">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="actividadesSeleccionadas" nillable="true" type="tns:planActividad"/>
+          <xs:element minOccurs="0" name="codigoPlan" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="estrategia">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="actividades" nillable="true" type="tns:estrategiaActividad"/>
+          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="planActividad">
+    <xs:complexContent>
+      <xs:extension base="tns:estrategiaActividad">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigoPlan" type="xs:string"/>
+          <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+          <xs:element minOccurs="0" name="fechaEjecutada" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fechaProgramada" type="xs:dateTime"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="indicadoresSeleccionados" nillable="true" type="tns:planIndicador"/>
+          <xs:element name="meta" type="xs:int"/>
+          <xs:element name="programado" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="estrategiaActividad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="actividad" type="tns:actividad"/>
+      <xs:element minOccurs="0" name="codigoEstrategia" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="indicadores" nillable="true" type="tns:indicador"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="estado">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="planIndicador">
+    <xs:complexContent>
+      <xs:extension base="tns:indicador">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigoActividad" type="xs:string"/>
+          <xs:element minOccurs="0" name="codigoEstrategia" type="xs:string"/>
+          <xs:element minOccurs="0" name="codigoPlan" type="xs:string"/>
+          <xs:element name="meta" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="indicador">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+          <xs:element minOccurs="0" name="formula" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element minOccurs="0" name="tipoIndicador" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="actividad">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+          <xs:element name="duracion" type="xs:int"/>
+          <xs:element name="frecuencia" type="xs:int"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element name="sesiones" type="xs:int"/>
+          <xs:element minOccurs="0" name="tipoFrecuencia" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="restriccionFecha">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="fecha" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="programarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configurar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="configurarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerProgramarPlan">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="obtenerProgramarPlanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listar">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="listarResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerConfigurarPlan">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="obtenerConfigurarPlanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerVigente">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="obtenerVigenteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarProgramacion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarProgramacionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:plan"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceException" type="tns:ServiceException"/>
+  <xs:complexType name="ServiceException">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="registrar">
+    <wsdl:part element="tns:registrar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarResponse">
+    <wsdl:part element="tns:listarResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="configurarResponse">
+    <wsdl:part element="tns:configurarResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarProgramacionResponse">
+    <wsdl:part element="tns:generarProgramacionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerVigenteResponse">
+    <wsdl:part element="tns:obtenerVigenteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarProgramacion">
+    <wsdl:part element="tns:generarProgramacion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerProgramarPlan">
+    <wsdl:part element="tns:obtenerProgramarPlan" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerConfigurarPlanResponse">
+    <wsdl:part element="tns:obtenerConfigurarPlanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerConfigurarPlan">
+    <wsdl:part element="tns:obtenerConfigurarPlan" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerProgramarPlanResponse">
+    <wsdl:part element="tns:obtenerProgramarPlanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="programar">
+    <wsdl:part element="tns:programar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="configurar">
+    <wsdl:part element="tns:configurar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="programarResponse">
+    <wsdl:part element="tns:programarResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listar">
+    <wsdl:part element="tns:listar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarResponse">
+    <wsdl:part element="tns:registrarResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ServiceException">
+    <wsdl:part element="tns:ServiceException" name="ServiceException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerVigente">
+    <wsdl:part element="tns:obtenerVigente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PlanificacionService">
+    <wsdl:operation name="programar">
+      <wsdl:input message="tns:programar" name="programar">
+    </wsdl:input>
+      <wsdl:output message="tns:programarResponse" name="programarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="configurar">
+      <wsdl:input message="tns:configurar" name="configurar">
+    </wsdl:input>
+      <wsdl:output message="tns:configurarResponse" name="configurarResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ServiceException" name="ServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerProgramarPlan">
+      <wsdl:input message="tns:obtenerProgramarPlan" name="obtenerProgramarPlan">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerProgramarPlanResponse" name="obtenerProgramarPlanResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ServiceException" name="ServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listar">
+      <wsdl:input message="tns:listar" name="listar">
+    </wsdl:input>
+      <wsdl:output message="tns:listarResponse" name="listarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerConfigurarPlan">
+      <wsdl:input message="tns:obtenerConfigurarPlan" name="obtenerConfigurarPlan">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerConfigurarPlanResponse" name="obtenerConfigurarPlanResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ServiceException" name="ServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerVigente">
+      <wsdl:input message="tns:obtenerVigente" name="obtenerVigente">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerVigenteResponse" name="obtenerVigenteResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ServiceException" name="ServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="generarProgramacion">
+      <wsdl:input message="tns:generarProgramacion" name="generarProgramacion">
+    </wsdl:input>
+      <wsdl:output message="tns:generarProgramacionResponse" name="generarProgramacionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrar">
+      <wsdl:input message="tns:registrar" name="registrar">
+    </wsdl:input>
+      <wsdl:output message="tns:registrarResponse" name="registrarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PlanificacionServiceSoapBinding" type="tns:PlanificacionService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="configurar">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="configurar">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="configurarResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="programar">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="programar">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="programarResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerProgramarPlan">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerProgramarPlan">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerProgramarPlanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listar">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listar">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerConfigurarPlan">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerConfigurarPlan">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerConfigurarPlanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="generarProgramacion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="generarProgramacion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="generarProgramacionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerVigente">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerVigente">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerVigenteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="registrar">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="registrar">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registrarResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PlanificacionService">
+    <wsdl:port binding="tns:PlanificacionServiceSoapBinding" name="PlanificacionServicePort">
+      <soap:address location="http://rcastillejo:8180/gepsac-service/PlanificacionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

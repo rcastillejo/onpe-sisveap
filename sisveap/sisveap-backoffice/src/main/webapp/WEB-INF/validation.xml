@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.1.3//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_1_3.dtd">
+
+<form-validation>
+
+	<!-- This is a minimal Validator form file with a couple of examples. -->
+
+    <global>
+
+		<!-- An example global constant <constant> <constant-name>postalCode</constant-name>
+			<constant-value>^\d{5}\d*$</constant-value> </constant> end example -->
+
+    </global>
+
+    <formset language="es">
+        <form name="usuarioAdminForm">
+            <field property="usuario.usuario" depends="required,maxlength,mask">
+                <msg name="required" key="usuario.usuario.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.usuario.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.usuario.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>20</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z0-9 ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.nombre" depends="required, maxlength, mask">
+                <msg name="required" key="usuario.nombre.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.nombre.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.nombre.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.apellidoPaterno" depends="required, maxlength,mask">
+                <msg name="required" key="usuario.apellidoPat.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.apellido.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.apellido.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.apellidoMaterno" depends="required, maxlength,mask">
+                <msg name="required" key="usuario.apellidoMat.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.apellido.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.apellido.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.telefono" depends="maxlength,mask">
+                <msg name="maxlength" key="empresa.telefono.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.telefono.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>9</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[0-9]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.correo" depends="required, email, maxlength">
+                <msg name="required" key="usuario.correo.required" bundle="rsUsuario" />
+                <msg name="email" key="usuario.correo.email" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.correo.max" bundle="rsUsuario" />
+
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+            </field>
+            <field property="usuario.estado" depends="required,validwhen">
+                <msg name="required" key="usuario.estado.required" bundle="rsUsuario" />
+                <msg name="validwhen" key="usuario.estado.validwhen" bundle="rsUsuario" />
+                <var>
+                    <var-name>test</var-name>
+                    <var-value>(*this*!=-1)</var-value>
+                </var>
+            </field>
+            <field property="usuario.empresaId" depends="required,validwhen">
+                <msg name="required" key="usuario.empresaId.required" bundle="rsUsuario" />
+                <msg name="validwhen" key="usuario.empresaId.validwhen" bundle="rsUsuario" />
+                <var>
+                    <var-name>test</var-name>
+                    <var-value>(*this*!=-1)</var-value>
+                </var>
+            </field>
+            <field property="usuario.tipoDocumento" depends="required,validwhen">
+                <msg name="required" key="usuario.tipoDocumento.required"
+                     bundle="rsUsuario" />
+                <msg name="validwhen" key="usuario.tipoDocumento.validwhen"
+                     bundle="rsUsuario" />
+                <var>
+                    <var-name>test</var-name>
+                    <var-value>(*this*!=-1)</var-value>
+                </var>
+            </field>
+            <field property="usuario.numeroDocumento" depends="required,maxlength,mask">
+                <msg name="required" key="usuario.numeroDocumento.required" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.numeroDocumento.mask" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.numeroDocumento.max" bundle="rsUsuario" />
+
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>8</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>12</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[0-9]*$</var-value>
+                </var>
+            </field>
+        </form>
+        <form name="reporteCierreForm">
+            <field property="usuario.usuario" depends="required,maxlength,mask">
+                <msg name="required" key="usuario.usuario.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.usuario.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.usuario.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>20</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z0-9 ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.nombre" depends="required, maxlength, mask">
+                <msg name="required" key="usuario.nombre.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.nombre.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.nombre.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.apellidoPaterno" depends="required, maxlength,mask">
+                <msg name="required" key="usuario.apellidoPat.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.apellido.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.apellido.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.apellidoMaterno" depends="required, maxlength,mask">
+                <msg name="required" key="usuario.apellidoMat.required" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.apellido.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.apellido.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z ]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.telefono" depends="maxlength,mask">
+                <msg name="maxlength" key="empresa.telefono.max" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.telefono.mask" bundle="rsUsuario" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>9</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[0-9]*$</var-value>
+                </var>
+            </field>
+            <field property="usuario.correo" depends="required, email, maxlength">
+                <msg name="required" key="usuario.correo.required" bundle="rsUsuario" />
+                <msg name="email" key="usuario.correo.email" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.correo.max" bundle="rsUsuario" />
+
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>1</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+                </var>
+            </field>
+            <field property="usuario.estado" depends="required,validwhen">
+                <msg name="required" key="usuario.estado.required" bundle="rsUsuario" />
+                <msg name="validwhen" key="usuario.estado.validwhen" bundle="rsUsuario" />
+                <var>
+                    <var-name>test</var-name>
+                    <var-value>(*this*!=-1)</var-value>
+                </var>
+            </field>
+            <field property="usuario.tipoDocumento" depends="required,validwhen">
+                <msg name="required" key="usuario.tipoDocumento.required"
+                     bundle="rsUsuario" />
+                <msg name="validwhen" key="usuario.tipoDocumento.validwhen"
+                     bundle="rsUsuario" />
+                <var>
+                    <var-name>test</var-name>
+                    <var-value>(*this*!=-1)</var-value>
+                </var>
+            </field>
+            <field property="usuario.numeroDocumento" depends="required,maxlength,mask">
+                <msg name="required" key="usuario.numeroDocumento.required" bundle="rsUsuario" />
+                <msg name="mask" key="usuario.numeroDocumento.mask" bundle="rsUsuario" />
+                <msg name="maxlength" key="usuario.numeroDocumento.max" bundle="rsUsuario" />
+
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>8</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>12</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[0-9]*$</var-value>
+                </var>
+            </field>
+        </form>
+    </formset>
+    <formset>
+        <form name="cambioClaveForm">
+
+            <field property="claveActual" depends="required,maxlength, mask">
+                <msg name="required" key="login.clave.actual.required" bundle="rsLogin" />
+                <msg name="maxlength" key="login.clave.actual.max" bundle="rsLogin" />
+                <msg name="mask" key="login.clave.actual.mask" bundle="rsLogin" />
+
+                <arg name="maxlength" key="${var:minlength}" position="0" resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1" resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z0-9]*$</var-value>
+                </var>
+            </field>
+
+            <field property="nuevaClave" depends="required,maxlength, mask">
+                <msg name="required" key="login.clave.actual.required" bundle="rsLogin" />
+                <msg name="maxlength" key="login.clave.actual.max" bundle="rsLogin" />
+                <msg name="mask" key="login.clave.actual.mask" bundle="rsLogin" />
+
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z0-9]*$</var-value>
+                </var>
+            </field>
+
+            <field property="confirmarClave" depends="required,maxlength, mask">
+                <msg name="required" key="login.confirmar.actual.required" bundle="rsLogin" />
+                <msg name="maxlength" key="login.confirmar.actual.max" bundle="rsLogin" />
+                <msg name="mask" key="login.clave.confirmar.mask" bundle="rsLogin" />
+
+                <arg name="maxlength" key="${var:minlength}" position="0"
+                     resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1"
+                     resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z0-9]*$</var-value>
+                </var>
+            </field>
+
+        </form>
+    </formset>
+    
+    
+    
+     <formset>
+        <form name="olvideClaveForm">
+
+            <field property="usuario" depends="required,maxlength, mask">
+                <msg name="required" key="login.clave.actual.required" bundle="rsLogin" />              
+
+                <arg name="maxlength" key="${var:minlength}" position="0" resource="false" />
+                <arg name="maxlength" key="${var:maxlength}" position="1" resource="false" />
+
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>6</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z0-9]*$</var-value>
+                </var>
+            </field>
+
+           
+
+        </form>
+    </formset>
+
+
+</form-validation>

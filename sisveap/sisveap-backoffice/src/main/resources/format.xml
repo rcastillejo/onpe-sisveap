@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+    <macros>
+        <macro type="DATE" nparams="1" parsename="DATEM" />
+        <macro type="SEQ" nparams="0" init="700" parsename="SEQ" />
+    </macros>
+
+    <formatters>
+
+        <formatter id="0100">
+            <field type="CollectGroup" id="120-d" gname="DA120" null="true" />
+            <field type="Fixed" id="operacion" length="2" format="n"/>
+            <field type="Fixed" id="formato" length="2" format="n">01</field>
+            <field type="Fixed" id="identificador"  length="10"  format="n"/>
+            <field type="Fixed" id="fecha"  length="8"   format="n"/>
+            <field type="Fixed" id="hora"  length="9"   format="n"/>
+            <field type="NVar"  id="data"  length="999" format="ans" nl="3" null="true"/>
+            <field type="CollectGroup" id="dataAgrupada" exp="data:999" collec="true" gname="DA120">
+                <field type="Case"  id="CASE_PRCODE"  casefields="operacion" >
+                    <!-- Transferencia -->
+                    <case value="1">
+                        <field type="Fixed" id="aplicacion"  length="30" />
+                        <field type="Fixed"  id="usuario"  length="20"  />
+                        <field type="Fixed" id="contrasena"  length="32"  />
+                        <field type="Fixed" id="rol"  length="1"  />
+                        <field type="Fixed"  id="permiso"  length="1" />
+                    </case>
+                    <case value="3">
+                        <field type="Fixed"  id="usuario"  length="20"  format="an"/>
+                        <field type="Fixed" id="contrasena"  length="32"   format="an"/>
+                        <field type="Fixed" id="nuevacontrasena"  length="32"   format="an"/>
+                        <field type="Fixed" id="aplicacion"  length="30"   />
+                    </case>
+                    <case value="5">
+                        <field type="Fixed"  id="usuario"  length="20"  format="an"/>
+                        <field type="Fixed" id="tipodocumento"  length="3"   format="an"/>
+                        <field type="Fixed"  id="numerodocumento"  length="12"  format="an"/>
+                        <field type="Fixed" id="correo"  length="60"/>
+                    </case>
+                    <case value="7">
+                        <field type="Fixed"  id="empresa"  length="20"  />
+                        <field type="Fixed" id="aplicacion"  length="30"   />
+                    </case>
+                </field>
+            </field>
+        </formatter>
+
+        <formatter id="0101">
+            <field type="Fixed" id="operacion" length="2" format="n"/>
+            <field type="Fixed" id="formato" length="2" format="n">01</field>
+            <field type="Fixed" id="identificador"  length="10"  format="n"/>
+            <field type="Fixed" id="fecha"  length="8"   format="n"/>
+            <field type="Fixed" id="hora"  length="9"   format="n"/>
+            <field type="Fixed" id="codigoRpta"  length="4"   format="n"/>
+            <field type="Fixed" id="descripcionRpta"  length="133" />
+            <field type="NVar"  id="data"  length="99999" format="ans" nl="5" null="true"/>
+        </formatter>
+
+        <formatter id="02">
+            <field type="Fixed" id="empresa"  length="30" format="an"/>
+            <field type="Fixed" id="aplicacion"  length="30"/>
+            <field type="Fixed" id="usuario"  length="20" format="an"/>
+            <field type="Fixed" id="tipoDocumento"  length="3" format="an"/>
+            <field type="Fixed" id="numeroDocumento"  length="12" format="an"/>
+            <field type="NVar" id="rol"  length="999"   nl="3" null="true" format="ans"/>
+            <field type="NVar" id="permiso"  length="99999"   nl="5" null="true" format="ans"/>
+            <field type="Fixed" id="timeout"  length="2" format="an"/>
+            <field type="Fixed" id="valorAtributo"  length="2" format="an"/>
+        </formatter>
+
+        <formatter id="04">
+            <field type="Fixed" id="valorAtributo"  length="5"/>
+        </formatter>
+
+        <formatter id="08">
+            <field type="NVar" id="valorAtributo"  length="99999"  format="ans" nl="5" null="true"/>
+        </formatter>
+
+    </formatters>
+
+</root>

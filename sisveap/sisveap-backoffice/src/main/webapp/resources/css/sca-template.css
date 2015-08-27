@@ -1,0 +1,169 @@
+body{
+    font-size: 12px !important;
+    font-family: Verdana,Arial,sans-serif !important;
+}
+
+table{
+    font-size: 12px !important;
+}
+
+.div-content-center{
+    margin: 0 auto;
+    text-align: center;
+    display: table;
+}
+
+.div-pagina{
+    margin: 20px;
+}
+
+.div-pagina-titulo{
+    margin: 15px 0px 15px 0px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.div-busqueda-titulo{
+    background-color: rgb(23, 55, 94);;
+    color: white;
+    border-bottom: 1px solid #EFF2F5;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.div-busqueda{
+    border: 1px solid #EFF2F5;
+    border-radius: 5px;
+}
+
+.no-float{
+    clear: both;
+    margin-bottom: 30px;
+}
+
+.div-busqueda-filtros{
+    margin: 15px;
+    font-size: 12px !important;
+}
+
+.div-busqueda-filtro{
+    float: left;
+    margin: 5px 10px 5px 0px;
+}
+
+.div-busqueda-filtro select{
+    width: 120px !important;
+    height: 20px !important;
+}
+
+.div-busqueda-filtro input{
+    width: 110px !important;
+    /*    height: 18px !important;*/
+}
+
+.div-busqueda-filtro img{
+    vertical-align: middle;
+}
+
+.div-btn-agregar{
+    float: left;
+    margin: 10px 0;
+    width: 100%;
+}
+.div-btn-importar{
+    float: left;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.btn-background-general {
+    background-image: url('../images/buttonbg.png');
+    background-repeat: no-repeat;
+    border: none;
+    color: #FFF;
+    cursor: pointer;
+    font-family: 'Trebuchet MS';
+    margin: 10px;
+    vertical-align: middle;
+    width: 101px;
+}
+
+
+
+.div-descripcion{
+    float: right;
+}
+
+.btn-action{
+    width: 16px;
+    height: 16px;
+    border: 0px; 
+    cursor: pointer;
+    text-align: center;
+}
+
+.lbl-msg{
+
+}
+
+.div-confirmacion{
+    padding-top: 20px !important;
+}
+
+.div-separador{
+    height: 40px;
+    width: 100%;
+}
+
+.error{
+    color:red;
+}
+
+#modal {
+    display:    none;
+    position:   fixed;
+    z-index:    5000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    opacity:    0.3;
+    background: url("../images/loading.gif") no-repeat 50% 50% #AAAAAA;
+}
+loading {
+    overflow: hidden;   
+}
+
+loading .modal {
+    display: block;
+}
+
+.select-Empresa{
+    width: 215px;
+}
+.select-Aplicacion{
+    width: 172px;
+}
+
+.colNro{
+    width: 20px;
+}
+
+.colCodigo{
+    width: 166px;
+}
+.colDescripcion{
+    width: 20%;
+}
+.colTipo{
+    width: 8%;
+}
+/*.colAccion{
+    width: 8%;
+}*/
+.popupHorario{
+    height: 365px;
+}
+

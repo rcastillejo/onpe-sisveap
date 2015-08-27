@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sacooliveros.gepsac.dao.mybatis.mapper.PlanMapper" >
+  <!--
+  <resultMap id="BaseResultMap" type="com.sacooliveros.gepsac.model.Estrategia" >
+    <id column="idUsuario" property="idUsuario" jdbcType="INTEGER" />
+    <result column="usuario" property="usuario" jdbcType="VARCHAR" />
+    <result column="premium" property="premium" jdbcType="VARCHAR" />
+    <result column="ocupacion" property="ocupacion" jdbcType="VARCHAR" />
+    <result column="cinefavorito" property="cinefavorito" jdbcType="VARCHAR" />
+    <result column="precio" property="precio" jdbcType="DECIMAL" />
+    <result column="generofavorito" property="generofavorito" jdbcType="VARCHAR" />
+  </resultMap>
+  -->
+    <resultMap id="recordResultMap" type="com.sacooliveros.gepsac.model.Plan" >
+        <id column="cod_plan" property="codigo" jdbcType="VARCHAR" />
+        <result column="anio" property="anio" jdbcType="VARCHAR" />
+        <result column="fec_registro" property="fecRegistro" jdbcType="DATE" />
+        <result column="fec_inicio" property="fecInicio" jdbcType="DATE" />
+        <result column="fec_fin" property="fecFin" jdbcType="DATE" />
+        <result column="cod_estado" property="estado.codigo" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <resultMap id="recordPlanEstrategia" type="com.sacooliveros.gepsac.model.PlanEstrategia" >
+        <id column="cod_estrategia" property="codigo" jdbcType="VARCHAR" />
+        <result column="cod_plan" property="codigoPlan" jdbcType="VARCHAR" /> 
+        <result column="titulo_estrategia" property="nombre" jdbcType="VARCHAR" />
+        <result column="des_estrategia" property="descripcion" jdbcType="VARCHAR" />
+        <result column="cod_estado" property="estado.codigo" jdbcType="VARCHAR" />
+        <result column="nom_estado" property="estado.nombre" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <resultMap id="recordPlanActividad" type="com.sacooliveros.gepsac.model.PlanActividad" >      
+        <id column="cod_actividad" property="actividad.codigo" jdbcType="VARCHAR" />  
+        <result column="cod_plan" property="codigoPlan" jdbcType="VARCHAR" /> 
+        <result column="cod_estrategia" property="codigoEstrategia" jdbcType="VARCHAR" /> 
+        <result column="nom_actividad" property="actividad.nombre" jdbcType="VARCHAR" />  
+        <result column="des_actividad" property="actividad.descripcion" jdbcType="VARCHAR" /> 
+    </resultMap>
+    
+    <resultMap id="recordPlanIndicador" type="com.sacooliveros.gepsac.model.PlanIndicador" >      
+        <id column="cod_indicador" property="codigo" jdbcType="VARCHAR" />  
+        <result column="nom_indicador" property="nombre" jdbcType="VARCHAR" /> 
+    </resultMap>
+  
+    <select id="query" resultMap="recordResultMap">
+        SELECT
+        cod_plan,
+        anio,
+        fec_registro,
+        fec_inicio,
+        fec_fin,
+        cod_estado
+        FROM 
+        tp_plan
+    </select>
+  
+    <select id="obtenerVigente" parameterType="int" resultMap="recordResultMap">
+        SELECT
+        cod_plan,
+        anio,
+        fec_registro,
+        fec_inicio,
+        fec_fin,
+        cod_estado
+        FROM 
+        tp_plan
+        where
+        anio = #{anio}
+    </select>
+  
+    <select id="get" resultMap="recordResultMap">
+        SELECT
+        cod_plan,
+        anio,
+        fec_registro,
+        fec_inicio,
+        fec_fin,
+        cod_estado
+        FROM 
+        tp_plan
+        where
+        cod_plan = #{codigo}
+    </select>
+  
+    <update id="update">
+        Update tp_plan set 
+            fec_registro = #{fecRegistro}, fec_programacion = #{fecProgramacion}, fec_configuracion = #{fecConfiguracion}, 
+            fec_inicio = #{fecInicio}, fec_fin = #{fecFin}, cod_estado = #{estado.codigo}
+        where anio = #{anio} and cod_plan = #{codigo}
+    </update>
+  
+    <insert id="insertEstrategia">
+        Insert into tp_plan_estrategia (cod_plan, cod_estrategia) 
+        Values (#{codigoPlan}, #{codigo})
+    </insert>
+    
+    <insert id="insertActividad">
+        Insert into tp_plan_actividad (cod_plan, cod_estrategia, cod_actividad, cod_estado) 
+        Values (#{codigoPlan}, #{codigoEstrategia}, #{actividad.codigo}, #{estado.codigo})
+    </insert>
+    
+    <insert id="insertIndicador">
+        Insert into tp_plan_indicador (cod_plan, cod_estrategia, cod_actividad, cod_indicador, cod_estado) 
+        Values (#{codigoPlan}, #{codigoEstrategia}, #{codigoActividad}, #{codigo}, #{estado.codigo})
+    </insert>
+    
+    <!--Estos delete se invocan al registrar o actualizar un plan en los estados : registrado o configurado-->
+    <delete id="deleteEstrategia">
+        Delete from tp_plan_estrategia
+        where cod_plan= #{codigoPlan}
+    </delete>
+    
+    <delete id="deleteActividad">
+        Delete from tp_plan_actividad
+        where cod_plan= #{codigoPlan}
+    </delete>
+    
+    <delete id="deleteIndicador">
+        Delete from tp_plan_indicador
+        where cod_plan= #{codigoPlan}
+    </delete>
+    
+    <select id="queryPlanEstrategia" resultMap="recordPlanEstrategia">
+        SELECT
+        a.cod_plan,
+        b.cod_estrategia,
+        b.titulo_estrategia,
+        b.des_estrategia,
+        b.fec_registro,
+        c.cod_estado,
+        c.nom_estado
+        FROM 
+        tp_plan_estrategia a inner join tp_estrategia b on a.cod_estrategia = b.cod_estrategia
+        inner join tp_estado c on b.cod_estado = c.cod_estado
+        where
+        a.cod_plan = #{codigo}
+    </select>
+  
+    <select id="queryPlanActividad" resultMap="recordPlanActividad">
+        SELECT
+        a.cod_plan,
+        a.cod_actividad,
+        a.cod_estrategia,
+        b.nom_actividad,
+        b.des_actividad
+        FROM 
+        tp_plan_actividad a inner join tp_actividad b on a.cod_actividad = b.cod_actividad
+        where
+        a.cod_plan = #{codigo} and a.cod_estrategia = #{codigoEstrategia}
+    </select>
+  
+    <select id="queryPlanIndicador" resultMap="recordPlanIndicador">        
+        SELECT
+        a.cod_indicador,
+        b.nom_indicador
+        FROM 
+        tp_plan_indicador a inner join tp_indicador b on a.cod_indicador = b.cod_indicador
+        where
+        a.cod_plan = #{codigo} and a.cod_estrategia = #{codigoEstrategia} and a.cod_actividad = #{codigoActividad}
+        
+    </select>
+</mapper>

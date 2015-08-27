@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!-- $Id: log4j.xml 5723 2007-07-08 22:54:42Z myuan $ -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+    
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%-10t] %m %l%n" />
+        </layout>
+    </appender>
+    
+    <appender name="TRAZADO" class="org.apache.log4j.DailyRollingFileAppender">       
+        <param name="File" value="${jboss.server.log.dir}/gepsac_service/trazado.log" />
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%-10t] (%c{2}) %m - [linea:%L]%n" />
+        </layout>
+    </appender>    
+    
+    <appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">       
+        <param name="File" value="${jboss.server.log.dir}/gepsac_service/error.log" />
+        <param name="DatePattern" value="'.'yyyyMMdd" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%-10t] (%c{2}) %m - [linea:%L]%n" />
+        </layout>
+    </appender>    
+    
+    <!--<appender name="PERFORMANCE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${jboss.server.log.dir}/gepsac_service/perfomance.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%t] %m%n"/>
+        </layout>
+    </appender>     
+    
+    <logger name="performance" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="PERFORMANCE"/>
+    </logger>-->
+     
+    
+    <logger name="com.sacooliveros.gepsac">
+        <level value="DEBUG" />
+        <appender-ref ref="TRAZADO"/>
+    </logger>
+    
+    <!--<logger name="com.sacooliveros.gepsac.dao.myibatis" additivity="false">
+        <level value="ERROR" />
+        <appender-ref ref="ERROR"/>
+    </logger>-->
+
+    <root>
+        <level value="ERROR" />        
+        <appender-ref ref="ERROR" />
+    </root>
+    
+    
+    
+	
+    
+</log4j:configuration>

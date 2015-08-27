@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_3.dtd">
+
+<tiles-definitions>
+
+    <definition name="principal" path="/templates/principal.jsp" >
+        <put name="header" value="/templates/header.jsp" type="page"/>
+        <put name="menu" value="/templates/menu.jsp" type="page"/>
+        <put name="content" value="/templates/content.jsp" type="page"/>
+        <put name="footer" value="/templates/footer.jsp" type="page"/>
+    </definition>
+    <!--
+    <definition name="usuario" extends="principal">
+        <put name="content" value="/pages/usuario/ReporteCierre.jsp" type="page"/>
+    </definition>
+    
+    
+   
+   <definition name="logout" page="/pages/login/Login.jsp"></definition>
+   <definition name="volverALogin" page="/pages/login/Login.jsp"></definition>
+   
+   <definition name="olvideClave" page="/pages/login/OlvideClave.jsp" ></definition>
+   <definition name="cambioClave" page="/pages/login/CambioClave.jsp"></definition>
+   <definition name="cambioPrimeraClave" page="/pages/login/CambioPrimeraClave.jsp"></definition>
+   -->
+   <definition name="inicioSistema" page="/index.jsp"></definition>
+   <definition name="errorServidorCorreo" page="/pages/exception/error-servidor-correo.jsp"></definition>
+
+    <!--
+    <definition name="transaccionReporte" extends="principal">
+        <put name="content" value="/pages/reporte/transaccion/reporte.jsp" type="page"/>
+    </definition>-->
+    
+    <definition name="configurarEstrategia" extends="principal">
+        <put name="content" value="/pages/planificacion/configurar.jsp" type="page"/>
+    </definition>
+    
+    <definition name="programarPlan" extends="principal">
+        <put name="content" value="/pages/planificacion/programar.jsp" type="page"/>
+    </definition>
+</tiles-definitions>

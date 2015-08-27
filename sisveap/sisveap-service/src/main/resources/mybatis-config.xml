@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--<settings>
+        Tiempo limite en segundos que el driver espera una respuesta de la base de datos
+        <setting name="defaultStatementTimeout" value="15"/>
+    </settings>-->
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="jdbc:postgresql://localhost:5432/gepsac"/>
+                <property name="username" value="postgres"/>
+                <property name="password" value="postgres"/>
+            </dataSource>
+        </environment>
+    </environments>
+    
+    <mappers>
+        <mapper resource="PlanMapper.xml"/>
+        <mapper resource="EstrategiaMapper.xml"/>
+    </mappers>
+</configuration>

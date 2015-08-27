@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sacooliveros.gepsac.dao.mybatis.mapper.EstrategiaMapper" >
+  
+    <resultMap id="recordResultMap" type="com.sacooliveros.gepsac.model.Estrategia" >
+        <id column="cod_estrategia" property="codigo" jdbcType="VARCHAR" />
+        <result column="titulo_estrategia" property="nombre" jdbcType="VARCHAR" />
+        <result column="des_estrategia" property="descripcion" jdbcType="VARCHAR" />
+        <result column="cod_estado" property="estado.codigo" jdbcType="VARCHAR" />
+        <result column="nom_estado" property="estado.nombre" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--
+    <resultMap id="actividadResultMap" type="com.sacooliveros.gepsac.model.Actividad">
+        <id column="cod_actividad" property="codigo" jdbcType="VARCHAR" />
+        <result column="nom_actividad" property="nombre" jdbcType="VARCHAR" />
+        <result column="des_actividad" property="descripcion" jdbcType="VARCHAR" />
+    </resultMap>-->
+  
+    <resultMap id="recordEstAct" type="com.sacooliveros.gepsac.model.EstrategiaActividad" >      
+        <id column="cod_actividad" property="actividad.codigo" jdbcType="VARCHAR" />  
+        <result column="cod_estrategia" property="codigoEstrategia" jdbcType="VARCHAR" /> 
+        <result column="nom_actividad" property="actividad.nombre" jdbcType="VARCHAR" />  
+        <result column="des_actividad" property="actividad.descripcion" jdbcType="VARCHAR" /> 
+    </resultMap>
+ 
+    <resultMap id="recordIndicador" type="com.sacooliveros.gepsac.model.Indicador" >      
+        <id column="cod_indicador" property="codigo" jdbcType="VARCHAR" />  
+        <result column="nom_indicador" property="nombre" jdbcType="VARCHAR" /> 
+    </resultMap>
+    
+    <select id="query" resultMap="recordResultMap">
+        SELECT
+        a.cod_estrategia,
+        a.titulo_estrategia,
+        a.des_estrategia,
+        a.fec_registro,
+        b.cod_estado,
+        b.nom_estado
+        FROM tp_estrategia a inner join tp_estado b on a.cod_estado = b.cod_estado
+    </select>
+ 
+    <select id="queryActividad" resultMap="recordEstAct">
+        SELECT
+        a.cod_actividad,
+        a.cod_estrategia,
+        b.nom_actividad,
+        b.des_actividad
+        FROM 
+        tp_estrategia_actividad a inner join tp_actividad b on a.cod_actividad = b.cod_actividad
+        where
+        a.cod_estrategia = #{codigoEstrategia}
+    </select>
+ 
+    <select id="queryIndicador" resultMap="recordIndicador">
+        SELECT
+        a.cod_indicador,
+        b.nom_indicador
+        FROM 
+        tp_estrategia_indicador a inner join tp_indicador b on a.cod_indicador = b.cod_indicador
+        where
+        a.cod_estrategia = #{codigoEstrategia} and a.cod_actividad = #{codigoActividad}
+    </select>    
+</mapper>

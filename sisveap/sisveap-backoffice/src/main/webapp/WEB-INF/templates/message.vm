@@ -1,0 +1,59 @@
+<html>
+ 	<head>
+ 	<style type='text/css'>
+	.table td label,p { 
+		color: #222222;
+		font-family: arial,sans-serif;
+		font-size:9pt;
+		align='justify';}	
+ 	
+	
+	.divTableDatos {	
+		margin-left: 5px !important;
+	}
+	
+	.divTableDatos table {
+		border: 1px solid #000000;
+		border-collapse: collapse;
+		margin-left: 180px;
+		padding-top: 5px;
+		width: 350px;
+	}
+	.divTableDatos table td {
+		height: 20px;
+		border-style:solid;
+		text-align: left;
+		border-spacing: 0;
+		border-collapse: collapse;
+	}
+
+	.divTableDatos table td label {
+		color: #222222;
+		font-family: arial,sans-serif;
+		font-size: 9pt;
+		font-weight: normal;
+		text-shadow: 0 1px 1px #F2F2F2;
+	}
+	
+	</style>
+ 	</head>
+ 	
+ 	<body>
+	<div style="width:800px;">
+	 				
+		<div>
+			<p><b>Estimado(a) ${usuario}:</b></p>
+			<p>
+				Gracias por utilizar el sistema de citas v&iacute;a web, la reserva de su cita se ha realizado exitosamente.</br>
+				A continuación, favor de revisar la informaci&oacute;n de los datos de la cita agendada para su vehículo ${placa} para el d&iacute;a ${fecha}.
+			</p>
+		</div>
+		
+		<div><br>
+ 			<font size="2" color="FF0000">NOTA: Este mensaje ha sido autogenerado por el Sistema, favor de no responder al mismo. 
+			Cualquier consulta adicional puede comunicarse al teléfono del cuadro anterior.</font>
+ 		</p><br></div>		
+	</div>
+			
+ 	</body>
+ </html> 
