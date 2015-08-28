@@ -15,8 +15,17 @@ public class Persona {
 
     private String dni;
     private String nombres;
+    private String apellidos;
     private String direccion;
     private Date ultFecTrabajo;
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
     public String getDni() {
         return dni;
@@ -52,7 +61,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "dni=" + dni + ", nombres=" + nombres + ", direccion=" + direccion + ", ultFecTrabajo=" + ultFecTrabajo + '}';
+        return "Persona{" + "dni=" + dni + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", ultFecTrabajo=" + ultFecTrabajo + '}';
     }
 
 }

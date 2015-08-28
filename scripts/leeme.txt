@@ -1,11 +1,11 @@
 Cuando la BD no existe:
-1. gepsac-database.sql
-2. gepsac-drop.sql
-3. gepsac-object.sql
-4. gepsac-insert.sql
+1. *-database.sql
+2. *-drop.sql
+3. *-object.sql
+4. *-insert.sql
 
 Bd existe:
-1. gepsac-drop.sql
-2. gepsac-object.sql
-3. gepsac-insert.sql
+1. *-drop.sql
+2. *-object.sql
+3. *-insert.sql
 
