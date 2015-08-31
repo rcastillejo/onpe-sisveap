@@ -8,8 +8,12 @@ package com.sacooliveros.gepsac.controller.comun;
 import com.sacooliveros.gepsac.controller.exception.ConrollerModuleException;
 import com.sacooliveros.gepsac.dao.DAOFactory;
 import com.sacooliveros.gepsac.dao.EstrategiaDAO;
+import com.sacooliveros.gepsac.dao.SupervisorDAO;
+import com.sacooliveros.gepsac.dao.VerificadorDAO;
 import com.sacooliveros.gepsac.model.Estrategia;
 import com.sacooliveros.gepsac.model.EstrategiaActividad;
+import com.sacooliveros.gepsac.model.Supervisor;
+import com.sacooliveros.gepsac.model.Verificador;
 import java.util.List;
 
 /**
@@ -32,10 +36,11 @@ public class ComunController {
         }
     }
 
-    public List<Estrategia> listarEstrategia() {
-        List<Estrategia> listado;
+    
+    public List<Supervisor> listarSupervisor() {
+        List<Supervisor> listado;
         try {
-            EstrategiaDAO dao = DAOFactory.getDAOFactory().getEstrategiaDAO();
+            SupervisorDAO dao = DAOFactory.getDAOFactory().getSupervisorDAO();
             listado = dao.listar();
         } catch (Exception e) {
             throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
@@ -46,17 +51,12 @@ public class ComunController {
         }
         return listado;
     }
-
-    public List<EstrategiaActividad> listarEstrategiaActividad(String codigoEstrategia) {
-        List<EstrategiaActividad> listado;
+    
+    public List<Verificador> listarVerificador(String codigoRegion) {
+        List<Verificador> listado;
         try {
-            EstrategiaDAO dao = DAOFactory.getDAOFactory().getEstrategiaDAO();
-            listado = dao.listarActividad(codigoEstrategia);
-            
-            for (EstrategiaActividad actividad : listado) {
-                actividad.setIndicadores(dao.listarIndicador(codigoEstrategia, actividad.getActividad().getCodigo()));
-            }
-            
+            VerificadorDAO dao = DAOFactory.getDAOFactory().getVerificadorDAO();
+            listado = dao.buscarPorRegion(codigoRegion);
         } catch (Exception e) {
             throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
         }
@@ -66,35 +66,5 @@ public class ComunController {
         }
         return listado;
     }
-    /*
-     public List<Actividad> listarActividad() {
-     List<Actividad> listado;
-     try {
-     ActividadDAO dao = DAOFactory.getDAOFactory().getActividadDAO();
-     listado = dao.listar();
-     } catch (Exception e) {
-     throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
-     }
-
-     if (listado == null || listado.isEmpty()) {
-     throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR);
-     }
-     return listado;
-     } 
-
-     public List<Inidicador> listarIndicador() {
-     List<Inidicador> listado;
-     try {
-     IndicadorDAO dao = DAOFactory.getDAOFactory().getIndicadorDAO();
-     listado = dao.listar();
-     } catch (Exception e) {
-     throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
-     }
-
-     if (listado == null || listado.isEmpty()) {
-     throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR);
-     }
-     return listado;
-     } */
 
 }

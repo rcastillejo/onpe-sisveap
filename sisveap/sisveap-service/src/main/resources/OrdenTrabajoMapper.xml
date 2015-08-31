@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sacooliveros.gepsac.dao.mybatis.mapper.OrdenTrabajoMapper" >
+  
+    <resultMap id="recordOT" type="com.sacooliveros.gepsac.model.OrdenTrabajo" >
+        <id column="cod_ordentrabajo" property="codigo" jdbcType="VARCHAR" />
+        <result column="fec_ingreso" property="fecIngreso" jdbcType="VARCHAR" />
+        <result column="fec_asignado" property="fecAsignado" jdbcType="VARCHAR" />
+        
+        
+        <result column="cod_estado" property="estado.codigo" jdbcType="VARCHAR" />
+        <result column="nom_estado" property="estado.nombre" jdbcType="VARCHAR" />
+        
+        
+        <result column="cod_region" property="region.codigo" jdbcType="VARCHAR" />
+        <result column="nom_region" property="region.nombre" jdbcType="VARCHAR" />
+        
+        <result column="cod_verificador" property="verificador.codigo" jdbcType="VARCHAR" />
+        <result column="nom_verificador" property="verificador.nombres" jdbcType="VARCHAR" />
+        
+    </resultMap>
+    
+    <select id="queryReqion" resultMap="recordOT">
+        SELECT
+        a.cod_estrategia,
+        a.titulo_estrategia,
+        a.des_estrategia,
+        a.fec_registro,
+        b.cod_estado,
+        b.nom_estado
+        FROM tp_estrategia a inner join tp_estado b on a.cod_estado = b.cod_estado
+    </select>
+    
+    <update id="update">
+        Update tp_plan set 
+            fec_registro = #{fecRegistro}, fec_programacion = #{fecProgramacion}, fec_configuracion = #{fecConfiguracion}, 
+            fec_inicio = #{fecInicio}, fec_fin = #{fecFin}, cod_estado = #{estado.codigo}
+        where anio = #{anio} and cod_plan = #{codigo}
+    </update>  
+</mapper>

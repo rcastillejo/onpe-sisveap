@@ -16,4 +16,11 @@ public interface Estado {
         String CONFIGURADO = "PLA0002";
         String PROGRAMADO = "PLA0003";
     }
+    
+    interface ArchivoOT{
+        String PENDIENTE = "AOT0001";
+        String PROCESO = "AOT0002";
+        String TERMINADO = "AOT0004";
+        String RECHAZADO = "AOT0005";
+    }
 }

@@ -7,6 +7,8 @@ package com.sacooliveros.gepsac.service.comun;
 
 import com.sacooliveros.gepsac.model.Estrategia;
 import com.sacooliveros.gepsac.model.EstrategiaActividad;
+import com.sacooliveros.gepsac.model.Supervisor;
+import com.sacooliveros.gepsac.model.Verificador;
 import com.sacooliveros.gepsac.service.exception.ServiceException;
 import java.util.List;
 import javax.jws.WebMethod;
@@ -17,17 +19,10 @@ import javax.jws.WebMethod;
  */
 public interface IComun {
     
-    @WebMethod(operationName = "listarEstrategia")
-    List<Estrategia> listarEstrategia() throws ServiceException;
+    @WebMethod(operationName = "listarSupervisor")
+    List<Supervisor> listarSupervisor() throws ServiceException;
     
-    @WebMethod(operationName = "listarEstrategiaActividad")
-    List<EstrategiaActividad> listarEstrategiaActividad(String codEstrategia) throws ServiceException;
-    /*
-    @WebMethod(operationName = "listarActividad")
-    List<Actividad> listarActividad() throws ServiceException;
-    
-    @WebMethod(operationName = "listarIndicador")
-    List<Indicador> listarIndicador() throws ServiceException;
-    */
+    @WebMethod(operationName = "listarVerificador")
+    List<Verificador> listarVerificador(String codigoRegion) throws ServiceException;
     
 }

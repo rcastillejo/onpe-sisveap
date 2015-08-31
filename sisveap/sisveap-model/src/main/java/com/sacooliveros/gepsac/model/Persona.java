@@ -12,12 +12,20 @@ import java.util.Date;
  * @author Ricardo
  */
 public class Persona {
-
+    private String codigo;
     private String dni;
     private String nombres;
     private String apellidos;
     private String direccion;
     private Date ultFecTrabajo;
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
     public String getApellidos() {
         return apellidos;

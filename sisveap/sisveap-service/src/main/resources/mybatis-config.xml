@@ -13,7 +13,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="UNPOOLED">
                 <property name="driver" value="org.postgresql.Driver"/>
-                <property name="url" value="jdbc:postgresql://localhost:5432/gepsac"/>
+                <property name="url" value="jdbc:postgresql://localhost:5432/sisveap"/>
                 <property name="username" value="postgres"/>
                 <property name="password" value="postgres"/>
             </dataSource>
@@ -21,7 +21,11 @@
     </environments>
     
     <mappers>
-        <mapper resource="PlanMapper.xml"/>
-        <mapper resource="EstrategiaMapper.xml"/>
+        <!--<mapper resource="PlanMapper.xml"/>
+        <mapper resource="EstrategiaMapper.xml"/>-->
+        <mapper resource="ArchivoOTMapper.xml"/>
+        <mapper resource="OrdenTrabajoMapper.xml"/>
+        <mapper resource="SupervisorMapper.xml"/>
+        <mapper resource="VerificadorMapper.xml"/>
     </mappers>
 </configuration>

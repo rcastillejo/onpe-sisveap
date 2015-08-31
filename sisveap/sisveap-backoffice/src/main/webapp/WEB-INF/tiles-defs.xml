@@ -41,4 +41,8 @@
     <definition name="programarPlan" extends="principal">
         <put name="content" value="/pages/planificacion/programar.jsp" type="page"/>
     </definition>
+        
+    <definition name="distribuirCargaSup" extends="principal">
+        <put name="content" value="/pages/planificacion/cargaSupervisor.jsp" type="page"/>
+    </definition>
 </tiles-definitions>

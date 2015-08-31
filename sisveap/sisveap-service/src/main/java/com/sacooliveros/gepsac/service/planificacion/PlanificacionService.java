@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Ricardo
  */
-@WebService(serviceName = "PlanificacionService")
+//@WebService(serviceName = "PlanificacionService")
 public class PlanificacionService implements IPlanificacion {
 
     private static final Logger log = LoggerFactory.getLogger(PlanificacionService.class);

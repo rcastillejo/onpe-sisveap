@@ -9,6 +9,8 @@ import com.sacooliveros.gepsac.controller.comun.ComunController;
 import com.sacooliveros.gepsac.controller.exception.ConrollerModuleException;
 import com.sacooliveros.gepsac.model.Estrategia;
 import com.sacooliveros.gepsac.model.EstrategiaActividad;
+import com.sacooliveros.gepsac.model.Supervisor;
+import com.sacooliveros.gepsac.model.Verificador;
 import com.sacooliveros.gepsac.service.exception.ServiceException;
 import java.util.List;
 import javax.jws.WebService;
@@ -29,44 +31,26 @@ public class ComunService implements IComun {
     public ComunService() {
         controller = new ComunController();
     }
+        
+    @Override
+    public List<Supervisor> listarSupervisor() {
+        try {
+            return controller.listarSupervisor();
+        } catch (ConrollerModuleException e) {
+            log.error(e.getMessage(), e);
+            throw new ServiceException(e.getCodigo(), e.getMessage());
+        }
+    }
     
     @Override
-    public List<Estrategia> listarEstrategia() {
+    public List<Verificador> listarVerificador(String codigoRegion) {
         try {
-            return controller.listarEstrategia();
+            return controller.listarVerificador(codigoRegion);
         } catch (ConrollerModuleException e) {
             log.error(e.getMessage(), e);
             throw new ServiceException(e.getCodigo(), e.getMessage());
         }
     }
-    @Override
-    public List<EstrategiaActividad> listarEstrategiaActividad(String codEstrategia) {
-        try {
-            return controller.listarEstrategiaActividad(codEstrategia);
-        } catch (ConrollerModuleException e) {
-            log.error(e.getMessage(), e);
-            throw new ServiceException(e.getCodigo(), e.getMessage());
-        }
-    }
-/*
-    @Override
-    public List<Actividad> listarActividad() {
-        try {
-            return controller.listarActividad();
-        } catch (ConrollerModuleException e) {
-            log.error(e.getMessage(), e);
-            throw new ServiceException(e.getCodigo(), e.getMessage());
-        }
-    }
-
-    @Override
-    public List<Indicador> listarIndicador() {
-        try {
-            return controller.listarInidicador();
-        } catch (ConrollerModuleException e) {
-            log.error(e.getMessage(), e);
-            throw new ServiceException(e.getCodigo(), e.getMessage());
-        }
-    }*/
-
+    
+    
 }

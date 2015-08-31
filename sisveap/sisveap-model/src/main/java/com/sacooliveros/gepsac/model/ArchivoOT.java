@@ -71,6 +71,14 @@ public class ArchivoOT extends Model {
         this.ordenes = ordenes;
     }
 
+    public Supervisor getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Supervisor supervisor) {
+        this.supervisor = supervisor;
+    }
+
     @Override
     public String toString() {
         return "ArchivoOT{" + "fecRegistro=" + fecRegistro + ", fecAsignacion=" + fecAsignacion + ", nombre=" + nombre + ", ruta=" + ruta + ", cantRegistro=" + cantRegistro + ", ordenes=" + ordenes + ", " + super.toString() + '}';
