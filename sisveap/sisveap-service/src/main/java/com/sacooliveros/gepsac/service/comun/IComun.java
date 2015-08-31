@@ -20,7 +20,7 @@ import javax.jws.WebMethod;
 public interface IComun {
     
     @WebMethod(operationName = "listarSupervisor")
-    List<Supervisor> listarSupervisor() throws ServiceException;
+    List<Supervisor> listarSupervisor(String codigoRegion) throws ServiceException;
     
     @WebMethod(operationName = "listarVerificador")
     List<Verificador> listarVerificador(String codigoRegion) throws ServiceException;

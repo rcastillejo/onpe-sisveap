@@ -64,4 +64,20 @@ public class SupervisorMyIbatisDAO extends GenericMyIbatisDAO implements Supervi
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<Supervisor> buscarPorRegion(String codigoRegion) {            
+        SqlSession session = null;
+        SupervisorMapper mapper;
+        List listado;
+        try {
+            session = getConnection();
+            mapper = session.getMapper(SupervisorMapper.class);
+            listado = mapper.queryReqion(codigoRegion);
+            log.debug("Listado tamanio[{}] [{}] ", listado == null ? 0 : listado.size(), listado);
+            return listado;
+        } finally {
+            closeConnection(session);
+        }
+    }
+
 }

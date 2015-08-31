@@ -17,7 +17,7 @@
     </appender>
     
     <appender name="TRAZADO" class="org.apache.log4j.DailyRollingFileAppender">       
-        <param name="File" value="${jboss.server.log.dir}/gepsac_backoffice/trazado.log" />
+        <param name="File" value="${jboss.server.log.dir}/sisveap_backoffice/trazado.log" />
         <param name="DatePattern" value="'.'yyyyMMdd" />
         <param name="Append" value="true" />
         <layout class="org.apache.log4j.PatternLayout">
@@ -26,7 +26,7 @@
     </appender>    
     
     <appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">       
-        <param name="File" value="${jboss.server.log.dir}/gepsac_backoffice/error.log" />
+        <param name="File" value="${jboss.server.log.dir}/sisveap_backoffice/error.log" />
         <param name="DatePattern" value="'.'yyyyMMdd" />
          <param name="Threshold" value="ERROR" />
         <param name="Append" value="true" />
@@ -36,7 +36,7 @@
     </appender>    
     
     <!--<appender name="PERFORMANCE" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="${jboss.server.log.dir}/gepsac_backoffice/perfomance.log"/>
+        <param name="File" value="${jboss.server.log.dir}/sisveap_backoffice/perfomance.log"/>
         <param name="Append" value="true"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">

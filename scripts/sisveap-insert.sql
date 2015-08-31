@@ -25,11 +25,13 @@ INSERT INTO tp_estado VALUES ('AOT0001', 'Pendiente');
 INSERT INTO tp_estado VALUES ('AOT0002', 'En Proceso');
 INSERT INTO tp_estado VALUES ('AOT0004', 'Terminado');
 INSERT INTO tp_estado VALUES ('AOT0005', 'Rechazado');
+INSERT INTO tp_estado VALUES ('AOT0003', 'Asignado');
 
 INSERT INTO tp_estado VALUES ('ORT0001', 'Pendiente');
 INSERT INTO tp_estado VALUES ('ORT0002', 'En Proceso');
 INSERT INTO tp_estado VALUES ('ORT0004', 'Terminado');
 INSERT INTO tp_estado VALUES ('ORT0005', 'Rechazado');
+INSERT INTO tp_estado VALUES ('ORT0003', 'Asignado');
 
 INSERT INTO tp_estado VALUES ('VER0001', 'Disponible');
 INSERT INTO tp_estado VALUES ('VER0002', 'No Disponible');
@@ -53,9 +55,12 @@ INSERT INTO tp_verificador VALUES ('VE00003', '46633127', 'Juan', 'Perez', 'Chin
 INSERT INTO tp_verificador VALUES ('VE00004', '46633126', 'Sergio', 'Gomez', 'Manco Segundo 530', '2009-08-27', 'RG00004', 'VER0001', 0);
 
 
-INSERT INTO tp_archivo_ot VALUES ('ARC201500001', now(), NULL, 'ot_20150827', 'C:/arch_ot/ot_20150827.txt', 100, 'AOT0001', NULL, NULL, '2015-07-29 16:33:44.156', NULL, NULL);
+INSERT INTO tp_archivo_ot VALUES ('ARC201500001', now(), NULL, 'ot_20150827', 'C:/arch_ot/ot_20150827.txt', 100, 'AOT0001', NULL, NULL, '2015-07-29 16:33:44.156', NULL);
 
 
 INSERT INTO tp_orden_trabajo VALUES ('ORT201500001', 'ARC201500001', now(), NULL, 'RG00001', 'ORT0001', NULL, NULL, '2015-07-29 16:33:44.156', NULL, NULL);
+INSERT INTO tp_orden_trabajo VALUES ('ORT201500002', 'ARC201500001', now(), NULL, 'RG00002', 'ORT0001', NULL, NULL, '2015-07-29 16:33:44.156', NULL, NULL);
+INSERT INTO tp_orden_trabajo VALUES ('ORT201500003', 'ARC201500001', now(), NULL, 'RG00003', 'ORT0001', NULL, NULL, '2015-07-29 16:33:44.156', NULL, NULL);
+INSERT INTO tp_orden_trabajo VALUES ('ORT201500004', 'ARC201500001', now(), NULL, 'RG00004', 'ORT0001', NULL, NULL, '2015-07-29 16:33:44.156', NULL, NULL);
 
 

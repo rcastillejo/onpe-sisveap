@@ -23,4 +23,17 @@
         b.nom_region
         FROM tp_supervisor a inner join tp_region b on a.cod_region = b.cod_region
     </select>
+    
+    <select id="queryReqion" resultMap="recordResultMap">
+        SELECT
+        a.cod_supervisor,
+        a.dni,
+        a.nombre,
+        a.apellidos,
+        a.direccion,
+        b.cod_region,
+        b.nom_region
+        FROM tp_supervisor a inner join tp_region b on a.cod_region = b.cod_region
+        WHERE b.cod_region = #{codigoRegion}
+    </select>
 </mapper>

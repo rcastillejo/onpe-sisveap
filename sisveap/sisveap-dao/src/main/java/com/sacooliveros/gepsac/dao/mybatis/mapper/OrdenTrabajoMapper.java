@@ -6,8 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 public interface OrdenTrabajoMapper {
 
+    public OrdenTrabajo get(@Param("codigo") String codigo );
+    
     public List<OrdenTrabajo> query();
     
+    public List<OrdenTrabajo> queryArchivo(@Param("codigoArchivo") String codigoRegion);
     public List<OrdenTrabajo> queryReqion(@Param("codigoRegion") String codigoRegion);
 
     public int insert(OrdenTrabajo model);

@@ -7,6 +7,7 @@
 package com.sacooliveros.gepsac.dao;
 
 import com.sacooliveros.gepsac.model.Supervisor;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import com.sacooliveros.gepsac.model.Supervisor;
  */
 public interface SupervisorDAO extends BaseDao<Supervisor>{
         
+    List<Supervisor> buscarPorRegion(String codigoRegion);
 }

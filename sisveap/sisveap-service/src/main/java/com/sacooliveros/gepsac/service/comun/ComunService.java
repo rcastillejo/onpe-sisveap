@@ -33,9 +33,9 @@ public class ComunService implements IComun {
     }
         
     @Override
-    public List<Supervisor> listarSupervisor() {
+    public List<Supervisor> listarSupervisor(String codigoRegion) {
         try {
-            return controller.listarSupervisor();
+            return controller.listarSupervisor(codigoRegion);
         } catch (ConrollerModuleException e) {
             log.error(e.getMessage(), e);
             throw new ServiceException(e.getCodigo(), e.getMessage());

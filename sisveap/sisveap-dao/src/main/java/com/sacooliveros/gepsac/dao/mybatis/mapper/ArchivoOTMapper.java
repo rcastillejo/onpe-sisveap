@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface ArchivoOTMapper {
 
+    public ArchivoOT get(String codigo);
+    
     public List<ArchivoOT> query();
 
     public int insert(ArchivoOT model);

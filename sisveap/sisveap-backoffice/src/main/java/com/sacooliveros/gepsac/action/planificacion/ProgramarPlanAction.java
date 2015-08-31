@@ -11,7 +11,6 @@ import com.sacooliveros.gepsac.exception.LoggerUtil;
 import com.novatronic.sca.util.ActionUtil;
 import com.novatronic.sca.util.Config;
 import com.novatronic.sca.util.Resultado;
-import com.sacooliveros.gepsac.proxyws.PlanificacionService;
 import com.sacooliveros.gepsac.proxyws.util.ProxyUtil;
 import java.io.IOException;
 import java.util.Calendar;
@@ -37,41 +36,7 @@ public class ProgramarPlanAction extends DispatchAction {
     public ProgramarPlanAction() {
         jsonBuilder = new GsonBuilder().create();
     }
-/*
-    public void initConsultarEstrategia(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
-        try {
-            CommonService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
-
-            Resultado resultado = createSuccessResult(service.listarEstrategia());
-
-            generalAction(resultado, response);
-        } catch (Exception e) {
-            //logger.error("Error al obtener plan", e);
-            LoggerUtil.error(logger, "consultarEstrategia", "planificación",
-                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
-                    e.getMessage(), e);
-            generalAction(createErrorResult(e), response);
-        }
-    }
-
-    public void initConsultarActividad(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
-        try {
-            CommonService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
-            String codigoEstrategia = request.getParameter("codigoEstrategia");
-            logger.debug("Consultando actividades de la estrategia [{}]", codigoEstrategia);
-
-            Resultado resultado = createSuccessResult(service.listarEstrategiaActividad(codigoEstrategia));
-
-            generalAction(resultado, response);
-        } catch (Exception e) {
-            //logger.error("Error al obtener plan", e);
-            LoggerUtil.error(logger, "consultarActividad", "planificación",
-                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
-                    e.getMessage(), e);
-            generalAction(createErrorResult(e), response);
-        }
-    }
-*/
+    /*
     public void generarProgramacionPlan(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         logger.debug("generando prgoramacion del plan ... ");
         try {
@@ -135,7 +100,7 @@ public class ProgramarPlanAction extends DispatchAction {
     public ActionForward init(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         return mapping.findForward("programarPlan");
     }
-
+*/
     private Resultado createSuccessResult(Object obj) {
         String json = jsonBuilder.toJson(obj, obj.getClass());
         return new Resultado(json, HttpServletResponse.SC_OK);

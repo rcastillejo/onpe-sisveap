@@ -41,9 +41,32 @@ public class DistribucionService implements IDistribucion {
     }
 
     @Override
-    public List<OrdenTrabajo> listarOrdenTrabajo(String codigoRegion) {
+    public ArchivoOT obtenerArchivoOT(String codigo) throws ServiceException {
         try {
-            return controller.listarOrdenTrabajo(codigoRegion);
+            ArchivoOT archivoOT = controller.obtenerArchivoOT(codigo);
+            List<OrdenTrabajo> ordenes= controller.listarOrdenTrabajo(codigo);
+            archivoOT.setOrdenes(ordenes);
+            return archivoOT;
+        } catch (ConrollerModuleException e) {
+            log.error(e.getMessage(), e);
+            throw new ServiceException(e.getCodigo(), e.getMessage());
+        }
+    }
+
+    @Override
+    public List<OrdenTrabajo> listarOrdenTrabajo(String codigoArchivo) {
+        try {
+            return controller.listarOrdenTrabajo(codigoArchivo);
+        } catch (ConrollerModuleException e) {
+            log.error(e.getMessage(), e);
+            throw new ServiceException(e.getCodigo(), e.getMessage());
+        }
+    }
+
+    @Override
+    public List<OrdenTrabajo> listarOrdenTrabajoPorRegion(String codigoRegion) {
+        try {
+            return controller.listarOrdenTrabajoPorRegion(codigoRegion);
         } catch (ConrollerModuleException e) {
             log.error(e.getMessage(), e);
             throw new ServiceException(e.getCodigo(), e.getMessage());
@@ -69,6 +92,5 @@ public class DistribucionService implements IDistribucion {
             throw new ServiceException(e.getCodigo(), e.getMessage());
         }
     }
-
     
 }

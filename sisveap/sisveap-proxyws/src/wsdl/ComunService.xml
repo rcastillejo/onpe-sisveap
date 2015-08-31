@@ -1,59 +1,40 @@
 <?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="ComunService" targetNamespace="http://comun.service.gepsac.sacooliveros.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://comun.service.gepsac.sacooliveros.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
 <xs:schema elementFormDefault="unqualified" targetNamespace="http://comun.service.gepsac.sacooliveros.com/" version="1.0" xmlns:tns="http://comun.service.gepsac.sacooliveros.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:element name="listarEstrategia" type="tns:listarEstrategia"/>
-<xs:element name="listarEstrategiaActividad" type="tns:listarEstrategiaActividad"/>
-<xs:element name="listarEstrategiaActividadResponse" type="tns:listarEstrategiaActividadResponse"/>
-<xs:element name="listarEstrategiaResponse" type="tns:listarEstrategiaResponse"/>
-<xs:complexType name="listarEstrategia">
-    <xs:sequence/>
-  </xs:complexType>
-<xs:complexType name="listarEstrategiaResponse">
+<xs:element name="listarSupervisor" type="tns:listarSupervisor"/>
+<xs:element name="listarSupervisorResponse" type="tns:listarSupervisorResponse"/>
+<xs:element name="listarVerificador" type="tns:listarVerificador"/>
+<xs:element name="listarVerificadorResponse" type="tns:listarVerificadorResponse"/>
+<xs:complexType name="listarVerificador">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:estrategia"/>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="estrategia">
+<xs:complexType name="listarVerificadorResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:verificador"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="verificador">
     <xs:complexContent>
-      <xs:extension base="tns:model">
+      <xs:extension base="tns:persona">
         <xs:sequence>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="actividades" nillable="true" type="tns:estrategiaActividad"/>
-          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
-          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element name="cantOTEnProceso" type="xs:int"/>
+          <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+          <xs:element minOccurs="0" name="region" type="tns:region"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-<xs:complexType name="model">
+<xs:complexType name="persona">
     <xs:sequence>
+      <xs:element minOccurs="0" name="apellidos" type="xs:string"/>
       <xs:element minOccurs="0" name="codigo" type="xs:string"/>
-      <xs:element minOccurs="0" name="estado" type="tns:estado"/>
-      <xs:element minOccurs="0" name="fecCre" type="xs:dateTime"/>
-      <xs:element minOccurs="0" name="fecMod" type="xs:dateTime"/>
-      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
-      <xs:element minOccurs="0" name="usuMod" type="xs:string"/>
+      <xs:element minOccurs="0" name="direccion" type="xs:string"/>
+      <xs:element minOccurs="0" name="dni" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombres" type="xs:string"/>
+      <xs:element minOccurs="0" name="ultFecTrabajo" type="xs:dateTime"/>
     </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="estrategiaActividad">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="actividad" type="tns:actividad"/>
-      <xs:element minOccurs="0" name="codigoEstrategia" type="xs:string"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="indicadores" nillable="true" type="tns:indicador"/>
-    </xs:sequence>
-  </xs:complexType>
-<xs:complexType name="actividad">
-    <xs:complexContent>
-      <xs:extension base="tns:model">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
-          <xs:element name="duracion" type="xs:int"/>
-          <xs:element name="frecuencia" type="xs:int"/>
-          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
-          <xs:element name="sesiones" type="xs:int"/>
-          <xs:element minOccurs="0" name="tipoFrecuencia" type="xs:string"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
   </xs:complexType>
 <xs:complexType name="estado">
     <xs:sequence>
@@ -61,84 +42,87 @@
       <xs:element minOccurs="0" name="nombre" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="indicador">
-    <xs:complexContent>
-      <xs:extension base="tns:model">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
-          <xs:element minOccurs="0" name="formula" type="xs:string"/>
-          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
-          <xs:element minOccurs="0" name="tipoIndicador" type="xs:string"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
+<xs:complexType name="region">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
   </xs:complexType>
-<xs:complexType name="listarEstrategiaActividad">
+<xs:complexType name="listarSupervisor">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="listarEstrategiaActividadResponse">
+<xs:complexType name="listarSupervisorResponse">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:estrategiaActividad"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:supervisor"/>
     </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="supervisor">
+    <xs:complexContent>
+      <xs:extension base="tns:persona">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="region" type="tns:region"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 </xs:schema>
   </wsdl:types>
-  <wsdl:message name="listarEstrategia">
-    <wsdl:part element="tns:listarEstrategia" name="parameters">
+  <wsdl:message name="listarVerificadorResponse">
+    <wsdl:part element="tns:listarVerificadorResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="listarEstrategiaActividadResponse">
-    <wsdl:part element="tns:listarEstrategiaActividadResponse" name="parameters">
+  <wsdl:message name="listarSupervisorResponse">
+    <wsdl:part element="tns:listarSupervisorResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="listarEstrategiaResponse">
-    <wsdl:part element="tns:listarEstrategiaResponse" name="parameters">
+  <wsdl:message name="listarVerificador">
+    <wsdl:part element="tns:listarVerificador" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="listarEstrategiaActividad">
-    <wsdl:part element="tns:listarEstrategiaActividad" name="parameters">
+  <wsdl:message name="listarSupervisor">
+    <wsdl:part element="tns:listarSupervisor" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="ComunService">
-    <wsdl:operation name="listarEstrategia">
-      <wsdl:input message="tns:listarEstrategia" name="listarEstrategia">
+    <wsdl:operation name="listarVerificador">
+      <wsdl:input message="tns:listarVerificador" name="listarVerificador">
     </wsdl:input>
-      <wsdl:output message="tns:listarEstrategiaResponse" name="listarEstrategiaResponse">
+      <wsdl:output message="tns:listarVerificadorResponse" name="listarVerificadorResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="listarEstrategiaActividad">
-      <wsdl:input message="tns:listarEstrategiaActividad" name="listarEstrategiaActividad">
+    <wsdl:operation name="listarSupervisor">
+      <wsdl:input message="tns:listarSupervisor" name="listarSupervisor">
     </wsdl:input>
-      <wsdl:output message="tns:listarEstrategiaActividadResponse" name="listarEstrategiaActividadResponse">
+      <wsdl:output message="tns:listarSupervisorResponse" name="listarSupervisorResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ComunServiceSoapBinding" type="tns:ComunService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="listarEstrategia">
+    <wsdl:operation name="listarVerificador">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="listarEstrategia">
+      <wsdl:input name="listarVerificador">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="listarEstrategiaResponse">
+      <wsdl:output name="listarVerificadorResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="listarEstrategiaActividad">
+    <wsdl:operation name="listarSupervisor">
       <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="listarEstrategiaActividad">
+      <wsdl:input name="listarSupervisor">
         <soap:body use="literal"/>
       </wsdl:input>
-      <wsdl:output name="listarEstrategiaActividadResponse">
+      <wsdl:output name="listarSupervisorResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ComunService">
     <wsdl:port binding="tns:ComunServiceSoapBinding" name="ComunServicePort">
-      <soap:address location="http://rcastillejo:8180/gepsac-service/ComunService"/>
+      <soap:address location="http://localhost:8180/sisveap-service/ComunService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

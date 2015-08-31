@@ -5,10 +5,10 @@
  */
 package com.sacooliveros.gepsac.proxyws.util;
 
-import com.sacooliveros.gepsac.proxyws.ComunService;
-import com.sacooliveros.gepsac.proxyws.ComunService_Service;
-import com.sacooliveros.gepsac.proxyws.PlanificacionService;
-import com.sacooliveros.gepsac.proxyws.PlanificacionService_Service;
+import com.onpe.sisveap.proxyws.ComunService;
+import com.onpe.sisveap.proxyws.ComunService_Service;
+import com.onpe.sisveap.proxyws.DistribucionService;
+import com.onpe.sisveap.proxyws.DistribucionService_Service;
 import javax.xml.ws.BindingProvider;
 
 /**
@@ -16,12 +16,13 @@ import javax.xml.ws.BindingProvider;
  * @author Ricardo
  */
 public class ProxyUtil {
-    private static final String PLAN_ENDPOINT = "http://localhost:8180/gepsac-service/PlanificacionService";
-    private static final String COMMON_ENDPOINT = "http://localhost:8180/gepsac-service/ComunService";
 
-    public static PlanificacionService getPlanificacionServicePort(long timeout) {
-        PlanificacionService_Service service = new PlanificacionService_Service();
-        PlanificacionService port = service.getPlanificacionServicePort();
+    private static final String PLAN_ENDPOINT = "http://localhost:8180/sisveap-service/DistribucionService";
+    private static final String COMMON_ENDPOINT = "http://localhost:8180/sisveap-service/ComunService";
+
+    public static DistribucionService getDistribucionServicePort(long timeout) {
+        DistribucionService_Service service = new DistribucionService_Service();
+        DistribucionService port = service.getDistribucionServicePort();
         BindingProvider bp = (BindingProvider) port;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, PLAN_ENDPOINT);
         bp.getRequestContext().put("com.sun.xml.internal.ws.connect.timeout", timeout);

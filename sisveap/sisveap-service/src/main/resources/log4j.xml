@@ -49,7 +49,7 @@
     </logger>-->
      
     
-    <logger name="com.sacooliveros.sisveap">
+    <logger name="com.sacooliveros.gepsac">
         <level value="DEBUG" />
         <appender-ref ref="TRAZADO"/>
     </logger>

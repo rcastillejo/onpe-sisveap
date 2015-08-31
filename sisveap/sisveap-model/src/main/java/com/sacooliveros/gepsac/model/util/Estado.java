@@ -20,7 +20,16 @@ public interface Estado {
     interface ArchivoOT{
         String PENDIENTE = "AOT0001";
         String PROCESO = "AOT0002";
+        String ASIGNADO = "AOT0003";
         String TERMINADO = "AOT0004";
         String RECHAZADO = "AOT0005";
+    }
+    
+    interface OT{
+        String PENDIENTE = "ORT0001";
+        String PROCESO = "ORT0002";
+        String ASIGNADO = "ORT0003";
+        String TERMINADO = "ORT0004";
+        String RECHAZADO = "ORT0005";
     }
 }

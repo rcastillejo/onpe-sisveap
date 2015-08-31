@@ -21,7 +21,6 @@ public class ArchivoOT extends Model {
     private String ruta;
     private int cantRegistro;
     private List<OrdenTrabajo> ordenes;
-    private Supervisor supervisor;
 
     public Date getFecRegistro() {
         return fecRegistro;
@@ -69,14 +68,6 @@ public class ArchivoOT extends Model {
 
     public void setOrdenes(List<OrdenTrabajo> ordenes) {
         this.ordenes = ordenes;
-    }
-
-    public Supervisor getSupervisor() {
-        return supervisor;
-    }
-
-    public void setSupervisor(Supervisor supervisor) {
-        this.supervisor = supervisor;
     }
 
     @Override

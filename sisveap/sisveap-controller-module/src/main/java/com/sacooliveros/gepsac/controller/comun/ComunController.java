@@ -37,11 +37,11 @@ public class ComunController {
     }
 
     
-    public List<Supervisor> listarSupervisor() {
+    public List<Supervisor> listarSupervisor(String codigoRegion) {
         List<Supervisor> listado;
         try {
             SupervisorDAO dao = DAOFactory.getDAOFactory().getSupervisorDAO();
-            listado = dao.listar();
+            listado = dao.buscarPorRegion(codigoRegion);
         } catch (Exception e) {
             throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
         }

@@ -11,8 +11,6 @@ import com.sacooliveros.gepsac.exception.LoggerUtil;
 import com.novatronic.sca.util.ActionUtil;
 import com.novatronic.sca.util.Config;
 import com.novatronic.sca.util.Resultado;
-import com.sacooliveros.gepsac.proxyws.ComunService;
-import com.sacooliveros.gepsac.proxyws.PlanificacionService;
 import com.sacooliveros.gepsac.proxyws.util.ProxyUtil;
 import java.io.IOException;
 import java.util.Calendar;
@@ -38,7 +36,7 @@ public class ConfigurarEstrategiaAction extends DispatchAction {
     public ConfigurarEstrategiaAction() {
         jsonBuilder = new GsonBuilder().create();
     }
-
+    /*
     public void initConsultarEstrategia(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         try {
             ComunService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
@@ -109,7 +107,7 @@ public class ConfigurarEstrategiaAction extends DispatchAction {
                     e.getMessage(), e);
             generalAction(createErrorResult(e), response);
         }
-    }
+    }*/
 
     public ActionForward init(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         return mapping.findForward("configurarEstrategia");

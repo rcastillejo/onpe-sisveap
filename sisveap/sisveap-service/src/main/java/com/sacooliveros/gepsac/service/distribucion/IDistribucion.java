@@ -21,8 +21,14 @@ public interface IDistribucion {
     @WebMethod(operationName = "listarArchivoOT")
     List<ArchivoOT> listarArchivoOT() throws ServiceException;
 
+    @WebMethod(operationName = "obtenerArchivoOT")
+    ArchivoOT obtenerArchivoOT(@WebParam(name = "codigo") String codigo) throws ServiceException;
+
     @WebMethod(operationName = "listarOrdenTrabajo")
-    List<OrdenTrabajo>  listarOrdenTrabajo(String codigoRegion) throws ServiceException;
+    List<OrdenTrabajo>  listarOrdenTrabajo(String codigoArchivo) throws ServiceException;
+
+    @WebMethod(operationName = "listarOrdenTrabajoRegion")
+    List<OrdenTrabajo>  listarOrdenTrabajoPorRegion(String codigoRegion) throws ServiceException;
 
     @WebMethod(operationName = "asignarSupervisorArchivoOT")
     String asignarSupervisorArchivoOT(@WebParam(name = "archivoOT") ArchivoOT archivoOT) throws ServiceException;

@@ -14,5 +14,6 @@ import java.util.List;
  */
 public interface OrdenTrabajoDAO extends BaseDao<OrdenTrabajo> {
 
+    List<OrdenTrabajo> buscarPorArchivo(String codigoArchivo);
     List<OrdenTrabajo> buscarPorRegion(String codigoRegion);
 }

@@ -33,6 +33,22 @@ public class OrdenTrabajoMyIbatisDAO extends GenericMyIbatisDAO implements Orden
     }
     
     @Override
+    public List<OrdenTrabajo> buscarPorArchivo(String codigoArchivo) {
+        SqlSession session = null;
+        OrdenTrabajoMapper mapper;
+        List listado;
+        try {
+            session = getConnection();
+            mapper = session.getMapper(OrdenTrabajoMapper.class);
+            listado = mapper.queryArchivo(codigoArchivo);
+            log.debug("Listado tamanio[{}] [{}] ", listado == null ? 0 : listado.size(), listado);
+            return listado;
+        } finally {
+            closeConnection(session);
+        }
+    }
+    
+    @Override
     public List<OrdenTrabajo> buscarPorRegion(String codigoRegion) {
         SqlSession session = null;
         OrdenTrabajoMapper mapper;
@@ -50,7 +66,18 @@ public class OrdenTrabajoMyIbatisDAO extends GenericMyIbatisDAO implements Orden
 
     @Override
     public OrdenTrabajo obtener(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SqlSession session = null;
+        OrdenTrabajoMapper mapper;
+        OrdenTrabajo model;
+        try {
+            session = getConnection();
+            mapper = session.getMapper(OrdenTrabajoMapper.class);
+            model = mapper.get(id);
+            log.debug("orden trabajo obtenido[{}]", model);
+            return model;
+        } finally {
+            closeConnection(session);
+        }
     }
 
     @Override

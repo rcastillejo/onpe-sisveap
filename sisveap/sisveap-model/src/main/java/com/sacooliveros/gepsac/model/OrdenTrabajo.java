@@ -12,10 +12,11 @@ import java.util.Date;
  *
  * @author Ricardo
  */
-public class OrdenTrabajo extends Model{
+public class OrdenTrabajo extends Model {
+
     private Date fecIngreso;
     private Date fecAsignado;
-    
+
     private Persona persona;
     private Region region;
     private Supervisor supervisor;
@@ -36,6 +37,43 @@ public class OrdenTrabajo extends Model{
     public void setFecAsignado(Date fecAsignado) {
         this.fecAsignado = fecAsignado;
     }
-    
-    
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public Verificador getVerificador() {
+        return verificador;
+    }
+
+    public void setVerificador(Verificador verificador) {
+        this.verificador = verificador;
+    }
+
+    public Supervisor getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Supervisor supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    @Override
+    public String toString() {
+        return "OrdenTrabajo{" + "fecIngreso=" + fecIngreso + ", fecAsignado=" + fecAsignado + ", persona=" + persona + ", region=" + region + ", supervisor=" + supervisor + ", verificador=" + verificador + ',' + super.toString() + '}';
+    }
+
+
 }

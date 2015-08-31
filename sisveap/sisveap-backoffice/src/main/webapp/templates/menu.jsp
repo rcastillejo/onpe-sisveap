@@ -11,9 +11,14 @@
 <!--     EMPRESA -->
 
         <li>
-            <div>Planificación</div>
+            <div>Distribucion</div>
             <ul style="display: none;">
                 <li>
+                    <html:link page="/DistribuirCarga.do?method=init" >
+                        Carga Supervisor
+                    </html:link>
+                </li>
+                <!--<li>
                     <html:link page="/ConfigurarEstrategia.do?method=init" >
                         Configurar Plan
                     </html:link>
@@ -22,7 +27,7 @@
                     <html:link page="/ProgramarPlan.do?method=init" >
                         Programar Plan
                     </html:link>
-                <li> 
+                <li> -->
             </ul>
         </li>
         

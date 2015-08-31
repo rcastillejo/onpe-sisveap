@@ -43,7 +43,19 @@ public class ArchivoOTMyIbatisDAO extends GenericMyIbatisDAO implements ArchivoO
 
     @Override
     public ArchivoOT obtener(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        SqlSession session = null;
+        ArchivoOTMapper mapper;
+        ArchivoOT model;
+        try {
+            session = getConnection();
+            mapper = session.getMapper(ArchivoOTMapper.class);
+            model = mapper.get(id);
+            log.info("Archivo OT obtenido [{}]",  model);
+            return model;
+        } finally {
+            closeConnection(session);
+        }
     }
 
     @Override

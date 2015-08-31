@@ -6,7 +6,6 @@
 
 package com.sacooliveros.gepsac.dao;
 
-import com.sacooliveros.gepsac.model.Estrategia;
 import com.sacooliveros.gepsac.model.Verificador;
 import java.util.List;
 

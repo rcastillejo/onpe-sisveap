@@ -13,10 +13,6 @@
         <result column="cod_estado" property="estado.codigo" jdbcType="VARCHAR" />
         <result column="nom_estado" property="estado.nombre" jdbcType="VARCHAR" />
         
-        <result column="cod_supervisor" property="supervisor.codigo" jdbcType="VARCHAR" />
-        <result column="nom_supervisor" property="supervisor.nombres" jdbcType="VARCHAR" />
-        <result column="ape_supervisor" property="supervisor.apellidos" jdbcType="VARCHAR" />
-        
     </resultMap>
     
     <select id="query" resultMap="recordArchivoOT">
@@ -28,18 +24,28 @@
         a.ruta_archivo,
         a.cant_registro,
         b.cod_estado,
-        b.nom_estado,
-        c.cod_supervisor,
-        c.nombre as nom_supervisor,
-        c.apellidos as ape_supervisor
+        b.nom_estado
         FROM tp_archivo_ot a inner join tp_estado b on a.cod_estado = b.cod_estado
-        left join tp_supervisor c on a.cod_supervisor = c.cod_supervisor
+    </select>
+    
+    <select id="get" resultMap="recordArchivoOT">
+        SELECT
+        a.cod_archivo,
+        a.fec_registro,
+        a.fec_asignacion,
+        a.nombre_archivo,
+        a.ruta_archivo,
+        a.cant_registro,
+        b.cod_estado,
+        b.nom_estado
+        FROM tp_archivo_ot a inner join tp_estado b on a.cod_estado = b.cod_estado
+        WHERE a.cod_archivo = #{codigo}
     </select>
     
     <update id="update">
         Update tp_archivo_ot set 
             fec_registro = #{fecRegistro}, fec_asignacion = #{fecAsignacion}, nombre_archivo = #{nombre}, 
-            ruta_archivo = #{ruta}, cant_registro = #{cantRegistro}, cod_supervisor = #{supervisor.codigo}, 
+            ruta_archivo = #{ruta}, cant_registro = #{cantRegistro}, 
             cod_estado = #{estado.codigo}
         where cod_archivo = #{codigo}
     </update>  

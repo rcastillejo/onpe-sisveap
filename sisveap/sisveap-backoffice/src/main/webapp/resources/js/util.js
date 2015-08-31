@@ -35,6 +35,38 @@ function fn_util_CierraModal() {
     //$("#dv_ModalFrame").dialog("destroy");
 }
 
+function fn_util_AbreModal2(pTitulo, pURL, pAncho, pAlto, pFuncion) {
+    if ((pTitulo == null) | (pTitulo == 'undefined')) { pTitulo = ''; }
+    $("body").append("<div id='dv_ModalFrame2'></div>");
+	
+	var strHtml= '<iframe runat="server" id="ifrModal2" width="'+pAncho+'px" height="'+ (pAlto - 20) +'px" frameborder="0"scrolling="auto" marginheight="0" marginwidth="0" src="'+ pURL +'"></iframe>';
+		 
+    $("#dv_ModalFrame2").html(strHtml);
+    $("#dv_ModalFrame2").dialog({
+        modal: true
+        , title: pTitulo
+        , resizable: false
+	    , beforeclose: function (event, ui) {
+	        $(this).remove(); pFuncion();
+	    }
+        /*,buttons: {
+            "Cerrar": function () {
+                $(this).remove();
+            }
+        }*/
+		, width: (pAncho + 30)
+    });
+	
+};
+
+function fn_util_CierraModal2() {
+    $("#ifrModal2").attr('src', '');
+    $("#dv_ModalFrame2").dialog("close");
+    $("#dv_ModalFrame2").remove();
+    //$("#dv_ModalFrame").dialog("destroy");
+    //$(".ui-dialog-content").dialog().dialog("close");
+    //$("#dv_ModalFrame").dialog("destroy");
+}
 
 
 //**********************************************************************

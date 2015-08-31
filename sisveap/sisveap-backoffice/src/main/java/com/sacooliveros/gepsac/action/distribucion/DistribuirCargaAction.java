@@ -11,8 +11,8 @@ import com.sacooliveros.gepsac.exception.LoggerUtil;
 import com.novatronic.sca.util.ActionUtil;
 import com.novatronic.sca.util.Config;
 import com.novatronic.sca.util.Resultado;
-import com.sacooliveros.gepsac.proxyws.ComunService;
-import com.sacooliveros.gepsac.proxyws.PlanificacionService;
+import com.onpe.sisveap.proxyws.ComunService;
+import com.onpe.sisveap.proxyws.DistribucionService;
 import com.sacooliveros.gepsac.proxyws.util.ProxyUtil;
 import java.io.IOException;
 import java.util.Calendar;
@@ -39,25 +39,41 @@ public class DistribuirCargaAction extends DispatchAction {
         jsonBuilder = new GsonBuilder().create();
     }
     
-    public void listarArchivoOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public void listarSupervisor(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         try {
             ComunService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
+            
+            String codigoRegion = request.getParameter("codigoRegion");
 
-            Resultado resultado = createSuccessResult(service.listarArchivoOT());
+            Resultado resultado = createSuccessResult(service.listarSupervisor(codigoRegion));
 
             generalAction(resultado, response);
         } catch (Exception e) {
-            //logger.error("Error al obtener plan", e);
-            LoggerUtil.error(logger, "consultarEstrategia", "planificación",
+            LoggerUtil.error(logger, "listarSupervisor", "distribucion",
                     Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
                     e.getMessage(), e);
             generalAction(createErrorResult(e), response);
         }
     }
     
+    public void listarArchivoOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            DistribucionService service = ProxyUtil.getDistribucionServicePort(Config.TIMEOUT);
+
+            Resultado resultado = createSuccessResult(service.listarArchivoOT());
+
+            generalAction(resultado, response);
+        } catch (Exception e) {
+            LoggerUtil.error(logger, "listarArchivoOT", "distribucion",
+                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
+                    e.getMessage(), e);
+            generalAction(createErrorResult(e), response);
+        }
+    }
+        
     public void obtenerArchivoOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         try {
-            ComunService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
+            DistribucionService service = ProxyUtil.getDistribucionServicePort(Config.TIMEOUT);
             
             String codigo = request.getParameter("codigoArchivoOT");
 
@@ -65,7 +81,6 @@ public class DistribuirCargaAction extends DispatchAction {
 
             generalAction(resultado, response);
         } catch (Exception e) {
-            //logger.error("Error al obtener plan", e);
             LoggerUtil.error(logger, "obtenerArchivoOT", "distribuicion",
                     Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
                     e.getMessage(), e);
@@ -75,19 +90,18 @@ public class DistribuirCargaAction extends DispatchAction {
     
     public void asignarSupervisorArchivoOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         try {
-            ComunService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
+            DistribucionService service = ProxyUtil.getDistribucionServicePort(Config.TIMEOUT);
             
             String json = request.getParameter("archivoOT");
             logger.debug("json [{}]", json);
-            com.sacooliveros.gepsac.proxyws.Plan plan = jsonBuilder.fromJson(json, com.sacooliveros.gepsac.proxyws.Plan.class);
+            com.onpe.sisveap.proxyws.ArchivoOT archivoOT = jsonBuilder.fromJson(json, com.onpe.sisveap.proxyws.ArchivoOT.class);
 
-            logger.debug("archivo OT [{}]", plan);
-            String msg = service.asignarSupervisor(plan);
+            logger.debug("archivo OT [{}]", archivoOT);
+            String msg = service.asignarSupervisorArchivoOT(archivoOT);
 
             logger.info("Archivo OT asignado [{}]", msg);
             generalAction(createSuccessResult(msg), response);
         } catch (Exception e) {
-            //logger.error("Error al obtener plan", e);
             LoggerUtil.error(logger, "obtenerArchivoOT", "distribuicion",
                     Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
                     e.getMessage(), e);
@@ -96,7 +110,7 @@ public class DistribuirCargaAction extends DispatchAction {
     }
     
     public ActionForward init(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
-        return mapping.findForward("programarPlan");
+        return mapping.findForward("listarArchivoOT");
     }
 
     private Resultado createSuccessResult(Object obj) {

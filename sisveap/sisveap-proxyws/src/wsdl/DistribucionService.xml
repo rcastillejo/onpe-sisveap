@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="DistribucionService" targetNamespace="http://distribucion.service.gepsac.sacooliveros.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://distribucion.service.gepsac.sacooliveros.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://distribucion.service.gepsac.sacooliveros.com/" xmlns:tns="http://distribucion.service.gepsac.sacooliveros.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="asignarSupervisorArchivoOT" type="tns:asignarSupervisorArchivoOT"/>
+  <xs:element name="asignarSupervisorArchivoOTResponse" type="tns:asignarSupervisorArchivoOTResponse"/>
+  <xs:element name="asignarVerificadorOT" type="tns:asignarVerificadorOT"/>
+  <xs:element name="asignarVerificadorOTResponse" type="tns:asignarVerificadorOTResponse"/>
+  <xs:element name="listarArchivoOT" type="tns:listarArchivoOT"/>
+  <xs:element name="listarArchivoOTResponse" type="tns:listarArchivoOTResponse"/>
+  <xs:element name="listarOrdenTrabajo" type="tns:listarOrdenTrabajo"/>
+  <xs:element name="listarOrdenTrabajoPorRegion" type="tns:listarOrdenTrabajoPorRegion"/>
+  <xs:element name="listarOrdenTrabajoPorRegionResponse" type="tns:listarOrdenTrabajoPorRegionResponse"/>
+  <xs:element name="listarOrdenTrabajoResponse" type="tns:listarOrdenTrabajoResponse"/>
+  <xs:element name="obtenerArchivoOT" type="tns:obtenerArchivoOT"/>
+  <xs:element name="obtenerArchivoOTResponse" type="tns:obtenerArchivoOTResponse"/>
+  <xs:complexType name="listarOrdenTrabajo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarOrdenTrabajoResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ordenTrabajo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ordenTrabajo">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fecAsignado" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fecIngreso" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="persona" type="tns:persona"/>
+          <xs:element minOccurs="0" name="region" type="tns:region"/>
+          <xs:element minOccurs="0" name="supervisor" type="tns:supervisor"/>
+          <xs:element minOccurs="0" name="verificador" type="tns:verificador"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="model">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+      <xs:element minOccurs="0" name="fecCre" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fecMod" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuMod" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="persona">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="apellidos" type="xs:string"/>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="direccion" type="xs:string"/>
+      <xs:element minOccurs="0" name="dni" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombres" type="xs:string"/>
+      <xs:element minOccurs="0" name="ultFecTrabajo" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="region">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="supervisor">
+    <xs:complexContent>
+      <xs:extension base="tns:persona">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="region" type="tns:region"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="verificador">
+    <xs:complexContent>
+      <xs:extension base="tns:persona">
+        <xs:sequence>
+          <xs:element name="cantOTEnProceso" type="xs:int"/>
+          <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+          <xs:element minOccurs="0" name="region" type="tns:region"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="estado">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerArchivoOT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerArchivoOTResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:archivoOT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="archivoOT">
+    <xs:complexContent>
+      <xs:extension base="tns:model">
+        <xs:sequence>
+          <xs:element name="cantRegistro" type="xs:int"/>
+          <xs:element minOccurs="0" name="fecAsignacion" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fecRegistro" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="ordenes" nillable="true" type="tns:ordenTrabajo"/>
+          <xs:element minOccurs="0" name="ruta" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="asignarSupervisorArchivoOT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:archivoOT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asignarSupervisorArchivoOTResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarOrdenTrabajoPorRegion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarOrdenTrabajoPorRegionResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ordenTrabajo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="listarArchivoOT">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="listarArchivoOTResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:archivoOT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asignarVerificadorOT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:ordenTrabajo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="asignarVerificadorOTResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceException" type="tns:ServiceException"/>
+  <xs:complexType name="ServiceException">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ServiceException">
+    <wsdl:part element="tns:ServiceException" name="ServiceException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajoPorRegion">
+    <wsdl:part element="tns:listarOrdenTrabajoPorRegion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerArchivoOT">
+    <wsdl:part element="tns:obtenerArchivoOT" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarSupervisorArchivoOTResponse">
+    <wsdl:part element="tns:asignarSupervisorArchivoOTResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajoPorRegionResponse">
+    <wsdl:part element="tns:listarOrdenTrabajoPorRegionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerArchivoOTResponse">
+    <wsdl:part element="tns:obtenerArchivoOTResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarSupervisorArchivoOT">
+    <wsdl:part element="tns:asignarSupervisorArchivoOT" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarVerificadorOT">
+    <wsdl:part element="tns:asignarVerificadorOT" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajo">
+    <wsdl:part element="tns:listarOrdenTrabajo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajoResponse">
+    <wsdl:part element="tns:listarOrdenTrabajoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarVerificadorOTResponse">
+    <wsdl:part element="tns:asignarVerificadorOTResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarArchivoOT">
+    <wsdl:part element="tns:listarArchivoOT" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarArchivoOTResponse">
+    <wsdl:part element="tns:listarArchivoOTResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DistribucionService">
+    <wsdl:operation name="listarOrdenTrabajo">
+      <wsdl:input message="tns:listarOrdenTrabajo" name="listarOrdenTrabajo">
+    </wsdl:input>
+      <wsdl:output message="tns:listarOrdenTrabajoResponse" name="listarOrdenTrabajoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerArchivoOT">
+      <wsdl:input message="tns:obtenerArchivoOT" name="obtenerArchivoOT">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerArchivoOTResponse" name="obtenerArchivoOTResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:ServiceException" name="ServiceException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="asignarSupervisorArchivoOT">
+      <wsdl:input message="tns:asignarSupervisorArchivoOT" name="asignarSupervisorArchivoOT">
+    </wsdl:input>
+      <wsdl:output message="tns:asignarSupervisorArchivoOTResponse" name="asignarSupervisorArchivoOTResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarOrdenTrabajoPorRegion">
+      <wsdl:input message="tns:listarOrdenTrabajoPorRegion" name="listarOrdenTrabajoPorRegion">
+    </wsdl:input>
+      <wsdl:output message="tns:listarOrdenTrabajoPorRegionResponse" name="listarOrdenTrabajoPorRegionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarArchivoOT">
+      <wsdl:input message="tns:listarArchivoOT" name="listarArchivoOT">
+    </wsdl:input>
+      <wsdl:output message="tns:listarArchivoOTResponse" name="listarArchivoOTResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asignarVerificadorOT">
+      <wsdl:input message="tns:asignarVerificadorOT" name="asignarVerificadorOT">
+    </wsdl:input>
+      <wsdl:output message="tns:asignarVerificadorOTResponse" name="asignarVerificadorOTResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DistribucionServiceSoapBinding" type="tns:DistribucionService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listarOrdenTrabajo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarOrdenTrabajo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarOrdenTrabajoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerArchivoOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerArchivoOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerArchivoOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="asignarSupervisorArchivoOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="asignarSupervisorArchivoOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="asignarSupervisorArchivoOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarOrdenTrabajoPorRegion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarOrdenTrabajoPorRegion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarOrdenTrabajoPorRegionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarArchivoOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarArchivoOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarArchivoOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asignarVerificadorOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="asignarVerificadorOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="asignarVerificadorOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DistribucionService">
+    <wsdl:port binding="tns:DistribucionServiceSoapBinding" name="DistribucionServicePort">
+      <soap:address location="http://localhost:8180/sisveap-service/DistribucionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -29,13 +29,13 @@
                 </executions>
                 <configuration>
                     <!--<wsdlDirectory>${basedir}/src/main/resource/wsdl</wsdlDirectory>-->
-                    <packageName>com.sacooliveros.sisveap.proxyws</packageName>
+                    <packageName>com.onpe.sisveap.proxyws</packageName>
                     <!--<wsdlUrls>
                         <wsdlUrl>http://localhost:8180/sisveap-service/PlanificacionService?wsdl</wsdlUrl>
                         <wsdlUrl>http://localhost:8180/sisveap-service/CommonService?wsdl</wsdlUrl>
                     </wsdlUrls>-->
                     <wsdlFiles>
-                        <wsdlFile>PlanificacionService.xml</wsdlFile>
+                        <wsdlFile>DistribucionService.xml</wsdlFile>
                         <wsdlFile>ComunService.xml</wsdlFile>
                     </wsdlFiles>
                     <sourceDestDir>src/main/java</sourceDestDir>

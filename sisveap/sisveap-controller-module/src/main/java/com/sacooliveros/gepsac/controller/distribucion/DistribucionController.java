@@ -9,17 +9,10 @@ import com.sacooliveros.gepsac.controller.exception.ConrollerModuleException;
 import com.sacooliveros.gepsac.dao.ArchivoOTDAO;
 import com.sacooliveros.gepsac.dao.DAOFactory;
 import com.sacooliveros.gepsac.dao.OrdenTrabajoDAO;
-import com.sacooliveros.gepsac.dao.PlanDAO;
-import com.sacooliveros.gepsac.dao.SupervisorDAO;
 import com.sacooliveros.gepsac.model.ArchivoOT;
 import com.sacooliveros.gepsac.model.OrdenTrabajo;
-import com.sacooliveros.gepsac.model.Plan;
-import com.sacooliveros.gepsac.model.PlanActividad;
-import com.sacooliveros.gepsac.model.PlanEstrategia;
-import com.sacooliveros.gepsac.model.PlanIndicador;
 import com.sacooliveros.gepsac.model.util.Estado;
 import java.text.MessageFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
@@ -52,7 +45,9 @@ public class DistribucionController {
         interface Mensaje {
 
             String GENERAL = "No se pudo realizar la  operación [{0}]";
-            String LISTAR = "No se encuentra planes";
+            String LISTAR_ARHC_OT = "No se encuentra los archivos de ordenes de trabajo";
+            String LISTAR_OT = "No se encuentra los archivos de ordenes de trabajo";
+            String ARCHIVOOT_NO_DISP = "No se encuentra disponible archivo OT";
             String ASIGNAR_SUPERVISOR = "Error al asignar supervisor a un archivo de OT";
             String ASIGNAR_VERIFICADOR = "Error al asignar verificador a una orden de trabajo";
             String CONFIGURAR = "Error al configurar el plan";
@@ -75,12 +70,42 @@ public class DistribucionController {
         }
 
         if (listado == null || listado.isEmpty()) {
-            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR);
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR_ARHC_OT);
         }
         return listado;
     }
 
-    public List<OrdenTrabajo> listarOrdenTrabajo(String codigoRegion) {
+    public ArchivoOT obtenerArchivoOT(String codigo) {
+        ArchivoOT model;
+        try {
+            ArchivoOTDAO dao = DAOFactory.getDAOFactory().getArchivoOTDAO();
+            model = dao.obtener(codigo);
+        } catch (Exception e) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
+        }
+
+        if (model == null) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.ARCHIVOOT_NO_DISP);
+        }
+        return model;
+    }
+
+    public List<OrdenTrabajo> listarOrdenTrabajo(String codigoArchivo) {
+        List<OrdenTrabajo> listado;
+        try {
+            OrdenTrabajoDAO dao = DAOFactory.getDAOFactory().getOrdenTrabajoDAO();
+            listado = dao.buscarPorArchivo(codigoArchivo);
+        } catch (Exception e) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
+        }
+
+        if (listado == null || listado.isEmpty()) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR_OT);
+        }
+        return listado;
+    }
+
+    public List<OrdenTrabajo> listarOrdenTrabajoPorRegion(String codigoRegion) {
         List<OrdenTrabajo> listado;
         try {
             OrdenTrabajoDAO dao = DAOFactory.getDAOFactory().getOrdenTrabajoDAO();
@@ -90,7 +115,7 @@ public class DistribucionController {
         }
 
         if (listado == null || listado.isEmpty()) {
-            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR);
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR_OT);
         }
         return listado;
     }
@@ -98,11 +123,25 @@ public class DistribucionController {
     public String asignarSupervisor(ArchivoOT archivoOT) {
         try {
             ArchivoOTDAO dao = DAOFactory.getDAOFactory().getArchivoOTDAO();
-
-            archivoOT.setEstado(Estado.ArchivoOT.PROCESO);
-            archivoOT.setFecAsignacion(new Date());
-
-            dao.actualizar(archivoOT);
+            ArchivoOT archivoOTActualizar = dao.obtener(archivoOT.getCodigo());
+            archivoOTActualizar.setEstado(Estado.ArchivoOT.ASIGNADO);
+            archivoOTActualizar.setFecAsignacion(new Date());
+            
+            
+            OrdenTrabajoDAO otDao = DAOFactory.getDAOFactory().getOrdenTrabajoDAO();
+            
+            for (OrdenTrabajo ot : archivoOT.getOrdenes()) {
+                OrdenTrabajo otActualizar = otDao.obtener(ot.getCodigo());
+                log.debug("ot obtenido[{}]", otActualizar);
+                otActualizar.setFecAsignado(new Date());
+                otActualizar.setSupervisor(ot.getSupervisor());
+                otActualizar.setEstado(Estado.OT.ASIGNADO);
+                log.debug("Actualizar ot[{}]", otActualizar);
+                otDao.actualizar(otActualizar);                
+            }            
+            log.debug("Actualizar archivo ot[{}]", archivoOTActualizar);
+            
+            dao.actualizar(archivoOTActualizar);
             return MessageFormat.format(Mensaje.ASIGNAR_SUPERVISOR, archivoOT.getCodigo());
         } catch (Exception e) {
             throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.ASIGNAR_SUPERVISOR, e);

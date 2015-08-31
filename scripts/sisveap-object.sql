@@ -75,7 +75,6 @@ CREATE TABLE tp_archivo_ot
   
   cod_estado character varying(15) NOT NULL, 
   
-  cod_supervisor character varying(15) NULL,
   
   usu_crea character varying(50), -- Usuario de creacion
   fec_crea timestamp without time zone DEFAULT now(), -- Fecha de creacion
@@ -84,9 +83,6 @@ CREATE TABLE tp_archivo_ot
   CONSTRAINT pk_tp_archivo_ot PRIMARY KEY (cod_archivo),
   CONSTRAINT fk_tp_archivo_ot_tp_estado FOREIGN KEY (cod_estado)
       REFERENCES tp_estado (cod_estado) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fk_tp_archivo_ot_tp_supervisor FOREIGN KEY (cod_supervisor)
-      REFERENCES tp_supervisor (cod_supervisor) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
@@ -104,6 +100,8 @@ CREATE TABLE tp_orden_trabajo
   cod_region character varying(15) NOT NULL, 
   
   cod_estado character varying(15) NOT NULL, 
+  
+  cod_supervisor character varying(15) NULL,
   
   cod_verificador character varying(15) NULL,
   
@@ -124,6 +122,9 @@ CREATE TABLE tp_orden_trabajo
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fk_tp_orden_trabajo_4 FOREIGN KEY (cod_verificador)
       REFERENCES tp_verificador (cod_verificador) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_tp_orden_trabajo_5 FOREIGN KEY (cod_supervisor)
+      REFERENCES tp_supervisor (cod_supervisor) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (

@@ -7,9 +7,10 @@
 
 <struts-config>
     <form-beans>
-        <!--Modulo Planificacion-->
+        <!--Modulo Planificacion
         <form-bean name="configurarEstrategiaForm" type="com.sacooliveros.gepsac.form.planificacion.ConfigurarEstrategiaForm" />
-        <form-bean name="programarPlanForm" type="com.sacooliveros.gepsac.form.planificacion.ProgramarPlanForm" />
+        <form-bean name="programarPlanForm" type="com.sacooliveros.gepsac.form.planificacion.ProgramarPlanForm" />-->
+        <form-bean name="distribuirCargaForm" type="com.sacooliveros.gepsac.form.distribuir.DistribuirCargaForm" />
         <!--
         <form-bean name="transaccionReporteForm" type="com.novatronic.sca.form.reporte.TransaccionReporteForm" />
         <form-bean name="usuarioForm" type="com.novatronic.sca.security.form.UsuarioForm" />
@@ -51,7 +52,15 @@
     </global-forwards>
 
     <action-mappings>
-            
+        <action path="/DistribuirCarga" 
+                type="com.sacooliveros.gepsac.action.distribucion.DistribuirCargaAction"
+                name="distribuirCargaForm"
+                scope="request"
+                parameter="method" 
+                validate="false">
+            <forward name="listarArchivoOT" path="listarArchivoOT" redirect="true"/>
+        </action>
+            <!--
         <action path="/ConfigurarEstrategia" 
                 type="com.sacooliveros.gepsac.action.planificacion.ConfigurarEstrategiaAction"
                 name="configurarEstrategiaForm"
@@ -68,7 +77,7 @@
                 parameter="method" 
                 validate="false">
             <forward name="programarPlan" path="programarPlan" redirect="true"/>
-        </action>
+        </action>-->
         
         <!--       
         <action path="/TransaccionReporte" 
