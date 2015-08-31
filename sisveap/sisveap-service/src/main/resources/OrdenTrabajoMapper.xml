@@ -16,12 +16,15 @@
         <result column="nom_region" property="region.nombre" jdbcType="VARCHAR" />
         
         <result column="cod_supervisor" property="supervisor.codigo" jdbcType="VARCHAR" />
+        <result column="dni_supervisor" property="supervisor.dni" jdbcType="VARCHAR" />
         <result column="nom_supervisor" property="supervisor.nombres" jdbcType="VARCHAR" />
         <result column="ape_supervisor" property="supervisor.apellidos" jdbcType="VARCHAR" />
+        <result column="cod_region" property="supervisor.region.codigo" jdbcType="VARCHAR" />
         
         <result column="cod_verificador" property="verificador.codigo" jdbcType="VARCHAR" />
         <result column="nom_verificador" property="verificador.nombres" jdbcType="VARCHAR" />
         <result column="ape_verificador" property="verificador.apellidos" jdbcType="VARCHAR" />
+        <result column="cod_region" property="verificador.region.codigo" jdbcType="VARCHAR" />
         
     </resultMap>
     
@@ -55,10 +58,15 @@
         d.nom_region,
         c.cod_verificador,
         c.nombre as nom_verificador,
-        c.apellidos as ape_verificador
+        c.apellidos as ape_verificador,
+        e.cod_supervisor,
+        e.dni as dni_supervisor,
+        e.nombre as nom_supervisor,
+        e.apellidos as ape_supervisor
         FROM tp_orden_trabajo a inner join tp_estado b on a.cod_estado = b.cod_estado
         inner join tp_region d on a.cod_region = d.cod_region
         left join tp_verificador c on a.cod_verificador = c.cod_verificador
+        left join tp_supervisor e on (a.cod_supervisor = e.cod_supervisor and a.cod_region = e.cod_region)
         WHERE a.cod_archivo = #{codigoArchivo}
         ORDER BY a.cod_region asc, a.cod_ordentrabajo asc
     </select>
@@ -74,11 +82,17 @@
         d.nom_region,
         c.cod_verificador,
         c.nombre as nom_verificador,
-        c.apellidos as ape_verificador
+        c.apellidos as ape_verificador,
+        e.cod_supervisor,
+        e.dni as dni_supervisor,
+        e.nombre as nom_supervisor,
+        e.apellidos as ape_supervisor
         FROM tp_orden_trabajo a inner join tp_estado b on a.cod_estado = b.cod_estado
         inner join tp_region d on a.cod_region = d.cod_region
         left join tp_verificador c on a.cod_verificador = c.cod_verificador
+        left join tp_supervisor e on (a.cod_supervisor = e.cod_supervisor and a.cod_region = e.cod_region)
         WHERE a.cod_region = #{codigoRegion}
+        ORDER BY a.cod_region asc, a.cod_ordentrabajo asc
     </select>
     
     <update id="update">

@@ -217,6 +217,12 @@
             region = $("#tblDetalleRegion").clone();
             region.attr('id', 'tblDetalleRegion-' + model.region.codigo);
             region.find("#lblRegion").append(model.region.nombre);
+            
+            if(model.supervisor){
+                region.find("#lblCodigoSupervisor").append(model.supervisor.codigo);
+                region.find("#lblDniSupervisor").append(model.supervisor.dni);
+                region.find("#lblNombreSupervisor").append(model.supervisor.nombres);
+            }
 
             region.find("#btnConsultarSupervisor").click(function (e) {
                 e.preventDefault();
@@ -246,8 +252,10 @@
         detalle.find("#lblCodigoOT").append(ot.codigo);
         var dateFin = new Date(ot.fecIngreso.year, ot.fecIngreso.month - 1, ot.fecIngreso.day);
         detalle.find("#lblFecIngresoOT").append($.datepicker.formatDate(formatDate, dateFin));
-
-        //detalle.find("#lblVerificadorOT").append(json.actividad.nombre);
+        
+        if(ot.supervisor){
+            detalle.find("#txtCodigoSupervisor").append(ot.supervisor.codigo);
+        }
 
         table.find("tbody").append(detalle);
     }
@@ -255,8 +263,12 @@
     function cargarSupervisor(model) {
         var region = $("#tblDetalle #tblDetalleRegion-" + model.region.codigo);
         
-        region.find("#txtCodigoSupervisor").append(model.codigo);
+        region.find("#txtCodigoSupervisor").empty();
+        region.find("#lblCodigoSupervisor").empty();
+        region.find("#lblDniSupervisor").empty();
+        region.find("#lblNombreSupervisor").empty();
         
+        region.find("#txtCodigoSupervisor").append(model.codigo);
         region.find("#lblCodigoSupervisor").append(model.codigo);
         region.find("#lblDniSupervisor").append(model.dni);
         region.find("#lblNombreSupervisor").append(model.nombres);

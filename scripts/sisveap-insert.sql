@@ -47,6 +47,10 @@ INSERT INTO tp_supervisor VALUES ('SU00001', '46633129', 'Luis Ricardo', 'Castil
 INSERT INTO tp_supervisor VALUES ('SU00002', '46633128', 'Harold', 'Flores', 'Las Palmeras 4430', 'RG00002');
 INSERT INTO tp_supervisor VALUES ('SU00003', '46633127', 'Juan', 'Perez', 'Chinchon 130', 'RG00003');
 INSERT INTO tp_supervisor VALUES ('SU00004', '46633126', 'Sergio', 'Gomez', 'Manco Segundo 530', 'RG00004');
+INSERT INTO tp_supervisor VALUES ('SU00005', '46633130', 'Luis', 'Castillejo Luna', 'Manco Segundo 130', 'RG00001');
+INSERT INTO tp_supervisor VALUES ('SU00006', '46633131', 'Arnold', 'Flores', 'Las Palmeras 4430', 'RG00002');
+INSERT INTO tp_supervisor VALUES ('SU00007', '46633132', 'Jose', 'Perez', 'Chinchon 130', 'RG00003');
+INSERT INTO tp_supervisor VALUES ('SU00008', '46633133', 'Abraham', 'Gomez', 'Manco Segundo 530', 'RG00004');
 
 
 INSERT INTO tp_verificador VALUES ('VE00001', '46633129', 'Luis Ricardo', 'Castillejo Luna', 'Manco Segundo 130', '2000-08-27', 'RG00001', 'VER0001', 0);

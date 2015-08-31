@@ -65,7 +65,7 @@
 
         detalle.find("#lblCodigo").append(json.codigo);
         detalle.find("#lblDni").append(json.dni);
-        detalle.find("#lblNombre").append(json.nombre);
+        detalle.find("#lblNombre").append(json.nombres);
         detalle.find("#lblApellidos").append(json.apellidos);
         detalle.find("#lblRegion").append(json.region.nombre);
 

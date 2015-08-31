@@ -83,7 +83,7 @@
         tableBody.append(detalle);
 
         detalle.find("#btnAsignar").click(function () {
-            if (json.estado.codigo === 'AOT0001') {                
+            if (json.estado.codigo === 'AOT0001' || json.estado.codigo === 'AOT0003' ) {                
                 fn_util_AbreModal("",
                         "<%=request.getContextPath()%>" + '/pages/distribucion/distribuirArchivoOT.jsp?codigoArchivoOT=' + json.codigo,
                         900, 500, null);
