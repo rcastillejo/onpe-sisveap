@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="92b0fc7b-d876-4bc5-bec7-f2bd9f553f45" activeEnvironment="Default" name="sisveap-service" resourceRoot="" soapui-version="5.1.3" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="165741ef-4a2d-4e70-8853-ed96f1b1a207" wsaVersion="NONE" name="DistribucionServiceSoapBinding" type="wsdl" bindingName="{http://distribucion.service.gepsac.sacooliveros.com/}DistribucionServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8180/sisveap-service/DistribucionService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8180/sisveap-service/DistribucionService?wsdl"><con:part><con:url>http://localhost:8180/sisveap-service/DistribucionService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="DistribucionService" targetNamespace="http://distribucion.service.gepsac.sacooliveros.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://distribucion.service.gepsac.sacooliveros.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://distribucion.service.gepsac.sacooliveros.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="asignarSupervisorArchivoOT" type="tns:asignarSupervisorArchivoOT"/>
+      <xs:element name="asignarSupervisorArchivoOTResponse" type="tns:asignarSupervisorArchivoOTResponse"/>
+      <xs:element name="asignarVerificadorOT" type="tns:asignarVerificadorOT"/>
+      <xs:element name="asignarVerificadorOTResponse" type="tns:asignarVerificadorOTResponse"/>
+      <xs:element name="listarArchivoOT" type="tns:listarArchivoOT"/>
+      <xs:element name="listarArchivoOTResponse" type="tns:listarArchivoOTResponse"/>
+      <xs:element name="listarOrdenTrabajo" type="tns:listarOrdenTrabajo"/>
+      <xs:element name="listarOrdenTrabajoPorRegion" type="tns:listarOrdenTrabajoPorRegion"/>
+      <xs:element name="listarOrdenTrabajoPorRegionResponse" type="tns:listarOrdenTrabajoPorRegionResponse"/>
+      <xs:element name="listarOrdenTrabajoResponse" type="tns:listarOrdenTrabajoResponse"/>
+      <xs:element name="obtenerArchivoOT" type="tns:obtenerArchivoOT"/>
+      <xs:element name="obtenerArchivoOTResponse" type="tns:obtenerArchivoOTResponse"/>
+      <xs:complexType name="listarOrdenTrabajo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listarOrdenTrabajoResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ordenTrabajo"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ordenTrabajo">
+        <xs:complexContent>
+          <xs:extension base="tns:model">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="fecAsignado" type="xs:dateTime"/>
+              <xs:element minOccurs="0" name="fecIngreso" type="xs:dateTime"/>
+              <xs:element minOccurs="0" name="persona" type="tns:persona"/>
+              <xs:element minOccurs="0" name="region" type="tns:region"/>
+              <xs:element minOccurs="0" name="supervisor" type="tns:supervisor"/>
+              <xs:element minOccurs="0" name="verificador" type="tns:verificador"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="model">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+          <xs:element minOccurs="0" name="fecCre" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="fecMod" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+          <xs:element minOccurs="0" name="usuMod" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="persona">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="apellidos" type="xs:string"/>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="direccion" type="xs:string"/>
+          <xs:element minOccurs="0" name="dni" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombres" type="xs:string"/>
+          <xs:element minOccurs="0" name="ultFecTrabajo" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="region">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="supervisor">
+        <xs:complexContent>
+          <xs:extension base="tns:persona">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="region" type="tns:region"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="verificador">
+        <xs:complexContent>
+          <xs:extension base="tns:persona">
+            <xs:sequence>
+              <xs:element name="cantOTEnProceso" type="xs:int"/>
+              <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+              <xs:element minOccurs="0" name="region" type="tns:region"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="estado">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="obtenerArchivoOT">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="obtenerArchivoOTResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:archivoOT"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="archivoOT">
+        <xs:complexContent>
+          <xs:extension base="tns:model">
+            <xs:sequence>
+              <xs:element name="cantRegistro" type="xs:int"/>
+              <xs:element minOccurs="0" name="fecAsignacion" type="xs:dateTime"/>
+              <xs:element minOccurs="0" name="fecRegistro" type="xs:dateTime"/>
+              <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="ordenes" nillable="true" type="tns:ordenTrabajo"/>
+              <xs:element minOccurs="0" name="ruta" type="xs:string"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="asignarSupervisorArchivoOT">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:archivoOT"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="asignarSupervisorArchivoOTResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listarOrdenTrabajoPorRegion">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listarOrdenTrabajoPorRegionResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ordenTrabajo"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listarArchivoOT">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="listarArchivoOTResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:archivoOT"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="asignarVerificadorOT">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:ordenTrabajo"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="asignarVerificadorOTResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ServiceException" type="tns:ServiceException"/>
+      <xs:complexType name="ServiceException">
+        <xs:sequence/>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ServiceException">
+    <wsdl:part element="tns:ServiceException" name="ServiceException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajoPorRegion">
+    <wsdl:part element="tns:listarOrdenTrabajoPorRegion" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerArchivoOT">
+    <wsdl:part element="tns:obtenerArchivoOT" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarSupervisorArchivoOTResponse">
+    <wsdl:part element="tns:asignarSupervisorArchivoOTResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajoPorRegionResponse">
+    <wsdl:part element="tns:listarOrdenTrabajoPorRegionResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerArchivoOTResponse">
+    <wsdl:part element="tns:obtenerArchivoOTResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarSupervisorArchivoOT">
+    <wsdl:part element="tns:asignarSupervisorArchivoOT" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarVerificadorOT">
+    <wsdl:part element="tns:asignarVerificadorOT" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajo">
+    <wsdl:part element="tns:listarOrdenTrabajo" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarOrdenTrabajoResponse">
+    <wsdl:part element="tns:listarOrdenTrabajoResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="asignarVerificadorOTResponse">
+    <wsdl:part element="tns:asignarVerificadorOTResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarArchivoOT">
+    <wsdl:part element="tns:listarArchivoOT" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarArchivoOTResponse">
+    <wsdl:part element="tns:listarArchivoOTResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DistribucionService">
+    <wsdl:operation name="listarOrdenTrabajo">
+      <wsdl:input message="tns:listarOrdenTrabajo" name="listarOrdenTrabajo"></wsdl:input>
+      <wsdl:output message="tns:listarOrdenTrabajoResponse" name="listarOrdenTrabajoResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerArchivoOT">
+      <wsdl:input message="tns:obtenerArchivoOT" name="obtenerArchivoOT"></wsdl:input>
+      <wsdl:output message="tns:obtenerArchivoOTResponse" name="obtenerArchivoOTResponse"></wsdl:output>
+      <wsdl:fault message="tns:ServiceException" name="ServiceException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="asignarSupervisorArchivoOT">
+      <wsdl:input message="tns:asignarSupervisorArchivoOT" name="asignarSupervisorArchivoOT"></wsdl:input>
+      <wsdl:output message="tns:asignarSupervisorArchivoOTResponse" name="asignarSupervisorArchivoOTResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarOrdenTrabajoPorRegion">
+      <wsdl:input message="tns:listarOrdenTrabajoPorRegion" name="listarOrdenTrabajoPorRegion"></wsdl:input>
+      <wsdl:output message="tns:listarOrdenTrabajoPorRegionResponse" name="listarOrdenTrabajoPorRegionResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarArchivoOT">
+      <wsdl:input message="tns:listarArchivoOT" name="listarArchivoOT"></wsdl:input>
+      <wsdl:output message="tns:listarArchivoOTResponse" name="listarArchivoOTResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asignarVerificadorOT">
+      <wsdl:input message="tns:asignarVerificadorOT" name="asignarVerificadorOT"></wsdl:input>
+      <wsdl:output message="tns:asignarVerificadorOTResponse" name="asignarVerificadorOTResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DistribucionServiceSoapBinding" type="tns:DistribucionService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listarOrdenTrabajo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarOrdenTrabajo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarOrdenTrabajoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerArchivoOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerArchivoOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerArchivoOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServiceException">
+        <soap:fault name="ServiceException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="asignarSupervisorArchivoOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="asignarSupervisorArchivoOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="asignarSupervisorArchivoOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarOrdenTrabajoPorRegion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarOrdenTrabajoPorRegion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarOrdenTrabajoPorRegionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarArchivoOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarArchivoOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarArchivoOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="asignarVerificadorOT">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="asignarVerificadorOT">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="asignarVerificadorOTResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DistribucionService">
+    <wsdl:port binding="tns:DistribucionServiceSoapBinding" name="DistribucionServicePort">
+      <soap:address location="http://localhost:8180/sisveap-service/DistribucionService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8180/sisveap-service/DistribucionService</con:endpoint></con:endpoints><con:operation id="98f713b8-afea-4025-acf6-b59a879927b9" isOneWay="false" action="" name="asignarSupervisorArchivoOT" bindingOperationName="asignarSupervisorArchivoOT" type="Request-Response" outputName="asignarSupervisorArchivoOTResponse" inputName="asignarSupervisorArchivoOT" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b4f397ca-ca1a-4c01-9ab9-3a190dc5adaa" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/DistribucionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://distribucion.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <dis:asignarSupervisorArchivoOT>\r
+         <!--Optional:-->\r
+         <arg0>\r
+            <!--Optional:-->\r
+            <codigo>?</codigo>\r
+            <!--Optional:-->\r
+            <estado>\r
+               <!--Optional:-->\r
+               <codigo>?</codigo>\r
+               <!--Optional:-->\r
+               <nombre>?</nombre>\r
+            </estado>\r
+            <!--Optional:-->\r
+            <fecCre>?</fecCre>\r
+            <!--Optional:-->\r
+            <fecMod>?</fecMod>\r
+            <!--Optional:-->\r
+            <usuCre>?</usuCre>\r
+            <!--Optional:-->\r
+            <usuMod>?</usuMod>\r
+            <cantRegistro>?</cantRegistro>\r
+            <!--Optional:-->\r
+            <fecAsignacion>?</fecAsignacion>\r
+            <!--Optional:-->\r
+            <fecRegistro>?</fecRegistro>\r
+            <!--Optional:-->\r
+            <nombre>?</nombre>\r
+            <!--Zero or more repetitions:-->\r
+            <ordenes>\r
+               <!--Optional:-->\r
+               <codigo>?</codigo>\r
+               <!--Optional:-->\r
+               <estado>\r
+                  <!--Optional:-->\r
+                  <codigo>?</codigo>\r
+                  <!--Optional:-->\r
+                  <nombre>?</nombre>\r
+               </estado>\r
+               <!--Optional:-->\r
+               <fecCre>?</fecCre>\r
+               <!--Optional:-->\r
+               <fecMod>?</fecMod>\r
+               <!--Optional:-->\r
+               <usuCre>?</usuCre>\r
+               <!--Optional:-->\r
+               <usuMod>?</usuMod>\r
+               <!--Optional:-->\r
+               <fecAsignado>?</fecAsignado>\r
+               <!--Optional:-->\r
+               <fecIngreso>?</fecIngreso>\r
+            </ordenes>\r
+            <!--Optional:-->\r
+            <ruta>?</ruta>\r
+            <!--Optional:-->\r
+            <supervisor>\r
+               <!--Optional:-->\r
+               <apellidos>?</apellidos>\r
+               <!--Optional:-->\r
+               <codigo>?</codigo>\r
+               <!--Optional:-->\r
+               <direccion>?</direccion>\r
+               <!--Optional:-->\r
+               <dni>?</dni>\r
+               <!--Optional:-->\r
+               <nombres>?</nombres>\r
+               <!--Optional:-->\r
+               <ultFecTrabajo>?</ultFecTrabajo>\r
+               <!--Optional:-->\r
+               <region>\r
+                  <!--Optional:-->\r
+                  <codigo>?</codigo>\r
+                  <!--Optional:-->\r
+                  <nombre>?</nombre>\r
+               </region>\r
+            </supervisor>\r
+         </arg0>\r
+      </dis:asignarSupervisorArchivoOT>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://distribucion.service.gepsac.sacooliveros.com/DistribucionService/asignarSupervisorArchivoOT"/></con:call></con:operation><con:operation id="dc7bd859-a5a6-4d01-a643-4919e738ec16" isOneWay="false" action="" name="asignarVerificadorOT" bindingOperationName="asignarVerificadorOT" type="Request-Response" outputName="asignarVerificadorOTResponse" inputName="asignarVerificadorOT" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4122c1a6-30f7-4b0b-baba-d01389796807" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/DistribucionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://distribucion.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <dis:asignarVerificadorOT>\r
+         <!--Optional:-->\r
+         <arg0>\r
+            <!--Optional:-->\r
+            <codigo>?</codigo>\r
+            <!--Optional:-->\r
+            <estado>\r
+               <!--Optional:-->\r
+               <codigo>?</codigo>\r
+               <!--Optional:-->\r
+               <nombre>?</nombre>\r
+            </estado>\r
+            <!--Optional:-->\r
+            <fecCre>?</fecCre>\r
+            <!--Optional:-->\r
+            <fecMod>?</fecMod>\r
+            <!--Optional:-->\r
+            <usuCre>?</usuCre>\r
+            <!--Optional:-->\r
+            <usuMod>?</usuMod>\r
+            <!--Optional:-->\r
+            <fecAsignado>?</fecAsignado>\r
+            <!--Optional:-->\r
+            <fecIngreso>?</fecIngreso>\r
+         </arg0>\r
+      </dis:asignarVerificadorOT>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://distribucion.service.gepsac.sacooliveros.com/DistribucionService/asignarVerificadorOT"/></con:call></con:operation><con:operation id="d85a35f8-7c55-4f44-8da1-db244a8e7a12" isOneWay="false" action="" name="listarArchivoOT" bindingOperationName="listarArchivoOT" type="Request-Response" outputName="listarArchivoOTResponse" inputName="listarArchivoOT" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8bcf448e-27bf-4668-8da9-d0fdb281d936" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/DistribucionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://distribucion.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <dis:listarArchivoOT/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://distribucion.service.gepsac.sacooliveros.com/DistribucionService/listarArchivoOT"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="45677f83-c314-4694-b42d-fcb42f10d1cf" isOneWay="false" action="" name="listarOrdenTrabajo" bindingOperationName="listarOrdenTrabajo" type="Request-Response" outputName="listarOrdenTrabajoResponse" inputName="listarOrdenTrabajo" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c5661f8a-dd2d-478c-9ddd-77538922a881" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/DistribucionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://distribucion.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <dis:listarOrdenTrabajo>\r
+         <!--Optional:-->\r
+         <arg0>ARC201500001</arg0>\r
+      </dis:listarOrdenTrabajo>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://distribucion.service.gepsac.sacooliveros.com/DistribucionService/listarOrdenTrabajo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="8f0ad3af-9095-4883-8c2e-b2ffb4d87830" isOneWay="false" action="" name="obtenerArchivoOT" bindingOperationName="obtenerArchivoOT" type="Request-Response" outputName="obtenerArchivoOTResponse" inputName="obtenerArchivoOT" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="206b850d-2725-402f-a3ac-a4cafebb0b1e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/DistribucionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://distribucion.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <dis:obtenerArchivoOT>\r
+         <!--Optional:-->\r
+         <arg0>ARC201500001</arg0>\r
+      </dis:obtenerArchivoOT>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://distribucion.service.gepsac.sacooliveros.com/DistribucionService/obtenerArchivoOT"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="11443427-d2e3-45bf-ab76-0be895109475" isOneWay="false" action="" name="listarOrdenTrabajoPorRegion" bindingOperationName="listarOrdenTrabajoPorRegion" type="Request-Response" outputName="listarOrdenTrabajoPorRegionResponse" inputName="listarOrdenTrabajoPorRegion" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a11ab8d0-3c00-42e8-9db6-694f7a93bc3e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/DistribucionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dis="http://distribucion.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <dis:listarOrdenTrabajoPorRegion>\r
+         <!--Optional:-->\r
+         <arg0>?</arg0>\r
+      </dis:listarOrdenTrabajoPorRegion>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://distribucion.service.gepsac.sacooliveros.com/DistribucionService/listarOrdenTrabajoPorRegion"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="96c2376b-e7c9-4b94-ab20-4fca88f6f290" wsaVersion="NONE" name="ComunServiceSoapBinding" type="wsdl" bindingName="{http://comun.service.gepsac.sacooliveros.com/}ComunServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8180/sisveap-service/ComunService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8180/sisveap-service/ComunService?wsdl"><con:part><con:url>http://localhost:8180/sisveap-service/ComunService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ComunService" targetNamespace="http://comun.service.gepsac.sacooliveros.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://comun.service.gepsac.sacooliveros.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://comun.service.gepsac.sacooliveros.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="listarSupervisor" type="tns:listarSupervisor"/>
+      <xs:element name="listarSupervisorResponse" type="tns:listarSupervisorResponse"/>
+      <xs:element name="listarVerificador" type="tns:listarVerificador"/>
+      <xs:element name="listarVerificadorResponse" type="tns:listarVerificadorResponse"/>
+      <xs:complexType name="listarVerificador">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listarVerificadorResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:verificador"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="verificador">
+        <xs:complexContent>
+          <xs:extension base="tns:persona">
+            <xs:sequence>
+              <xs:element name="cantOTEnProceso" type="xs:int"/>
+              <xs:element minOccurs="0" name="estado" type="tns:estado"/>
+              <xs:element minOccurs="0" name="region" type="tns:region"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="persona">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="apellidos" type="xs:string"/>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="direccion" type="xs:string"/>
+          <xs:element minOccurs="0" name="dni" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombres" type="xs:string"/>
+          <xs:element minOccurs="0" name="ultFecTrabajo" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="estado">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="region">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listarSupervisor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listarSupervisorResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:supervisor"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="supervisor">
+        <xs:complexContent>
+          <xs:extension base="tns:persona">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="region" type="tns:region"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="listarVerificadorResponse">
+    <wsdl:part element="tns:listarVerificadorResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarSupervisorResponse">
+    <wsdl:part element="tns:listarSupervisorResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarVerificador">
+    <wsdl:part element="tns:listarVerificador" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarSupervisor">
+    <wsdl:part element="tns:listarSupervisor" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ComunService">
+    <wsdl:operation name="listarVerificador">
+      <wsdl:input message="tns:listarVerificador" name="listarVerificador"></wsdl:input>
+      <wsdl:output message="tns:listarVerificadorResponse" name="listarVerificadorResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarSupervisor">
+      <wsdl:input message="tns:listarSupervisor" name="listarSupervisor"></wsdl:input>
+      <wsdl:output message="tns:listarSupervisorResponse" name="listarSupervisorResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ComunServiceSoapBinding" type="tns:ComunService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listarVerificador">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarVerificador">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarVerificadorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarSupervisor">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarSupervisor">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarSupervisorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ComunService">
+    <wsdl:port binding="tns:ComunServiceSoapBinding" name="ComunServicePort">
+      <soap:address location="http://localhost:8180/sisveap-service/ComunService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8180/sisveap-service/ComunService</con:endpoint></con:endpoints><con:operation id="0855cd45-d836-4be4-ac57-5c48b8e09ff8" isOneWay="false" action="" name="listarSupervisor" bindingOperationName="listarSupervisor" type="Request-Response" outputName="listarSupervisorResponse" inputName="listarSupervisor" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="34425a00-7a23-4de5-83e7-5fee72dd3548" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/ComunService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://comun.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <com:listarSupervisor>\r
+         <!--Optional:-->
+         <arg0>RG00001</arg0>
+      </com:listarSupervisor>
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://comun.service.gepsac.sacooliveros.com/ComunService/listarSupervisor"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="0408977c-59ac-4dca-a96c-31a2c8ee7aa4" isOneWay="false" action="" name="listarVerificador" bindingOperationName="listarVerificador" type="Request-Response" outputName="listarVerificadorResponse" inputName="listarVerificador" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ab5bd0a6-73f3-4475-8ac3-ced5cb6f8124" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8180/sisveap-service/ComunService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://comun.service.gepsac.sacooliveros.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <com:listarVerificador>\r
+         <!--Optional:-->\r
+         <arg0>RG00001</arg0>\r
+      </com:listarVerificador>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://comun.service.gepsac.sacooliveros.com/ComunService/listarVerificador"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
