@@ -323,14 +323,11 @@
                     <table>    
                         <tr>
                             <td>
+                                <input id="txtCodigoSupervisor" class="inputValue" type="hidden" data-name="supervisor.codigo" name="supervisor.codigo">
                                 <label id="lblCodigoOT" class="inputValue" data-name="codigo" name="codigo"></label>
                             </td>
                             <td>
                                 <label id="lblFecIngresoOT"></label>
-                            </td>
-                            <td>
-                                <input id="txtCodigoSupervisor" class="inputValue" type="hidden" data-name="supervisor.codigo" name="supervisor.codigo">
-                                <label id="lblSupervisorOT"></label>
                             </td>
                         </tr>
                     </table>
@@ -377,7 +374,6 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Fecha Ingreso</th>
-                                        <th>Verificador</th>
                                     </tr>	
                                 </thead>
                                 <tbody></tbody>

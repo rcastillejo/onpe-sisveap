@@ -37,22 +37,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ListarSupervisor }
-     * 
-     */
-    public ListarSupervisor createListarSupervisor() {
-        return new ListarSupervisor();
-    }
-
-    /**
-     * Create an instance of {@link ListarSupervisorResponse }
-     * 
-     */
-    public ListarSupervisorResponse createListarSupervisorResponse() {
-        return new ListarSupervisorResponse();
-    }
-
-    /**
      * Create an instance of {@link ListarVerificadorResponse }
      * 
      */
@@ -61,35 +45,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Supervisor }
-     * 
-     */
-    public Supervisor createSupervisor() {
-        return new Supervisor();
-    }
-
-    /**
-     * Create an instance of {@link Persona }
-     * 
-     */
-    public Persona createPersona() {
-        return new Persona();
-    }
-
-    /**
-     * Create an instance of {@link Estado }
-     * 
-     */
-    public Estado createEstado() {
-        return new Estado();
-    }
-
-    /**
      * Create an instance of {@link ListarVerificador }
      * 
      */
     public ListarVerificador createListarVerificador() {
         return new ListarVerificador();
+    }
+
+    /**
+     * Create an instance of {@link Supervisor }
+     * 
+     */
+    public Supervisor createSupervisor() {
+        return new Supervisor();
     }
 
     /**
@@ -106,6 +74,38 @@ public class ObjectFactory {
      */
     public Region createRegion() {
         return new Region();
+    }
+
+    /**
+     * Create an instance of {@link Estado }
+     * 
+     */
+    public Estado createEstado() {
+        return new Estado();
+    }
+
+    /**
+     * Create an instance of {@link ListarSupervisor }
+     * 
+     */
+    public ListarSupervisor createListarSupervisor() {
+        return new ListarSupervisor();
+    }
+
+    /**
+     * Create an instance of {@link Persona }
+     * 
+     */
+    public Persona createPersona() {
+        return new Persona();
+    }
+
+    /**
+     * Create an instance of {@link ListarSupervisorResponse }
+     * 
+     */
+    public ListarSupervisorResponse createListarSupervisorResponse() {
+        return new ListarSupervisorResponse();
     }
 
     /**
