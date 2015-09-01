@@ -59,6 +59,7 @@
                 parameter="method" 
                 validate="false">
             <forward name="listarArchivoOT" path="listarArchivoOT" redirect="true"/>
+            <forward name="listarOrdenTrabajo" path="listarOrdenTrabajo" redirect="true"/>
         </action>
             <!--
         <action path="/ConfigurarEstrategia" 

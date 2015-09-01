@@ -10,7 +10,7 @@ import javax.xml.ws.WebFault;
  * Generated source version: 2.1
  * 
  */
-@WebFault(name = "ServiceException", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/")
+@WebFault(name = "ServiceException", targetNamespace = "http://comun.service.gepsac.sacooliveros.com/")
 public class ServiceException_Exception
     extends Exception
 {

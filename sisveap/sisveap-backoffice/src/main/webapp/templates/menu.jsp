@@ -18,6 +18,11 @@
                         Carga Supervisor
                     </html:link>
                 </li>
+                <li>
+                    <html:link page="/DistribuirCarga.do?method=initListarOT" >
+                        Carga Verificador
+                    </html:link>
+                </li>
                 <!--<li>
                     <html:link page="/ConfigurarEstrategia.do?method=init" >
                         Configurar Plan

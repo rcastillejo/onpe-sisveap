@@ -85,6 +85,23 @@ public interface DistribucionService {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns com.onpe.sisveap.proxyws.OrdenTrabajo
+     * @throws ServiceException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "obtenerOT", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.ObtenerOT")
+    @ResponseWrapper(localName = "obtenerOTResponse", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.ObtenerOTResponse")
+    public OrdenTrabajo obtenerOT(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0)
+        throws ServiceException_Exception
+    ;
+
+    /**
+     * 
      * @return
      *     returns java.util.List<com.onpe.sisveap.proxyws.ArchivoOT>
      */

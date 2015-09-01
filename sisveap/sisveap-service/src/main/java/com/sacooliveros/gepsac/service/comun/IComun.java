@@ -7,6 +7,7 @@ package com.sacooliveros.gepsac.service.comun;
 
 import com.sacooliveros.gepsac.model.Estrategia;
 import com.sacooliveros.gepsac.model.EstrategiaActividad;
+import com.sacooliveros.gepsac.model.Region;
 import com.sacooliveros.gepsac.model.Supervisor;
 import com.sacooliveros.gepsac.model.Verificador;
 import com.sacooliveros.gepsac.service.exception.ServiceException;
@@ -24,5 +25,9 @@ public interface IComun {
     
     @WebMethod(operationName = "listarVerificador")
     List<Verificador> listarVerificador(String codigoRegion) throws ServiceException;
+    
+    
+    @WebMethod(operationName = "obtenerRegion")
+    Region obtenerRegion(String codigoRegion) throws ServiceException;
     
 }

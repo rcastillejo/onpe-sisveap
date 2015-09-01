@@ -6,6 +6,7 @@
 
 package com.sacooliveros.gepsac.dao;
 
+import com.sacooliveros.gepsac.model.Region;
 import com.sacooliveros.gepsac.model.Verificador;
 import java.util.List;
 
@@ -16,4 +17,6 @@ import java.util.List;
 public interface VerificadorDAO extends BaseDao<Verificador>{
         
     List<Verificador> buscarPorRegion(String codigoRegion);
+    
+    Region getRegion(String codigo);
 }

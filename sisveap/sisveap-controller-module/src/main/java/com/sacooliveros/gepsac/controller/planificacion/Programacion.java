@@ -46,8 +46,8 @@ public class Programacion {
     private final Map<Integer, Integer> diasAsignados;
 
     public Programacion() {
-        diasAsignados = new HashMap<>();
-        actividadesNoProgramadas = new TreeMap<>();
+        diasAsignados = new HashMap();
+        actividadesNoProgramadas = new TreeMap();
     }
 
     public void configure(Plan plan) {
@@ -63,7 +63,7 @@ public class Programacion {
         if (!(strhitos == null || strhitos.isEmpty())) {
             SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FMT_FECHA);
             String[] arrayHitos = strhitos.split(",");
-            hitos = new ArrayList<>();
+            hitos = new ArrayList();
             for (String strHito : arrayHitos) {
                 try {
                     hitos.add(sdf.parse(strHito));
@@ -198,7 +198,7 @@ public class Programacion {
     }
 
     public void setActividades(List<PlanEstrategia> estrategias) {
-        actividades = new ArrayList<>();
+        actividades = new ArrayList();
         for (PlanEstrategia estrategiasSeleccionada : estrategias) {
             for (PlanActividad actividadSeleccionada : estrategiasSeleccionada.getActividadesSeleccionadas()) {
                 actividades.add(actividadSeleccionada);

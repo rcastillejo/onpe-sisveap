@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "DistribucionService", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", wsdlLocation = "file:/D:/UPC/Harold/PI/fuentes/onpe-sisveap/sisveap/sisveap-proxyws/src/wsdl/DistribucionService.xml")
+@WebServiceClient(name = "DistribucionService", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", wsdlLocation = "http://localhost:8180/sisveap-service/DistribucionService?wsdl")
 public class DistribucionService_Service
     extends Service
 {
@@ -30,9 +30,9 @@ public class DistribucionService_Service
         try {
             URL baseUrl;
             baseUrl = com.onpe.sisveap.proxyws.DistribucionService_Service.class.getResource(".");
-            url = new URL(baseUrl, "file:/D:/UPC/Harold/PI/fuentes/onpe-sisveap/sisveap/sisveap-proxyws/src/wsdl/DistribucionService.xml");
+            url = new URL(baseUrl, "http://localhost:8180/sisveap-service/DistribucionService?wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'file:/D:/UPC/Harold/PI/fuentes/onpe-sisveap/sisveap/sisveap-proxyws/src/wsdl/DistribucionService.xml', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8180/sisveap-service/DistribucionService?wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         DISTRIBUCIONSERVICE_WSDL_LOCATION = url;

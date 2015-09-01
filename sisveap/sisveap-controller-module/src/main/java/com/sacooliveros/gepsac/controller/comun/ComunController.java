@@ -7,11 +7,9 @@ package com.sacooliveros.gepsac.controller.comun;
 
 import com.sacooliveros.gepsac.controller.exception.ConrollerModuleException;
 import com.sacooliveros.gepsac.dao.DAOFactory;
-import com.sacooliveros.gepsac.dao.EstrategiaDAO;
 import com.sacooliveros.gepsac.dao.SupervisorDAO;
 import com.sacooliveros.gepsac.dao.VerificadorDAO;
-import com.sacooliveros.gepsac.model.Estrategia;
-import com.sacooliveros.gepsac.model.EstrategiaActividad;
+import com.sacooliveros.gepsac.model.Region;
 import com.sacooliveros.gepsac.model.Supervisor;
 import com.sacooliveros.gepsac.model.Verificador;
 import java.util.List;
@@ -65,6 +63,21 @@ public class ComunController {
             throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.LISTAR);
         }
         return listado;
+    }
+    
+    public Region obtenerRegion(String codigoRegion) {
+        Region model;
+        try {
+            VerificadorDAO dao = DAOFactory.getDAOFactory().getVerificadorDAO();
+            model = dao.getRegion(codigoRegion);
+        } catch (Exception e) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
+        }
+
+        if (model == null) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, "No se encontro region");
+        }
+        return model;
     }
 
 }

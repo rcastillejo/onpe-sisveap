@@ -7,8 +7,8 @@ package com.sacooliveros.gepsac.dao.myibatis;
 
 import com.sacooliveros.gepsac.dao.VerificadorDAO;
 import com.sacooliveros.gepsac.dao.exception.DAOException;
-import com.sacooliveros.gepsac.dao.mybatis.mapper.PlanMapper;
 import com.sacooliveros.gepsac.dao.mybatis.mapper.VerificadorMapper;
+import com.sacooliveros.gepsac.model.Region;
 import com.sacooliveros.gepsac.model.Verificador;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -34,7 +34,7 @@ public class VerificadorMyIbatisDAO extends GenericMyIbatisDAO implements Verifi
         try {
             session = getConnection();
             mapper = session.getMapper(VerificadorMapper.class);
-            listado = mapper.query();
+            listado = mapper.queryReqion(codigoRegion);
             log.debug("Listado tamanio[{}] [{}] ", listado == null ? 0 : listado.size(), listado);
             return listado;
         } finally {
@@ -44,7 +44,18 @@ public class VerificadorMyIbatisDAO extends GenericMyIbatisDAO implements Verifi
 
     @Override
     public List<Verificador> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SqlSession session = null;
+        VerificadorMapper mapper;
+        List listado;
+        try {
+            session = getConnection();
+            mapper = session.getMapper(VerificadorMapper.class);
+            listado = mapper.query();
+            log.debug("Listado tamanio[{}] [{}] ", listado == null ? 0 : listado.size(), listado);
+            return listado;
+        } finally {
+            closeConnection(session);
+        }
     }
 
     @Override
@@ -79,5 +90,21 @@ public class VerificadorMyIbatisDAO extends GenericMyIbatisDAO implements Verifi
     @Override
     public void eliminar(Verificador t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Region getRegion(String codigo) {
+        SqlSession session = null;
+        VerificadorMapper mapper;
+        Region model;
+        try {
+            session = getConnection();
+            mapper = session.getMapper(VerificadorMapper.class);
+            model = mapper.getRegion(codigo);
+            log.debug("model [{}] ", model);
+            return model;
+        } finally {
+            closeConnection(session);
+        }
     }
 }

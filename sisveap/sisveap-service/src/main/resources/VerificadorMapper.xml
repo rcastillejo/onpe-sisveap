@@ -15,7 +15,7 @@
         <result column="nom_estado" property="estado.nombre" jdbcType="VARCHAR" />
     </resultMap>
     
-    <select id="query" resultMap="recordResultMap">
+    <select id="queryReqion" resultMap="recordResultMap">
         SELECT
         a.cod_verificador,
         a.dni,
@@ -29,6 +29,7 @@
         c.nom_estado
         FROM tp_verificador a inner join tp_region b on a.cod_region = b.cod_region
         inner join tp_estado c on a.cod_estado = c.cod_estado
+        WHERE b.cod_region = #{codigoRegion}
     </select>
     
     <update id="update">
@@ -36,4 +37,19 @@
         cant_ot_asignado = #{cantOTEnProceso}, cod_estado = #{estado.codigo}
         where cod_verificador = #{codigo}        
     </update>
+    
+    
+    
+    <resultMap id="recordRegion" type="com.sacooliveros.gepsac.model.Region" >
+        <id column="cod_region" property="codigo" jdbcType="VARCHAR" />
+        <result column="nom_region" property="nombre" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <select id="getRegion" resultMap="recordRegion">
+        SELECT
+        cod_region,
+        nom_region
+        FROM tp_region
+        WHERE cod_region = #{codigo}
+    </select>
 </mapper>

@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "ComunService", targetNamespace = "http://comun.service.gepsac.sacooliveros.com/", wsdlLocation = "file:/D:/UPC/Harold/PI/fuentes/onpe-sisveap/sisveap/sisveap-proxyws/src/wsdl/ComunService.xml")
+@WebServiceClient(name = "ComunService", targetNamespace = "http://comun.service.gepsac.sacooliveros.com/", wsdlLocation = "http://localhost:8180/sisveap-service/ComunService?wsdl")
 public class ComunService_Service
     extends Service
 {
@@ -30,9 +30,9 @@ public class ComunService_Service
         try {
             URL baseUrl;
             baseUrl = com.onpe.sisveap.proxyws.ComunService_Service.class.getResource(".");
-            url = new URL(baseUrl, "file:/D:/UPC/Harold/PI/fuentes/onpe-sisveap/sisveap/sisveap-proxyws/src/wsdl/ComunService.xml");
+            url = new URL(baseUrl, "http://localhost:8180/sisveap-service/ComunService?wsdl");
         } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'file:/D:/UPC/Harold/PI/fuentes/onpe-sisveap/sisveap/sisveap-proxyws/src/wsdl/ComunService.xml', retrying as a local file");
+            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8180/sisveap-service/ComunService?wsdl', retrying as a local file");
             logger.warning(e.getMessage());
         }
         COMUNSERVICE_WSDL_LOCATION = url;

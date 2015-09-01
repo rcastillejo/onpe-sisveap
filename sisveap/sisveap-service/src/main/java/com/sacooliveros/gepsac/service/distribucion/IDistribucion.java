@@ -36,5 +36,8 @@ public interface IDistribucion {
     @WebMethod(operationName = "asignarVerificadorOT")
     String asignarVerificadorOT(@WebParam(name = "ordenTrabajo") OrdenTrabajo ordenTrabajo) throws ServiceException;
  
+    @WebMethod(operationName = "obtenerOT")
+    OrdenTrabajo obtenerOT(@WebParam(name = "codigo") String codigo) throws ServiceException;
+
 
 }

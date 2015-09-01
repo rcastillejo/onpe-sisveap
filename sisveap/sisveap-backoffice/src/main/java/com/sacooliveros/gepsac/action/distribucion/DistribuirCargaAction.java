@@ -13,11 +13,13 @@ import com.novatronic.sca.util.Config;
 import com.novatronic.sca.util.Resultado;
 import com.onpe.sisveap.proxyws.ComunService;
 import com.onpe.sisveap.proxyws.DistribucionService;
+import com.onpe.sisveap.proxyws.Region;
 import com.sacooliveros.gepsac.proxyws.util.ProxyUtil;
 import java.io.IOException;
 import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -50,6 +52,46 @@ public class DistribuirCargaAction extends DispatchAction {
             generalAction(resultado, response);
         } catch (Exception e) {
             LoggerUtil.error(logger, "listarSupervisor", "distribucion",
+                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
+                    e.getMessage(), e);
+            generalAction(createErrorResult(e), response);
+        }
+    }
+    
+    public void obtenerRegion(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            ComunService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
+            
+            String codigoRegion = request.getParameter("codigoRegion");
+            
+            Region region = service.obtenerRegion(codigoRegion);
+            
+            HttpSession session = request.getSession();
+            
+            session.setAttribute("region", region);
+            
+            Resultado resultado = createSuccessResult(region);
+
+            generalAction(resultado, response);
+        } catch (Exception e) {
+            LoggerUtil.error(logger, "listarSupervisor", "distribucion",
+                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
+                    e.getMessage(), e);
+            generalAction(createErrorResult(e), response);
+        }
+    }
+    
+    public void listarVerificador(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            ComunService service = ProxyUtil.getCommonServicePort(Config.TIMEOUT);
+            
+            String codigoRegion = request.getParameter("codigoRegion");
+
+            Resultado resultado = createSuccessResult(service.listarVerificador(codigoRegion));
+
+            generalAction(resultado, response);
+        } catch (Exception e) {
+            LoggerUtil.error(logger, "listarVerificador", "distribucion",
                     Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
                     e.getMessage(), e);
             generalAction(createErrorResult(e), response);
@@ -112,7 +154,72 @@ public class DistribuirCargaAction extends DispatchAction {
     public ActionForward init(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
         return mapping.findForward("listarArchivoOT");
     }
+    
+    public ActionForward initListarOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        return mapping.findForward("listarOrdenTrabajo");
+    }
+    
+    public void listarOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            DistribucionService service = ProxyUtil.getDistribucionServicePort(Config.TIMEOUT);
+            
+            HttpSession session = request.getSession();
+            
+            Region region = (Region)session.getAttribute("region");
+            
+            if(region == null){
+                throw new Exception("Region no encontrada");
+            }
+            
+            Resultado resultado = createSuccessResult(service.listarOrdenTrabajoPorRegion(region.getCodigo()));
 
+            generalAction(resultado, response);
+        } catch (Exception e) {
+            LoggerUtil.error(logger, "listarArchivoOT", "distribucion",
+                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
+                    e.getMessage(), e);
+            generalAction(createErrorResult(e), response);
+        }
+    }
+        
+    public void obtenerOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            DistribucionService service = ProxyUtil.getDistribucionServicePort(Config.TIMEOUT);
+            
+            String codigo = request.getParameter("codigoOT");
+
+            Resultado resultado = createSuccessResult(service.obtenerOT(codigo));
+
+            generalAction(resultado, response);
+        } catch (Exception e) {
+            LoggerUtil.error(logger, "obtenerArchivoOT", "distribuicion",
+                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
+                    e.getMessage(), e);
+            generalAction(createErrorResult(e), response);
+        }
+    }
+    
+    public void asignarVerificadorOT(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            DistribucionService service = ProxyUtil.getDistribucionServicePort(Config.TIMEOUT);
+            
+            String json = request.getParameter("ordenTrabajo");
+            logger.debug("json [{}]", json);
+            com.onpe.sisveap.proxyws.OrdenTrabajo ot = jsonBuilder.fromJson(json, com.onpe.sisveap.proxyws.OrdenTrabajo.class);
+
+            logger.debug("archivo OT [{}]", ot);
+            String msg = service.asignarVerificadorOT(ot);
+
+            logger.info("Archivo OT asignado [{}]", msg);
+            generalAction(createSuccessResult(msg), response);
+        } catch (Exception e) {
+            LoggerUtil.error(logger, "obtenerArchivoOT", "distribuicion",
+                    Calendar.getInstance(), ActionUtil.obtenerNombreUsuarioLogeado(request),
+                    e.getMessage(), e);
+            generalAction(createErrorResult(e), response);
+        }
+    }
+        
     private Resultado createSuccessResult(Object obj) {
         String json = jsonBuilder.toJson(obj, obj.getClass());
         return new Resultado(json, HttpServletResponse.SC_OK);

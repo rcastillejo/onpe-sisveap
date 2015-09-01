@@ -28,6 +28,23 @@ public interface ComunService {
      * 
      * @param arg0
      * @return
+     *     returns com.onpe.sisveap.proxyws.Region
+     * @throws ServiceException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "obtenerRegion", targetNamespace = "http://comun.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.ObtenerRegion")
+    @ResponseWrapper(localName = "obtenerRegionResponse", targetNamespace = "http://comun.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.ObtenerRegionResponse")
+    public Region obtenerRegion(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0)
+        throws ServiceException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns java.util.List<com.onpe.sisveap.proxyws.Verificador>
      */
     @WebMethod

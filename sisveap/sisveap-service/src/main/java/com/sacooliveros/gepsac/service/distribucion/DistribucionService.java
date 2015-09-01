@@ -92,5 +92,15 @@ public class DistribucionService implements IDistribucion {
             throw new ServiceException(e.getCodigo(), e.getMessage());
         }
     }
+
+    @Override
+    public OrdenTrabajo obtenerOT(String codigo) throws ServiceException {
+        try {
+            return controller.obtenerOT(codigo);
+        } catch (ConrollerModuleException e) {
+            log.error(e.getMessage(), e);
+            throw new ServiceException(e.getCodigo(), e.getMessage());
+        }
+    }
     
 }

@@ -45,4 +45,7 @@
     <definition name="listarArchivoOT" extends="principal">
         <put name="content" value="/pages/distribucion/listarArchivoOT.jsp" type="page"/>
     </definition>
+    <definition name="listarOrdenTrabajo" extends="principal">
+        <put name="content" value="/pages/distribucion/listarOrdenTrabajo.jsp" type="page"/>
+    </definition>
 </tiles-definitions>

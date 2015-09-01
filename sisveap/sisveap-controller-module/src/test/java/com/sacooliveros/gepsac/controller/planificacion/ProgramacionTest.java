@@ -82,7 +82,7 @@ public class ProgramacionTest {
     public void testIsAvailableDay() {
         System.out.println("testIsAvailableDay");
         List<RestriccionFecha> fechasRestringidas;
-        fechasRestringidas = new ArrayList<>();
+        fechasRestringidas = new ArrayList();
 
         fechasRestringidas.add(new RestriccionFecha(new Date(2015, 6, 28)));
         fechasRestringidas.add(new RestriccionFecha(new Date(2015, 6, 29)));
@@ -132,7 +132,7 @@ public class ProgramacionTest {
         System.out.println("elaborarCronograma");
         List<PlanActividad> actividadesPlan;
         List<RestriccionFecha> fechasRestringidas;
-        fechasRestringidas = new ArrayList<>();
+        fechasRestringidas = new ArrayList();
         Programacion instance = new Programacion();
         Calendar calFec = Calendar.getInstance();
         calFec.set(2015, 2, 16);
@@ -151,11 +151,11 @@ public class ProgramacionTest {
         Actividad actividad;
         PlanActividad actividadPlan;
 
-        List<PlanEstrategia> estrategias = new ArrayList<>();
+        List<PlanEstrategia> estrategias = new ArrayList();
 
         for (int i = 0; i < 5; i++) {
             PlanEstrategia estrategia = new PlanEstrategia();
-            actividadesPlan = new ArrayList<>();
+            actividadesPlan = new ArrayList();
             for (int j = 0; j < 16; j++) {
                 actividadPlan = new PlanActividad();
                 actividad = new Actividad();

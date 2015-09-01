@@ -48,6 +48,7 @@ public class DistribucionController {
             String LISTAR_ARHC_OT = "No se encuentra los archivos de ordenes de trabajo";
             String LISTAR_OT = "No se encuentra los archivos de ordenes de trabajo";
             String ARCHIVOOT_NO_DISP = "No se encuentra disponible archivo OT";
+            String OT_NO_DISP = "No se encuentra disponible orden de trabajo";
             String ASIGNAR_SUPERVISOR = "Error al asignar supervisor a un archivo de OT";
             String ASIGNAR_VERIFICADOR = "Error al asignar verificador a una orden de trabajo";
             String CONFIGURAR = "Error al configurar el plan";
@@ -126,10 +127,9 @@ public class DistribucionController {
             ArchivoOT archivoOTActualizar = dao.obtener(archivoOT.getCodigo());
             archivoOTActualizar.setEstado(Estado.ArchivoOT.ASIGNADO);
             archivoOTActualizar.setFecAsignacion(new Date());
-            
-            
+
             OrdenTrabajoDAO otDao = DAOFactory.getDAOFactory().getOrdenTrabajoDAO();
-            
+
             for (OrdenTrabajo ot : archivoOT.getOrdenes()) {
                 OrdenTrabajo otActualizar = otDao.obtener(ot.getCodigo());
                 log.debug("ot obtenido[{}]", otActualizar);
@@ -137,10 +137,10 @@ public class DistribucionController {
                 otActualizar.setSupervisor(ot.getSupervisor());
                 otActualizar.setEstado(Estado.OT.ASIGNADO);
                 log.debug("Actualizar ot[{}]", otActualizar);
-                otDao.actualizar(otActualizar);                
-            }            
+                otDao.actualizar(otActualizar);
+            }
             log.debug("Actualizar archivo ot[{}]", archivoOTActualizar);
-            
+
             dao.actualizar(archivoOTActualizar);
             return MessageFormat.format(Mensaje.ASIGNAR_SUPERVISOR, archivoOT.getCodigo());
         } catch (Exception e) {
@@ -150,12 +150,36 @@ public class DistribucionController {
 
     public String asignarVerificador(OrdenTrabajo ordenTrabajo) {
         try {
-        
+            OrdenTrabajoDAO dao = DAOFactory.getDAOFactory().getOrdenTrabajoDAO();
+            OrdenTrabajo oTActualizar = dao.obtener(ordenTrabajo.getCodigo());
+            oTActualizar.setEstado(Estado.OT.PROCESO);
+            oTActualizar.setFecAsignado(new Date());
+
+            oTActualizar.setVerificador(ordenTrabajo.getVerificador());
+
+            log.debug("Actualizar archivo ot[{}]", oTActualizar);
+
+            dao.actualizar(oTActualizar);
             return MessageFormat.format(Mensaje.ASIGNAR_VERIFICADOR, ordenTrabajo.getCodigo());
         } catch (Exception e) {
             log.error("Error al grabar la configuración", e);
             throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.ASIGNAR_VERIFICADOR, e);
         }
+    }
+
+    public OrdenTrabajo obtenerOT(String codigo) {
+        OrdenTrabajo model;
+        try {
+            OrdenTrabajoDAO dao = DAOFactory.getDAOFactory().getOrdenTrabajoDAO();
+            model = dao.obtener(codigo);
+        } catch (Exception e) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.GENERAL, e);
+        }
+
+        if (model == null) {
+            throw new ConrollerModuleException(Error.Codigo.GENERAL, Error.Mensaje.OT_NO_DISP);
+        }
+        return model;
     }
 
 }
