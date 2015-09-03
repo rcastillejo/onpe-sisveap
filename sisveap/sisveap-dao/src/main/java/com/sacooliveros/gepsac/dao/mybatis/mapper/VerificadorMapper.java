@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 public interface VerificadorMapper {
 
+    public Verificador get(@Param("codigo") String codigo);
+    
     public List<Verificador> query();
     
     public List<Verificador> queryReqion(@Param("codigoRegion") String codigoRegion);

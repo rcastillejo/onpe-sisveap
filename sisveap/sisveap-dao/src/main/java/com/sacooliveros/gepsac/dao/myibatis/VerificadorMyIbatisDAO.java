@@ -60,7 +60,19 @@ public class VerificadorMyIbatisDAO extends GenericMyIbatisDAO implements Verifi
 
     @Override
     public Verificador obtener(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        SqlSession session = null;
+       VerificadorMapper mapper;
+        Verificador model;
+        try {
+            session = getConnection();
+            mapper = session.getMapper(VerificadorMapper.class);
+            model = mapper.get(id);
+            log.debug("verificador obtenido[{}]", model);
+            return model;
+        } finally {
+            closeConnection(session);
+        }
     }
 
     @Override

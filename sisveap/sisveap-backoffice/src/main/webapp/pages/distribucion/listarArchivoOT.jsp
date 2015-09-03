@@ -37,6 +37,11 @@
 
     $(document).ready(function () {
         listarArchivoOT();
+        $("#lblDate").empty();
+        $("#lblDate").append($.datepicker.formatDate(formatDate, new Date()))                
+        $("#btnCancelar").click(function (e) {
+            location.assign("<%=request.getContextPath()%>")
+        });
     });
 
 
@@ -54,7 +59,7 @@
         }).fail(function (error) {
             console.log('error', error);
             fn_mdl_alert(error.responseText, function () {
-                location.assign("<%=request.getContextPath()%>");
+                location.assign("<%=request.getContextPath()%>")
             }, "VALIDACIONES");
         });
     }
@@ -78,6 +83,9 @@
         detalle.find("#lblCodigoArchivo").append(json.codigo);
         detalle.find("#lblNombreArchivo").append(json.nombre);
         detalle.find("#lblCantRegistro").append(json.cantRegistro);
+        
+        var date = new Date(json.fecRegistro.year, json.fecRegistro.month - 1, json.fecRegistro.day);
+        detalle.find("#lblFecRegistro").append($.datepicker.formatDate(formatDate, date));
         detalle.find("#lblEstado").append(json.estado.nombre);
 
         tableBody.append(detalle);
@@ -99,14 +107,14 @@
 <div class="div-pagina">
 
     <div id="div-pagina-titulo" class="div-pagina-titulo">
-        Listado de Archivos OT
+        Ordenes de Trabajo: Fuentes ONP al <label id="lblDate"/>
     </div>
-    <!--<div>
-        <input type="button" id="btnConsultarEstrategia" value="Consultar Estrategia" />
+    <div>
+        <!--<input type="button" id="btnConsultarEstrategia" value="Consultar Estrategia" />
         <input type="button" id="btnGuardarConfiguracion" value="Guardar Configuración" />
-        <input type="button" id="btnAgregarEstrategia" value="Agregar Estrategia" />
+        <input type="button" id="btnAgregarEstrategia" value="Agregar Estrategia" />-->
         <input type="button" id="btnCancelar" value="Cancelar" />
-    </div>-->
+    </div>
     <div id="dvData">
         <html:form styleId="frm" action="DistribuirCarga.do?method=busqueda" method="POST">
             <input id="hdnBuscast" type="submit" style="display: none;" />
@@ -152,10 +160,13 @@
                                 <label id="lblCantRegistro"></label>
                             </td>
                             <td>
+                                <label id="lblFecRegistro"></label>
+                            </td>
+                            <td>
                                 <label id="lblEstado"></label>
                             </td>
                             <td>
-                                <input type="button" id="btnAsignar" value="Asignar Supervisor">
+                                <input type="button" id="btnAsignar" value="Asignar Sup.">
                             </td>
                         </tr>
 
@@ -168,8 +179,9 @@
                             <th>Código</th>	
                             <th>Nombre</th>
                             <th>Cant. Registros</th>
+                            <th>Fec. Carga</th>
                             <th>Estado</th>
-                            <th>-</th>
+                            <th>Acción</th>
                         </tr>	
                     </thead>
                     <tbody></tbody>

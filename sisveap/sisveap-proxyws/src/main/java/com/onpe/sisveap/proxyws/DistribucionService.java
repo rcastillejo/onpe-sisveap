@@ -28,6 +28,23 @@ public interface DistribucionService {
      * 
      * @param arg0
      * @return
+     *     returns java.lang.String
+     * @throws ServiceException_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "asignarVerificadorOTS", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.AsignarVerificadorOTS")
+    @ResponseWrapper(localName = "asignarVerificadorOTSResponse", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.AsignarVerificadorOTSResponse")
+    public String asignarVerificadorOTS(
+        @WebParam(name = "arg0", targetNamespace = "")
+        List<OrdenTrabajo> arg0)
+        throws ServiceException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns java.util.List<com.onpe.sisveap.proxyws.OrdenTrabajo>
      */
     @WebMethod
@@ -87,6 +104,20 @@ public interface DistribucionService {
      * 
      * @param arg0
      * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "asignarVerificadorOT", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.AsignarVerificadorOT")
+    @ResponseWrapper(localName = "asignarVerificadorOTResponse", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.AsignarVerificadorOTResponse")
+    public String asignarVerificadorOT(
+        @WebParam(name = "arg0", targetNamespace = "")
+        OrdenTrabajo arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns com.onpe.sisveap.proxyws.OrdenTrabajo
      * @throws ServiceException_Exception
      */
@@ -110,19 +141,5 @@ public interface DistribucionService {
     @RequestWrapper(localName = "listarArchivoOT", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.ListarArchivoOT")
     @ResponseWrapper(localName = "listarArchivoOTResponse", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.ListarArchivoOTResponse")
     public List<ArchivoOT> listarArchivoOT();
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "asignarVerificadorOT", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.AsignarVerificadorOT")
-    @ResponseWrapper(localName = "asignarVerificadorOTResponse", targetNamespace = "http://distribucion.service.gepsac.sacooliveros.com/", className = "com.onpe.sisveap.proxyws.AsignarVerificadorOTResponse")
-    public String asignarVerificadorOT(
-        @WebParam(name = "arg0", targetNamespace = "")
-        OrdenTrabajo arg0);
 
 }

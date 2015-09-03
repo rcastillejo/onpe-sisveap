@@ -102,5 +102,15 @@ public class DistribucionService implements IDistribucion {
             throw new ServiceException(e.getCodigo(), e.getMessage());
         }
     }
+
+    @Override
+    public String asignarVerificadorOTS(List<OrdenTrabajo> ordenesTrabajo) throws ServiceException {
+        try{            
+            return controller.asignarVerificadores(ordenesTrabajo);
+        } catch (ConrollerModuleException e) {
+            log.error(e.getMessage(), e);
+            throw new ServiceException(e.getCodigo(), e.getMessage());
+        }
+    }
     
 }

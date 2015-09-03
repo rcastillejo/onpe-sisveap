@@ -68,6 +68,7 @@
         detalle.find("#lblNombre").append(json.nombres);
         detalle.find("#lblApellidos").append(json.apellidos);
         detalle.find("#lblRegion").append(json.region.nombre);
+        detalle.find("#lblCantOtAsig").append(json.cantOTEnProceso);
         detalle.find("#lblEstado").append(json.estado.nombre);
 
         table.find("tbody").append(detalle);
@@ -86,7 +87,7 @@
     function fn_seleccionar() {
         if (item && item !== null) {
             console.log("itemSeleccionado", item);
-            parent.cargarVerificador(item);
+            parent.cargarVerificador(item, getRequestParameter('codigoOT'));
         } else {
             fn_mdl_alert("Debe seleccionar un supervisor", null, "VALIDACIONES");
         }
@@ -110,7 +111,7 @@
                 </a>
             </div>
             <div class="div-busqueda-filtro">
-                <a href="javascript:parent.fn_util_CierraModal2();">
+                <a href="javascript:parent.fn_util_CierraModal();">
                     <img src="<%=request.getContextPath()%>/resources/images/iconos/ico_btn_cancelar.jpg" border="0" /><br />
                     Cerrar
                 </a>
@@ -142,6 +143,9 @@
                         <label id="lblRegion" class="inputValue" data-name="region" ></label>
                     </td>
                     <td>
+                        <label id="lblCantOtAsig" class="inputValue" data-name="cant_ot_asig" ></label>
+                    </td>
+                    <td>
                         <label id="lblEstado" class="inputValue" data-name="estado" ></label>
                     </td>
                 </tr>
@@ -157,6 +161,7 @@
                     <th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Region</th>
+                    <th>OT Asignados</th>
                     <th>Estado</th>
                 </tr>	
             </thead>

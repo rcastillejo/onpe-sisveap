@@ -5,6 +5,7 @@
  */
 package com.sacooliveros.gepsac.model;
 
+import com.sacooliveros.gepsac.model.comun.Estado;
 import java.util.Date;
 
 /**
@@ -12,12 +13,14 @@ import java.util.Date;
  * @author Ricardo
  */
 public class Persona {
+
     private String codigo;
     private String dni;
     private String nombres;
     private String apellidos;
     private String direccion;
     private Date ultFecTrabajo;
+    private Estado estado;
 
     public String getCodigo() {
         return codigo;
@@ -67,9 +70,23 @@ public class Persona {
         this.ultFecTrabajo = ultFecTrabajo;
     }
 
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public void setEstado(String estado) {
+        Estado est = new Estado();
+        est.setCodigo(estado);
+        this.estado = est;
+    }
+
     @Override
     public String toString() {
-        return "Persona{" + "dni=" + dni + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", ultFecTrabajo=" + ultFecTrabajo + '}';
+        return "Persona{" + "codigo=" + codigo + ", dni=" + dni + ", nombres=" + nombres + ", apellidos=" + apellidos + ", direccion=" + direccion + ", ultFecTrabajo=" + ultFecTrabajo + ", estado=" + estado + '}';
     }
 
 }

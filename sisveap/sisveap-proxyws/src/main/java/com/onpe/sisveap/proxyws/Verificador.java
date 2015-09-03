@@ -17,7 +17,6 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;extension base="{http://comun.service.gepsac.sacooliveros.com/}persona">
  *       &lt;sequence>
  *         &lt;element name="cantOTEnProceso" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="estado" type="{http://comun.service.gepsac.sacooliveros.com/}estado" minOccurs="0"/>
  *         &lt;element name="region" type="{http://comun.service.gepsac.sacooliveros.com/}region" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -30,7 +29,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "verificador", propOrder = {
     "cantOTEnProceso",
-    "estado",
     "region"
 })
 public class Verificador
@@ -38,7 +36,6 @@ public class Verificador
 {
 
     protected int cantOTEnProceso;
-    protected Estado estado;
     protected Region region;
 
     /**
@@ -55,30 +52,6 @@ public class Verificador
      */
     public void setCantOTEnProceso(int value) {
         this.cantOTEnProceso = value;
-    }
-
-    /**
-     * Gets the value of the estado property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Estado }
-     *     
-     */
-    public Estado getEstado() {
-        return estado;
-    }
-
-    /**
-     * Sets the value of the estado property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Estado }
-     *     
-     */
-    public void setEstado(Estado value) {
-        this.estado = value;
     }
 
     /**

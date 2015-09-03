@@ -11,12 +11,12 @@
     
     <modules>
         <module>sisveap-parent</module>
-        <module>sisveap-backoffice</module>
         <module>sisveap-model</module>
-        <module>sisveap-service</module>
-        <module>sisveap-controller-module</module>
         <module>sisveap-dao</module>
+        <module>sisveap-controller-module</module>
+        <module>sisveap-service</module>
         <module>sisveap-proxyws</module>
+        <module>sisveap-backoffice</module>
     </modules>
 
 </project>

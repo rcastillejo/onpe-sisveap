@@ -131,3 +131,16 @@ WITH (
   OIDS=FALSE
 );
 
+
+CREATE TABLE tp_config
+(
+  parametro character varying(15) NOT NULL,  
+  valor character varying(50) NOT NULL,  
+  descripcion character varying(150),
+  CONSTRAINT pk_tp_config PRIMARY KEY (parametro)
+)
+WITH (
+  OIDS=FALSE
+);
+
+

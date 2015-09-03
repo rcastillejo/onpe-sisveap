@@ -37,6 +37,29 @@
 
     $(document).ready(function () {
         listarOT();
+        
+        $("#btnCancelar").click(function (e) {
+            location.assign("<%=request.getContextPath()%>")
+        });
+
+        $("#btnGuardar").click(function (e) {
+            e.preventDefault();
+
+            /*var sError = validar();
+
+            if (sError === "") {*/
+                fn_mdl_confirma("¿Está seguro que desea guardar la distribucion de las ordenes?",
+                        function () {
+                            guardar();
+                        },
+                        null,
+                        null,
+                        "CONFIRMACIÓN"
+                        );
+            /*} else {
+                fn_mdl_alert(sError, null, "VALIDACIONES");
+            }*/
+        });
     });
 
 
@@ -54,7 +77,7 @@
         }).fail(function (error) {
             console.log('error', error);
             fn_mdl_alert(error.responseText, function () {
-                location.assign("<%=request.getContextPath()%>");
+                location.assign("<%=request.getContextPath()%>")
             }, "VALIDACIONES");
         });
     }
@@ -74,15 +97,19 @@
         var detalle = $("#rowDetalle table tr").clone();
 
         detalle.show();
-
+        detalle.attr("id", json.codigo);
         detalle.find("#lblCodigo").append(json.codigo);
+        detalle.find("#lblCodigoArchivo").append(json.codigoArchivo);
 
         var date = new Date(json.fecIngreso.year, json.fecIngreso.month - 1, json.fecIngreso.day);
         detalle.find("#lblFecIngreso").append($.datepicker.formatDate(formatDate, date));
 
         if (json.verificador && json.verificador.codigo) {
-            detalle.find("#lblVerificador").append(json.verificador.nombre + ' ' + json.verificador.apellido);
+            detalle.find("#txtVerificador").val(json.verificador.codigo);
+            detalle.find("#lblVerificador").empty();
+            detalle.find("#lblVerificador").append(json.verificador.nombres + ' ' + json.verificador.apellidos);
         } else {
+            detalle.find("#txtVerificador").val('');
             detalle.find("#lblVerificador").append("-");
         }
 
@@ -90,15 +117,110 @@
 
         tableBody.append(detalle);
 
-        detalle.find("#btnAsignar").click(function () {
+        detalle.find("#btnAsignar").click(function (e) {
+            e.preventDefault();
             if (json.estado.codigo === 'ORT0002' || json.estado.codigo === 'ORT0003') {
                 fn_util_AbreModal("",
-                        "<%=request.getContextPath()%>" + '/pages/distribucion/distribuirOT.jsp?codigoOT=' + json.codigo,
-                        900, 500, null);
+                        "<%=request.getContextPath()%>" + '/pages/common/consultarVerificador.jsp?codigoRegion=' 
+                                + json.region.codigo + '&codigoOT=' + json.codigo,
+                        900, 500, null);                
             } else {
                 fn_mdl_alert("No puede se puede asignar un verificador", null, "VALIDACIONES");
             }
         });
+
+    }
+    
+    function cargarVerificador(model, codigoOT) {
+        console.log('cargar modelo', model, 'codigoOT', codigoOT);
+        
+        if(model.estado.codigo === 'VER0001'){
+            var detalle = $("#tblDetalle tbody tr[id='"+codigoOT+"']");
+            console.log('tr', detalle);
+
+            detalle.find("#txtVerificador").val(model.codigo);
+            detalle.find("#lblVerificador").empty();
+            detalle.find("#lblVerificador").append(model.nombres + ' ' + model.apellidos);
+
+            fn_util_CierraModal();
+            
+        }else{
+            fn_mdl_alert("El verificador no se encuentra disponible", null, "VALIDACIONES");
+        }
+        
+    }
+
+    function getRequestParameter(name) {
+        if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+    }
+    
+    function serialize() {
+        //var dataSerialize = {};
+
+        var listado = [];
+ 
+
+        var elDetalle = $('#tblDetalle');
+
+        elDetalle.find("tbody tr").each(function () {
+            var item = getData($(this));
+            console.log('item', item);
+            if(item.verificador && item.verificador.codigo){
+                listado.push(item);
+            }
+        });
+
+        console.log('listado', listado); 
+
+        //dataSerialize = getData($("#div-busqueda-filtros"));
+        //dataSerialize["ordenes"] = listado;
+
+        console.log("dataSerialize", listado);
+        return listado;
+    }
+
+    function getData(jQueryEl) {
+        var data = {};
+        jQueryEl.find(".inputValue").each(function () {
+            var k = $(this).data("name");
+            var v = $(this).val() || $(this).text();
+            if (v && v !== '') {
+                var ks = k.split(".");
+                if (ks.length === 1) {
+                    data[ks[0]] = v;
+                } else {
+                    var d = data[ks[0]] || {};
+                    d[ks[1]] = v;
+                    data[ks[0]] = d;
+                }
+            }
+
+        });
+        return data;
+    }
+
+    function guardar() {
+        var data = serialize();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: "<%=request.getContextPath()%>" + action + '?method=asignarVerificadorOT&ordenesTrabajo=' + JSON.stringify(data)
+        }).done(function (msg) {
+            console.log('msg', msg);
+            //cargarPlan(plan);
+            fn_mdl_alert(msg, function () {
+                listarOT()
+            }, "CONFIRMACION");
+        }).fail(function (error) {
+            console.log('error', error);
+            fn_mdl_alert(error.responseText, function () {
+                //
+            }, "CONFIRMACION");
+        });
+
+        //$("#cphCuerpo_txtDetalle").val(JSON.stringify(listado));
+        //console.log('detalle json', $("#cphCuerpo_txtDetalle").val());
 
     }
 
@@ -109,12 +231,10 @@
     <div id="div-pagina-titulo" class="div-pagina-titulo">
         Listado de Ordenes de Trabajo
     </div>
-    <!--<div>
-        <input type="button" id="btnConsultarEstrategia" value="Consultar Estrategia" />
-        <input type="button" id="btnGuardarConfiguracion" value="Guardar Configuración" />
-        <input type="button" id="btnAgregarEstrategia" value="Agregar Estrategia" />
+    <div>
+        <input type="button" id="btnGuardar" value="Guardar Asignación" />
         <input type="button" id="btnCancelar" value="Cancelar" />
-    </div>-->
+    </div>
     <div id="dvData">
         <html:form styleId="frm" action="DistribuirCarga.do?method=busqueda" method="POST">
             <input id="hdnBuscast" type="submit" style="display: none;" />
@@ -151,12 +271,17 @@
                     <table>                        
                         <tr>
                             <td>
-                                <label id="lblCodigo" class="inputValue" data-name="actividad.codigo" name="actividad.codigo"></label>
+                                <label id="lblCodigo" class="inputValue" 
+                                       data-name="codigo" name="codigo"></label>
+                                <label id="lblCodigoArchivo" class="inputValue" style="display: none"
+                                       data-name="codigoArchivo" name="codigoArchivo"></label>
                             </td>
                             <td>
                                 <label id="lblFecIngreso"></label>
                             </td>
                             <td>
+                                <input id="txtVerificador" type="hidden" class="inputValue"
+                                       data-name="verificador.codigo" name="verificador.codigo">
                                 <label id="lblVerificador"></label>
                             </td>
                             <td>

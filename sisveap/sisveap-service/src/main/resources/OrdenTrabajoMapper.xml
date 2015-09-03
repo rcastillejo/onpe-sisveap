@@ -4,6 +4,7 @@
   
     <resultMap id="recordOT" type="com.sacooliveros.gepsac.model.OrdenTrabajo" >
         <id column="cod_ordentrabajo" property="codigo" jdbcType="VARCHAR" />
+        <result column="cod_archivo" property="codigoArchivo" jdbcType="VARCHAR" />
         <result column="fec_ingreso" property="fecIngreso" jdbcType="VARCHAR" />
         <result column="fec_asignado" property="fecAsignado" jdbcType="VARCHAR" />
         
@@ -31,6 +32,7 @@
     <select id="get" resultMap="recordOT">
         SELECT
         a.cod_ordentrabajo,
+        a.cod_archivo,
         a.fec_ingreso,
         a.fec_asignado,
         b.cod_estado,
@@ -39,10 +41,15 @@
         d.nom_region,
         c.cod_verificador,
         c.nombre as nom_verificador,
-        c.apellidos as ape_verificador
+        c.apellidos as ape_verificador,
+        e.cod_supervisor,
+        e.dni as dni_supervisor,
+        e.nombre as nom_supervisor,
+        e.apellidos as ape_supervisor
         FROM tp_orden_trabajo a inner join tp_estado b on a.cod_estado = b.cod_estado
         inner join tp_region d on a.cod_region = d.cod_region
         left join tp_verificador c on a.cod_verificador = c.cod_verificador
+        left join tp_supervisor e on (a.cod_supervisor = e.cod_supervisor and a.cod_region = e.cod_region)
         WHERE a.cod_ordentrabajo = #{codigo}
     </select>
     
@@ -50,6 +57,7 @@
     <select id="queryArchivo" resultMap="recordOT">
         SELECT
         a.cod_ordentrabajo,
+        a.cod_archivo,
         a.fec_ingreso,
         a.fec_asignado,
         b.cod_estado,
@@ -74,6 +82,7 @@
     <select id="queryReqion" resultMap="recordOT">
         SELECT
         a.cod_ordentrabajo,
+        a.cod_archivo,
         a.fec_ingreso,
         a.fec_asignado,
         b.cod_estado,

@@ -23,6 +23,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="codigo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="direccion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="dni" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="estado" type="{http://comun.service.gepsac.sacooliveros.com/}estado" minOccurs="0"/>
  *         &lt;element name="nombres" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ultFecTrabajo" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *       &lt;/sequence>
@@ -39,6 +40,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "codigo",
     "direccion",
     "dni",
+    "estado",
     "nombres",
     "ultFecTrabajo"
 })
@@ -52,6 +54,7 @@ public class Persona {
     protected String codigo;
     protected String direccion;
     protected String dni;
+    protected Estado estado;
     protected String nombres;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar ultFecTrabajo;
@@ -150,6 +153,30 @@ public class Persona {
      */
     public void setDni(String value) {
         this.dni = value;
+    }
+
+    /**
+     * Gets the value of the estado property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Estado }
+     *     
+     */
+    public Estado getEstado() {
+        return estado;
+    }
+
+    /**
+     * Sets the value of the estado property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Estado }
+     *     
+     */
+    public void setEstado(Estado value) {
+        this.estado = value;
     }
 
     /**

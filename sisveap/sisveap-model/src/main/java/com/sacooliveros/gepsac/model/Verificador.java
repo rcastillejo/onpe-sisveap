@@ -5,15 +5,13 @@
  */
 package com.sacooliveros.gepsac.model;
 
-import com.sacooliveros.gepsac.model.comun.Estado;
-
 /**
  *
  * @author Ricardo
  */
 public class Verificador extends Persona {
+
     private Region region;
-    private Estado estado;
     private int cantOTEnProceso;
 
     public Region getRegion() {
@@ -22,14 +20,6 @@ public class Verificador extends Persona {
 
     public void setRegion(Region region) {
         this.region = region;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
 
     public int getCantOTEnProceso() {
@@ -42,7 +32,7 @@ public class Verificador extends Persona {
 
     @Override
     public String toString() {
-        return "Verificador{" + "region=" + region + ", estado=" + estado + ", cantOTEnProceso=" + cantOTEnProceso + '}';
+        return "Verificador{" + "region=" + region + ", cantOTEnProceso=" + cantOTEnProceso + "," + super.toString() + '}';
     }
-    
+
 }

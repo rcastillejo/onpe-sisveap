@@ -27,5 +27,6 @@
         <mapper resource="OrdenTrabajoMapper.xml"/>
         <mapper resource="SupervisorMapper.xml"/>
         <mapper resource="VerificadorMapper.xml"/>
+        <mapper resource="ConfiguracionMapper.xml"/>
     </mappers>
 </configuration>

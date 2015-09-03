@@ -7,6 +7,7 @@ package com.sacooliveros.gepsac.action.distribucion;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.sacooliveros.gepsac.exception.LoggerUtil;
 import com.novatronic.sca.util.ActionUtil;
 import com.novatronic.sca.util.Config;
@@ -16,7 +17,10 @@ import com.onpe.sisveap.proxyws.DistribucionService;
 import com.onpe.sisveap.proxyws.Region;
 import com.sacooliveros.gepsac.proxyws.util.ProxyUtil;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -203,14 +207,18 @@ public class DistribuirCargaAction extends DispatchAction {
         try {
             DistribucionService service = ProxyUtil.getDistribucionServicePort(Config.TIMEOUT);
             
-            String json = request.getParameter("ordenTrabajo");
+            String json = request.getParameter("ordenesTrabajo");
             logger.debug("json [{}]", json);
-            com.onpe.sisveap.proxyws.OrdenTrabajo ot = jsonBuilder.fromJson(json, com.onpe.sisveap.proxyws.OrdenTrabajo.class);
+            
+            Type listType = new TypeToken<ArrayList<com.onpe.sisveap.proxyws.OrdenTrabajo>>() {
+                    }.getType();
+            
+            List<com.onpe.sisveap.proxyws.OrdenTrabajo> ordenesTrabajo = jsonBuilder.fromJson(json, listType);
 
-            logger.debug("archivo OT [{}]", ot);
-            String msg = service.asignarVerificadorOT(ot);
+            logger.debug("OTs [{}]", ordenesTrabajo);
+            String msg = service.asignarVerificadorOTS(ordenesTrabajo);
 
-            logger.info("Archivo OT asignado [{}]", msg);
+            logger.info("OT asignados [{}]", msg);
             generalAction(createSuccessResult(msg), response);
         } catch (Exception e) {
             LoggerUtil.error(logger, "obtenerArchivoOT", "distribuicion",

@@ -13,7 +13,7 @@ import java.util.Date;
  * @author Ricardo
  */
 public class OrdenTrabajo extends Model {
-
+    private String codigoArchivo;
     private Date fecIngreso;
     private Date fecAsignado;
 
@@ -21,6 +21,14 @@ public class OrdenTrabajo extends Model {
     private Region region;
     private Supervisor supervisor;
     private Verificador verificador;
+
+    public String getCodigoArchivo() {
+        return codigoArchivo;
+    }
+
+    public void setCodigoArchivo(String codigoArchivo) {
+        this.codigoArchivo = codigoArchivo;
+    }
 
     public Date getFecIngreso() {
         return fecIngreso;

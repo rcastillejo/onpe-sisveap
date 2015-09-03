@@ -32,4 +32,9 @@ public interface Estado {
         String TERMINADO = "ORT0004";
         String RECHAZADO = "ORT0005";
     }
+    
+    interface Verificador{
+        String DISPONIBLE = "VER0001";
+        String NO_DISPONIBLE = "VER0002";
+    }
 }

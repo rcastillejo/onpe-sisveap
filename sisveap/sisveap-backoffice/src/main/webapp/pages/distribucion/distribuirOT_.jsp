@@ -86,7 +86,7 @@
         $.ajax({
             type: "POST",
             dataType: 'json',
-            url: "<%=request.getContextPath()%>" + action + '?method=obtenerArchivoOT&codigoArchivoOT=' + getRequestParameter('codigoArchivoOT')
+            url: "<%=request.getContextPath()%>" + action + '?method=obtenerOT&codigoOT=' + getRequestParameter('codigoOT')
         }).done(function (json) {
             console.log('json', json);
             cargarModel(json);
@@ -176,7 +176,6 @@
             console.log('msg', msg);
             //cargarPlan(plan);
             fn_mdl_alert(msg, function () {//@TODO:Revisar
-                parent.listarArchivoOT();
                 parent.fn_util_CierraModal();
             }, "CONFIRMACION");
         }).fail(function (error) {
@@ -282,7 +281,7 @@
 <div class="div-pagina">
 
     <div id="div-pagina-titulo" class="div-pagina-titulo">
-        Distribuir Carga Archivo OT
+        Asignar Orden de Trabajo
     </div>
     <div>
         <input type="button" id="btnGuardar" value="Guardar Distribucion" />
@@ -294,7 +293,28 @@
             <!-- INCIO PANEL-->
             <div id="div-busqueda" class="div-busqueda">
                 <div id="div-busqueda-titulo" class="div-busqueda-titulo">
-                    Datos del Archivo OT
+                    Datos del OT
+                </div>
+
+                <div id="div-busqueda-filtros" class="div-busqueda-filtros">
+                    <div class="div-busqueda-filtro">
+                        Codigo del Archivo: 
+                        <input id="codigo" type="text" disabled="true" class="inputValue" data-name="codigo">
+                    </div>
+                    <div class="div-busqueda-filtro">
+                        Nombre del Archivo: 
+                        <input id="nombre" type="text" disabled="true">
+                    </div>
+                    <div class="div-busqueda-filtro">
+                        Cantidad de Registros: 
+                        <input id="cantRegistro" type="text" disabled="true">
+                    </div>
+
+                </div>
+
+                <div class="no-float"></div>
+                <div id="div-busqueda-titulo" class="div-busqueda-titulo">
+                    Datos del Verificador
                 </div>
 
                 <div id="div-busqueda-filtros" class="div-busqueda-filtros">

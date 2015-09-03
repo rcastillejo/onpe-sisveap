@@ -18,6 +18,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;extension base="{http://distribucion.service.gepsac.sacooliveros.com/}model">
  *       &lt;sequence>
+ *         &lt;element name="codigoArchivo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="fecAsignado" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="fecIngreso" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="persona" type="{http://distribucion.service.gepsac.sacooliveros.com/}persona" minOccurs="0"/>
@@ -34,6 +35,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ordenTrabajo", propOrder = {
+    "codigoArchivo",
     "fecAsignado",
     "fecIngreso",
     "persona",
@@ -45,6 +47,7 @@ public class OrdenTrabajo
     extends Model
 {
 
+    protected String codigoArchivo;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar fecAsignado;
     @XmlSchemaType(name = "dateTime")
@@ -53,6 +56,30 @@ public class OrdenTrabajo
     protected Region region;
     protected Supervisor supervisor;
     protected Verificador verificador;
+
+    /**
+     * Gets the value of the codigoArchivo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodigoArchivo() {
+        return codigoArchivo;
+    }
+
+    /**
+     * Sets the value of the codigoArchivo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodigoArchivo(String value) {
+        this.codigoArchivo = value;
+    }
 
     /**
      * Gets the value of the fecAsignado property.

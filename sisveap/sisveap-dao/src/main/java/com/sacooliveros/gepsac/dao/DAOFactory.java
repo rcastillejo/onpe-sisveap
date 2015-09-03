@@ -49,4 +49,5 @@ public abstract class DAOFactory {
     public abstract OrdenTrabajoDAO getOrdenTrabajoDAO();
     public abstract SupervisorDAO getSupervisorDAO();
     public abstract VerificadorDAO getVerificadorDAO();
+    public abstract ConfiguracionDAO getConfiguracionDAO();
 }

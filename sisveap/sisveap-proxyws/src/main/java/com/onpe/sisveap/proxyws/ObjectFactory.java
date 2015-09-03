@@ -40,11 +40,75 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ObtenerRegion }
+     * 
+     */
+    public ObtenerRegion createObtenerRegion() {
+        return new ObtenerRegion();
+    }
+
+    /**
+     * Create an instance of {@link ListarVerificadorResponse }
+     * 
+     */
+    public ListarVerificadorResponse createListarVerificadorResponse() {
+        return new ListarVerificadorResponse();
+    }
+
+    /**
+     * Create an instance of {@link Estado }
+     * 
+     */
+    public Estado createEstado() {
+        return new Estado();
+    }
+
+    /**
      * Create an instance of {@link Persona }
      * 
      */
     public Persona createPersona() {
         return new Persona();
+    }
+
+    /**
+     * Create an instance of {@link ListarSupervisor }
+     * 
+     */
+    public ListarSupervisor createListarSupervisor() {
+        return new ListarSupervisor();
+    }
+
+    /**
+     * Create an instance of {@link ObtenerRegionResponse }
+     * 
+     */
+    public ObtenerRegionResponse createObtenerRegionResponse() {
+        return new ObtenerRegionResponse();
+    }
+
+    /**
+     * Create an instance of {@link Region }
+     * 
+     */
+    public Region createRegion() {
+        return new Region();
+    }
+
+    /**
+     * Create an instance of {@link Verificador }
+     * 
+     */
+    public Verificador createVerificador() {
+        return new Verificador();
+    }
+
+    /**
+     * Create an instance of {@link ServiceException }
+     * 
+     */
+    public ServiceException createServiceException() {
+        return new ServiceException();
     }
 
     /**
@@ -64,75 +128,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Verificador }
-     * 
-     */
-    public Verificador createVerificador() {
-        return new Verificador();
-    }
-
-    /**
-     * Create an instance of {@link ListarVerificadorResponse }
-     * 
-     */
-    public ListarVerificadorResponse createListarVerificadorResponse() {
-        return new ListarVerificadorResponse();
-    }
-
-    /**
-     * Create an instance of {@link ObtenerRegionResponse }
-     * 
-     */
-    public ObtenerRegionResponse createObtenerRegionResponse() {
-        return new ObtenerRegionResponse();
-    }
-
-    /**
      * Create an instance of {@link ListarVerificador }
      * 
      */
     public ListarVerificador createListarVerificador() {
         return new ListarVerificador();
-    }
-
-    /**
-     * Create an instance of {@link Estado }
-     * 
-     */
-    public Estado createEstado() {
-        return new Estado();
-    }
-
-    /**
-     * Create an instance of {@link ListarSupervisor }
-     * 
-     */
-    public ListarSupervisor createListarSupervisor() {
-        return new ListarSupervisor();
-    }
-
-    /**
-     * Create an instance of {@link ServiceException }
-     * 
-     */
-    public ServiceException createServiceException() {
-        return new ServiceException();
-    }
-
-    /**
-     * Create an instance of {@link Region }
-     * 
-     */
-    public Region createRegion() {
-        return new Region();
-    }
-
-    /**
-     * Create an instance of {@link ObtenerRegion }
-     * 
-     */
-    public ObtenerRegion createObtenerRegion() {
-        return new ObtenerRegion();
     }
 
     /**

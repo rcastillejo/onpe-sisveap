@@ -15,6 +15,25 @@
         <result column="nom_estado" property="estado.nombre" jdbcType="VARCHAR" />
     </resultMap>
     
+    <select id="get" resultMap="recordResultMap">
+        SELECT
+        a.cod_verificador,
+        a.dni,
+        a.nombre,
+        a.apellidos,
+        a.direccion,
+        count(d.cod_ordentrabajo) as cant_ot_asignado,
+        b.cod_region,
+        b.nom_region,
+        c.cod_estado,
+        c.nom_estado
+        FROM tp_verificador a inner join tp_region b on a.cod_region = b.cod_region
+        inner join tp_estado c on a.cod_estado = c.cod_estado
+	left join tp_orden_trabajo d on a.cod_verificador = d.cod_verificador
+        WHERE a.cod_verificador = #{codigo}
+        GROUP BY a.cod_verificador,b.cod_region,c.cod_estado
+    </select>
+    
     <select id="queryReqion" resultMap="recordResultMap">
         SELECT
         a.cod_verificador,
@@ -22,14 +41,16 @@
         a.nombre,
         a.apellidos,
         a.direccion,
-        a.cant_ot_asignado,
+        count(d.cod_ordentrabajo) as cant_ot_asignado,
         b.cod_region,
         b.nom_region,
         c.cod_estado,
         c.nom_estado
         FROM tp_verificador a inner join tp_region b on a.cod_region = b.cod_region
         inner join tp_estado c on a.cod_estado = c.cod_estado
+	left join tp_orden_trabajo d on a.cod_verificador = d.cod_verificador
         WHERE b.cod_region = #{codigoRegion}
+        GROUP BY a.cod_verificador,b.cod_region,c.cod_estado
     </select>
     
     <update id="update">

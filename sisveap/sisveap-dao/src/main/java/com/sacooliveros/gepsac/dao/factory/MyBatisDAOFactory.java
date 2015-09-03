@@ -6,6 +6,7 @@
 package com.sacooliveros.gepsac.dao.factory;
 
 import com.sacooliveros.gepsac.dao.ArchivoOTDAO;
+import com.sacooliveros.gepsac.dao.ConfiguracionDAO;
 import com.sacooliveros.gepsac.dao.DAOFactory;
 import com.sacooliveros.gepsac.dao.EstrategiaDAO;
 import com.sacooliveros.gepsac.dao.OrdenTrabajoDAO;
@@ -13,6 +14,7 @@ import com.sacooliveros.gepsac.dao.PlanDAO;
 import com.sacooliveros.gepsac.dao.SupervisorDAO;
 import com.sacooliveros.gepsac.dao.VerificadorDAO;
 import com.sacooliveros.gepsac.dao.myibatis.ArchivoOTMyIbatisDAO;
+import com.sacooliveros.gepsac.dao.myibatis.ConfiguracionMyIbatisDAO;
 import com.sacooliveros.gepsac.dao.myibatis.EstrategiaMyIbatisDAO;
 import com.sacooliveros.gepsac.dao.myibatis.OrdenTrabajoMyIbatisDAO;
 import com.sacooliveros.gepsac.dao.myibatis.PlanMyIbatisDAO;
@@ -53,6 +55,11 @@ public class MyBatisDAOFactory extends DAOFactory {
     @Override
     public VerificadorDAO getVerificadorDAO() {
         return new VerificadorMyIbatisDAO();
+    }
+
+    @Override
+    public ConfiguracionDAO getConfiguracionDAO() {
+        return new ConfiguracionMyIbatisDAO();
     }
 
 }
